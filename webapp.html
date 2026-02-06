@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>VPN Service</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        body {
+            background: linear-gradient(180deg, #1a1a1a 0%, #2d1810 50%, #000000 100%);
+            color: #ffffff;
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+            padding: 0;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        /* Экраны */
+        .screen {
+            display: none;
+            padding: 24px;
+            min-height: 100vh;
+            animation: fadeIn 0.3s;
+        }
+        
+        .screen.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Онбординг */
+        .onboarding-screen {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            text-align: center;
+            padding: 60px 24px 40px;
+        }
+        
+        .onboarding-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .onboarding-icon {
+            font-size: 80px;
+            margin-bottom: 32px;
+        }
+        
+        .onboarding-title {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            line-height: 1.2;
+        }
+        
+        .onboarding-text {
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.5;
+            margin-bottom: 32px;
+        }
+        
+        .feature-list {
+            text-align: left;
+            margin: 0 auto;
+            max-width: 320px;
+        }
+        
+        .feature-item {
+            display: flex;
+            align-items: start;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        
+        .feature-icon {
+            font-size: 24px;
+            flex-shrink: 0;
+        }
+        
+        .feature-text h3 {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+        
+        .feature-text p {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.6);
+        }
+        
+        /* Кнопки онбординга */
+        .onboarding-buttons {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #ff6b3d 0%, #ff4757 100%);
+            border: none;
+            border-radius: 16px;
+            padding: 18px;
+            font-size: 17px;
+            font-weight: 700;
+            color: #ffffff;
+            cursor: pointer;
+            box-shadow: 0 8px 24px rgba(255, 107, 61, 0.4);
+            transition: all 0.3s;
+        }
+        
+        .btn-primary:active {
+            transform: scale(0.96);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            border: none;
+            padding: 18px;
+            font-size: 15px;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.6);
+            cursor: pointer;
+        }
+        
+        /* Индикатор шагов */
+        .steps-indicator {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+            margin-bottom: 32px;
+        }
+        
+        .step-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transition: all 0.3s;
+        }
+        
+        .step-dot.active {
+            width: 24px;
+            border-radius: 4px;
+            background: #ff6b3d;
+        }
+        
+        /* Главный экран (ваш предыдущий дизайн) */
+        .server-card {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 24px;
+            margin-bottom: 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            min-height: 90px;
+        }
+        
+        .server-info {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        
+        .server-flag {
+            font-size: 36px;
+        }
+        
+        .server-details h3 {
+            font-size: 17px;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+        
+        .server-details p {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.6);
+        }
+        
+        .dropdown-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .dropdown-icon svg {
+            width: 18px;
+            height: 18px;
+            fill: rgba(255, 255, 255, 0.7);
+        }
+        
+        /* Subscription Card */
+        .subscription-card {
+            background: linear-gradient(135deg, rgba(255, 107, 61, 0.15) 0%, rgba(255, 71, 87, 0.1) 100%);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 107, 61, 0.3);
+            border-radius: 24px;
+            padding: 28px;
+            margin-bottom: 32px;
+        }
+        
+        .sub-header {
+            text-align: center;
+            margin-bottom: 24px;
+        }
+        
+        .sub-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #ff6b3d;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .sub-country {
+            font-size: 24px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+        
+        .sub-info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+        
+        .sub-info-item {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 14px;
+            padding: 16px;
+        }
+        
+        .sub-info-label {
+            font-size: 11px;
+            color: rgba(255, 255, 255, 0.5);
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+        
+        .sub-info-value {
+            font-size: 15px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .ip-value {
+            cursor: pointer;
+        }
+        
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #10b981;
+            animation: pulse-dot 2s infinite;
+        }
+        
+        @keyframes pulse-dot {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        
+        /* QR Section */
+        .qr-section {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 16px;
+            padding: 20px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .qr-wrapper {
+            background: #ffffff;
+            padding: 16px;
+            border-radius: 12px;
+            display: inline-block;
+            margin-bottom: 16px;
+        }
+        
+        #qrcode {
+            display: inline-block;
+        }
+        
+        .qr-label {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.6);
+        }
+        
+        .connection-link {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 14px;
+            padding: 16px;
+            margin-bottom: 20px;
+        }
+        
+        .link-label {
+            font-size: 11px;
+            color: rgba(255, 255, 255, 0.5);
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+        
+        .link-value {
+            font-family: 'SF Mono', monospace;
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.8);
+            word-break: break-all;
+            line-height: 1.6;
+            max-height: 60px;
+            overflow: hidden;
+        }
+        
+        .copy-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #ff6b3d 0%, #ff4757 100%);
+            border: none;
+            border-radius: 14px;
+            padding: 16px;
+            font-size: 16px;
+            font-weight: 700;
+            color: #ffffff;
+            cursor: pointer;
+            box-shadow: 0 8px 24px rgba(255, 107, 61, 0.3);
+            margin-bottom: 12px;
+        }
+        
+        .expiry-text {
+            text-align: center;
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.5);
+        }
+        
+        /* Тарифы */
+        .section-title {
+            font-size: 21px;
+            font-weight: 700;
+            margin-bottom: 18px;
+        }
+        
+        .plan-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        
+        .plan-item {
+            background: rgba(255, 255, 255, 0.06);
+            border-radius: 16px;
+            padding: 22px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .plan-item:active {
+            transform: scale(0.98);
+        }
+        
+        .plan-item.featured {
+            background: rgba(255, 107, 61, 0.12);
+            border: 1px solid rgba(255, 107, 61, 0.3);
+        }
+        
+        .plan-info h3 {
+            font-size: 19px;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+        
+        .plan-info p {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.5);
+        }
+        
+        .plan-price {
+            font-size: 26px;
+            font-weight: 700;
+        }
+        
+        /* No Subscription State */
+        .no-subscription {
+            text-align: center;
+            padding: 40px 20px;
+        }
+        
+        .no-subscription-icon {
+            font-size: 64px;
+            margin-bottom: 20px;
+            opacity: 0.5;
+        }
+        
+        .no-subscription h2 {
+            font-size: 22px;
+            margin-bottom: 12px;
+        }
+        
+        .no-subscription p {
+            font-size: 15px;
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 32px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Онбординг: Экран 1 - Приветствие -->
+    <div id="onboarding1" class="screen onboarding-screen active">
+        <div class="onboarding-content">
+            <div class="onboarding-icon">🚀</div>
+            <h1 class="onboarding-title">Добро пожаловать в VPN Service!</h1>
+            <p class="onboarding-text">
+                Быстрый, безопасный и надёжный VPN для всех ваших устройств
+            </p>
+        </div>
+        <div class="onboarding-buttons">
+            <div class="steps-indicator">
+                <div class="step-dot active"></div>
+                <div class="step-dot"></div>
+                <div class="step-dot"></div>
+            </div>
+            <button class="btn-primary" onclick="nextOnboarding(2)">Начать</button>
+            <button class="btn-secondary" onclick="skipOnboarding()">Пропустить</button>
+        </div>
+    </div>
+    
+    <!-- Онбординг: Экран 2 - Возможности -->
+    <div id="onboarding2" class="screen onboarding-screen">
+        <div class="onboarding-content">
+            <h1 class="onboarding-title">Что вы получаете</h1>
+            <div class="feature-list">
+                <div class="feature-item">
+                    <div class="feature-icon">🌍</div>
+                    <div class="feature-text">
+                        <h3>12+ серверов</h3>
+                        <p>По всему миру</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">🔒</div>
+                    <div class="feature-text">
+                        <h3>Шифрование</h3>
+                        <p>Полная конфиденциальность</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">⚡</div>
+                    <div class="feature-text">
+                        <h3>Безлимитный трафик</h3>
+                        <p>Без ограничений скорости</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">📱</div>
+                    <div class="feature-text">
+                        <h3>Все устройства</h3>
+                        <p>iOS, Android, Windows, Mac</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="onboarding-buttons">
+            <div class="steps-indicator">
+                <div class="step-dot"></div>
+                <div class="step-dot active"></div>
+                <div class="step-dot"></div>
+            </div>
+            <button class="btn-primary" onclick="nextOnboarding(3)">Далее</button>
+            <button class="btn-secondary" onclick="skipOnboarding()">Пропустить</button>
+        </div>
+    </div>
+    
+    <!-- Онбординг: Экран 3 - Как использовать -->
+    <div id="onboarding3" class="screen onboarding-screen">
+        <div class="onboarding-content">
+            <div class="onboarding-icon">📖</div>
+            <h1 class="onboarding-title">Как это работает</h1>
+            <div class="feature-list">
+                <div class="feature-item">
+                    <div class="feature-icon">1️⃣</div>
+                    <div class="feature-text">
+                        <h3>Выберите тариф</h3>
+                        <p>От 500⭐ в месяц</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">2️⃣</div>
+                    <div class="feature-text">
+                        <h3>Выберите сервер</h3>
+                        <p>Любая страна на выбор</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">3️⃣</div>
+                    <div class="feature-text">
+                        <h3>Получите конфигурацию</h3>
+                        <p>QR-код или ссылка</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">4️⃣</div>
+                    <div class="feature-text">
+                        <h3>Подключитесь</h3>
+                        <p>В приложении VPN</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="onboarding-buttons">
+            <div class="steps-indicator">
+                <div class="step-dot"></div>
+                <div class="step-dot"></div>
+                <div class="step-dot active"></div>
+            </div>
+            <button class="btn-primary" onclick="completeOnboarding()">Начать использовать</button>
+        </div>
+    </div>
+    
+    <!-- Главный экран: Нет подписки -->
+    <div id="mainNoSub" class="screen">
+        <div class="no-subscription">
+            <div class="no-subscription-icon">🔒</div>
+            <h2>У вас нет активной подписки</h2>
+            <p>Выберите тариф для начала работы</p>
+        </div>
+        
+        <div class="section-title">Тарифы</div>
+        <div class="plan-list">
+            <div class="plan-item" onclick="buyPlan('1month', 500)">
+                <div class="plan-info">
+                    <h3>1 месяц</h3>
+                    <p>Безлимит • 10+ серверов</p>
+                </div>
+                <div class="plan-price">500⭐</div>
+            </div>
+            
+            <div class="plan-item featured" onclick="buyPlan('3month', 1200)">
+                <div class="plan-info">
+                    <h3>3 месяца</h3>
+                    <p>-20% скидка • Поддержка</p>
+                </div>
+                <div class="plan-price">1200⭐</div>
+            </div>
+            
+            <div class="plan-item" onclick="buyPlan('12month', 4000)">
+                <div class="plan-info">
+                    <h3>12 месяцев</h3>
+                    <p>Всё включено • Dedicated IP</p>
+                </div>
+                <div class="plan-price">4000⭐</div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Главный экран: С подпиской (ваш предыдущий дизайн) -->
+    <div id="mainWithSub" class="screen">
+        <div class="server-card">
+            <div class="server-info">
+                <div class="server-flag" id="currentFlag">🇨🇳</div>
+                <div class="server-details">
+                    <h3 id="currentCountry">Китай</h3>
+                    <p id="currentProtocol">VLESS • TCP</p>
+                </div>
+            </div>
+            <div class="dropdown-icon">
+                <svg viewBox="0 0 24 24">
+                    <path d="M6 9l6 6 6-6"/>
+                </svg>
+            </div>
+        </div>
+        
+        <div class="subscription-card">
+            <div class="sub-header">
+                <div class="sub-title">Активная подписка</div>
+                <div class="sub-country">
+                    <span>🇨🇳</span>
+                    <span>Китай</span>
+                </div>
+            </div>
+            
+            <div class="sub-info-grid">
+                <div class="sub-info-item">
+                    <div class="sub-info-label">IP Адрес</div>
+                    <div class="sub-info-value">
+                        <span class="ip-value" id="ipAddress" onclick="toggleIP()">45.142.•••.•••</span>
+                    </div>
+                </div>
+                
+                <div class="sub-info-item">
+                    <div class="sub-info-label">Статус сервера</div>
+                    <div class="sub-info-value">
+                        <span class="status-badge">
+                            <span class="status-dot"></span>
+                            Доступен
+                        </span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="qr-section">
+                <div class="qr-wrapper">
+                    <div id="qrcode"></div>
+                </div>
+                <div class="qr-label">Отсканируйте для подключения</div>
+            </div>
+            
+            <div class="connection-link">
+                <div class="link-label">Ссылка подключения</div>
+                <div class="link-value" id="connectionLink">
+                    vless://example@45.142.120.45:443?encryption=none#China
+                </div>
+            </div>
+            
+            <button class="copy-btn" onclick="copyLink()">
+                Скопировать ссылку
+            </button>
+            
+            <div class="expiry-text" id="expiryText">
+                Заканчивается 21.02.2026 23:59
+            </div>
+        </div>
+        
+        <div class="section-title">Тарифы</div>
+        <div class="plan-list">
+            <div class="plan-item" onclick="buyPlan('1month', 500)">
+                <div class="plan-info">
+                    <h3>1 месяц</h3>
+                    <p>Безлимит • 10+ серверов</p>
+                </div>
+                <div class="plan-price">500⭐</div>
+            </div>
+            
+            <div class="plan-item featured" onclick="buyPlan('3month', 1200)">
+                <div class="plan-info">
+                    <h3>3 месяца</h3>
+                    <p>-20% скидка • Поддержка</p>
+                </div>
+                <div class="plan-price">1200⭐</div>
+            </div>
+            
+            <div class="plan-item" onclick="buyPlan('12month', 4000)">
+                <div class="plan-info">
+                    <h3>12 месяцев</h3>
+                    <p>Всё включено • Dedicated IP</p>
+                </div>
+                <div class="plan-price">4000⭐</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let tg = window.Telegram.WebApp;
+        tg.ready();
+        tg.expand();
+        tg.setHeaderColor('#1a1a1a');
+        tg.setBackgroundColor('#000000');
+        
+        const userId = tg.initDataUnsafe.user?.id;
+        let currentConfigLink = '';
+        let ipRevealed = false;
+        let fullIP = '45.142.120.45';
+        
+        // Проверяем, прошёл ли онбординг
+        const onboardingComplete = localStorage.getItem('vpn_onboarding_complete');
+        
+        if (onboardingComplete) {
+            checkSubscription();
+        }
+        
+        function nextOnboarding(step) {
+            tg.HapticFeedback.impactOccurred('light');
+            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+            document.getElementById(`onboarding${step}`).classList.add('active');
+        }
+        
+        function skipOnboarding() {
+            tg.HapticFeedback.impactOccurred('medium');
+            completeOnboarding();
+        }
+        
+        function completeOnboarding() {
+            tg.HapticFeedback.notificationOccurred('success');
+            localStorage.setItem('vpn_onboarding_complete', 'true');
+            checkSubscription();
+        }
+        
+        function checkSubscription() {
+            // Отправляем запрос в бот
+            tg.sendData(JSON.stringify({
+                action: 'check_subscription',
+                user_id: userId
+            }));
+            
+            // Временно показываем экран без подписки
+            showScreen('mainNoSub');
+        }
+        
+        function showScreen(screenId) {
+            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+            document.getElementById(screenId).classList.add('active');
+        }
+        
+        function buyPlan(planType, price) {
+            tg.HapticFeedback.impactOccurred('medium');
+            tg.sendData(JSON.stringify({
+                action: 'buy_plan',
+                plan: planType,
+                price: price,
+                user_id: userId
+            }));
+            
+            // После "покупки" переключаемся на экран с подпиской
+            setTimeout(() => {
+                showScreen('mainWithSub');
+                generateQRCode('vless://test@45.142.120.45:443#Test');
+            }, 500);
+        }
+        
+        function generateQRCode(text) {
+            document.getElementById('qrcode').innerHTML = '';
+            new QRCode(document.getElementById("qrcode"), {
+                text: text,
+                width: 160,
+                height: 160,
+                colorDark: "#000000",
+                colorLight: "#ffffff"
+            });
+            currentConfigLink = text;
+        }
+        
+        function toggleIP() {
+            tg.HapticFeedback.impactOccurred('light');
+            const ipElement = document.getElementById('ipAddress');
+            ipRevealed = !ipRevealed;
+            
+            if (ipRevealed) {
+                ipElement.textContent = fullIP;
+            } else {
+                ipElement.textContent = '45.142.•••.•••';
+            }
+        }
+        
+        function copyLink() {
+            tg.HapticFeedback.notificationOccurred('success');
+            const link = currentConfigLink;
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(link);
+            }
+            
+            const btn = event.target;
+            btn.textContent = '✓ Скопировано!';
+            setTimeout(() => {
+                btn.textContent = 'Скопировать ссылку';
+            }, 2000);
+        }
+    </script>
+</body>
+</html>
