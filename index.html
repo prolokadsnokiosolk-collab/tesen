@@ -22,154 +22,8 @@
             min-height: 100vh;
         }
         
-        /* Экраны */
-        .screen {
-            display: none;
-            padding: 20px;
-            animation: fadeIn 0.3s;
-        }
-        
-        .screen.active {
-            display: block;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        
-        /* === ОНБОРДИНГ === */
-        .onboarding-container {
-            max-width: 480px;
-            margin: 0 auto;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-            padding: 40px 20px;
-        }
-        
-        .onboarding-content {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            text-align: center;
-        }
-        
-        .onboarding-logo {
-            width: 120px;
-            height: 120px;
-            margin: 0 auto 40px;
-            background: linear-gradient(135deg, #FF6B4A 0%, #FF4757 100%);
-            border-radius: 30px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 48px;
-            font-weight: 700;
-        }
-        
-        .onboarding-title {
-            font-size: 32px;
-            font-weight: 700;
-            margin-bottom: 16px;
-            line-height: 1.2;
-        }
-        
-        .onboarding-subtitle {
-            font-size: 17px;
-            color: rgba(255, 255, 255, 0.6);
-            line-height: 1.5;
-            margin-bottom: 48px;
-        }
-        
-        .feature-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 16px;
-            text-align: left;
-            margin-bottom: 48px;
-        }
-        
-        .feature-card {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 16px;
-            padding: 20px;
-        }
-        
-        .feature-icon {
-            width: 40px;
-            height: 40px;
-            background: rgba(255, 107, 74, 0.15);
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 12px;
-            font-size: 20px;
-        }
-        
-        .feature-title {
-            font-size: 15px;
-            font-weight: 600;
-            margin-bottom: 4px;
-        }
-        
-        .feature-desc {
-            font-size: 13px;
-            color: rgba(255, 255, 255, 0.5);
-        }
-        
-        .steps-indicator {
-            display: flex;
-            gap: 8px;
-            justify-content: center;
-            margin-bottom: 24px;
-        }
-        
-        .step-dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.2);
-            transition: all 0.3s;
-        }
-        
-        .step-dot.active {
-            width: 24px;
-            border-radius: 4px;
-            background: #FF6B4A;
-        }
-        
-        .btn-primary {
-            background: linear-gradient(135deg, #FF6B4A 0%, #FF4757 100%);
-            border: none;
-            border-radius: 14px;
-            padding: 16px;
-            font-size: 17px;
-            font-weight: 600;
-            color: #ffffff;
-            cursor: pointer;
-            transition: all 0.2s;
-            margin-bottom: 12px;
-        }
-        
-        .btn-primary:active {
-            transform: scale(0.98);
-        }
-        
-        .btn-secondary {
-            background: transparent;
-            border: none;
-            padding: 16px;
-            font-size: 15px;
-            font-weight: 500;
-            color: rgba(255, 255, 255, 0.5);
-            cursor: pointer;
-        }
-        
-        /* === ГЛАВНЫЙ ЭКРАН === */
-        .main-container {
+        /* Контейнер */
+        .container {
             max-width: 480px;
             margin: 0 auto;
             padding: 20px;
@@ -188,7 +42,7 @@
             font-weight: 700;
         }
         
-        .header-status {
+        .status-badge {
             background: rgba(16, 185, 129, 0.15);
             color: #10b981;
             padding: 8px 16px;
@@ -207,6 +61,11 @@
             justify-content: space-between;
             align-items: center;
             cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .server-card:active {
+            transform: scale(0.98);
         }
         
         .server-info {
@@ -223,7 +82,9 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 24px;
+            font-size: 18px;
+            font-weight: 700;
+            color: rgba(255, 255, 255, 0.9);
         }
         
         .server-details h3 {
@@ -307,6 +168,7 @@
         .connection-ip {
             font-size: 13px;
             color: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
         }
         
         .info-grid {
@@ -360,7 +222,7 @@
             padding: 12px;
             margin-bottom: 16px;
             word-break: break-all;
-            font-family: 'SF Mono', monospace;
+            font-family: 'SF Mono', 'Consolas', monospace;
             font-size: 11px;
             color: rgba(255, 255, 255, 0.6);
             line-height: 1.6;
@@ -376,7 +238,12 @@
             font-weight: 600;
             color: #ffffff;
             cursor: pointer;
+            transition: all 0.2s;
             margin-bottom: 12px;
+        }
+        
+        .copy-button:active {
+            transform: scale(0.98);
         }
         
         .expiry-info {
@@ -396,6 +263,7 @@
             display: flex;
             flex-direction: column;
             gap: 12px;
+            margin-bottom: 40px;
         }
         
         .plan-card {
@@ -433,265 +301,93 @@
             font-size: 24px;
             font-weight: 700;
         }
-        
-        /* No Subscription State */
-        .empty-state {
-            text-align: center;
-            padding: 60px 20px;
-        }
-        
-        .empty-icon {
-            width: 80px;
-            height: 80px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 24px;
-            font-size: 36px;
-        }
-        
-        .empty-title {
-            font-size: 22px;
-            font-weight: 700;
-            margin-bottom: 12px;
-        }
-        
-        .empty-desc {
-            font-size: 15px;
-            color: rgba(255, 255, 255, 0.5);
-            margin-bottom: 32px;
-        }
     </style>
 </head>
 <body>
-    <!-- Онбординг 1: Приветствие -->
-    <div id="onboarding1" class="screen active">
-        <div class="onboarding-container">
-            <div class="onboarding-content">
-                <div class="onboarding-logo">V</div>
-                <h1 class="onboarding-title">VPN Service</h1>
-                <p class="onboarding-subtitle">Быстрое и безопасное подключение к интернету без ограничений</p>
-            </div>
-            <div>
-                <div class="steps-indicator">
-                    <div class="step-dot active"></div>
-                    <div class="step-dot"></div>
-                    <div class="step-dot"></div>
+    <div class="container">
+        <!-- Хедер -->
+        <div class="header">
+            <div class="header-title">VPN Service</div>
+            <div class="status-badge">Active</div>
+        </div>
+        
+        <!-- Выбор сервера -->
+        <div class="server-card">
+            <div class="server-info">
+                <div class="server-flag">CN</div>
+                <div class="server-details">
+                    <h3>Китай</h3>
+                    <p>VLESS • TCP</p>
                 </div>
-                <button class="btn-primary" onclick="nextStep(2)">Продолжить</button>
-                <button class="btn-secondary" onclick="skipOnboarding()">Пропустить</button>
+            </div>
+            <div class="server-arrow">
+                <svg viewBox="0 0 24 24">
+                    <path d="M9 18l6-6-6-6"/>
+                </svg>
             </div>
         </div>
-    </div>
-    
-    <!-- Онбординг 2: Возможности -->
-    <div id="onboarding2" class="screen">
-        <div class="onboarding-container">
-            <div class="onboarding-content">
-                <h1 class="onboarding-title">Что вы получаете</h1>
-                <p class="onboarding-subtitle">Полный набор функций для безопасного интернета</p>
-                
-                <div class="feature-grid">
-                    <div class="feature-card">
-                        <div class="feature-icon">🌍</div>
-                        <div class="feature-title">12+ серверов</div>
-                        <div class="feature-desc">По всему миру</div>
-                    </div>
-                    <div class="feature-card">
-                        <div class="feature-icon">🔒</div>
-                        <div class="feature-title">Шифрование</div>
-                        <div class="feature-desc">Полная защита</div>
-                    </div>
-                    <div class="feature-card">
-                        <div class="feature-icon">⚡</div>
-                        <div class="feature-title">Безлимит</div>
-                        <div class="feature-desc">Без ограничений</div>
-                    </div>
-                    <div class="feature-card">
-                        <div class="feature-icon">📱</div>
-                        <div class="feature-title">Все устройства</div>
-                        <div class="feature-desc">iOS, Android, PC</div>
-                    </div>
+        
+        <!-- Карточка подключения -->
+        <div class="connection-card">
+            <div class="connection-header">
+                <div class="connection-status">
+                    <div class="status-indicator"></div>
+                    <span class="status-text">Connected</span>
+                </div>
+                <div class="connection-ip" id="ipAddress" onclick="toggleIP()">45.142.•••.•••</div>
+            </div>
+            
+            <div class="info-grid">
+                <div class="info-item">
+                    <div class="info-label">Протокол</div>
+                    <div class="info-value">VLESS</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">Порт</div>
+                    <div class="info-value">443</div>
                 </div>
             </div>
-            <div>
-                <div class="steps-indicator">
-                    <div class="step-dot"></div>
-                    <div class="step-dot active"></div>
-                    <div class="step-dot"></div>
-                </div>
-                <button class="btn-primary" onclick="nextStep(3)">Далее</button>
-                <button class="btn-secondary" onclick="skipOnboarding()">Пропустить</button>
+            
+            <div class="qr-container">
+                <div id="qrcode"></div>
             </div>
+            <div class="qr-hint">Отсканируйте QR-код в приложении</div>
+            
+            <div class="config-link">
+                vless://uuid-example@45.142.120.45:443?encryption=none&security=tls&type=ws&host=server.com&path=/ws#China-VLESS
+            </div>
+            
+            <button class="copy-button" onclick="copyConfig()">
+                Скопировать конфигурацию
+            </button>
+            <div class="expiry-info">Действует до 21.02.2026 23:59</div>
         </div>
-    </div>
-    
-    <!-- Онбординг 3: Инструкция -->
-    <div id="onboarding3" class="screen">
-        <div class="onboarding-container">
-            <div class="onboarding-content">
-                <h1 class="onboarding-title">Как это работает</h1>
-                <p class="onboarding-subtitle">Простые шаги для начала работы</p>
-                
-                <div class="feature-grid">
-                    <div class="feature-card">
-                        <div class="feature-icon">1</div>
-                        <div class="feature-title">Выберите тариф</div>
-                        <div class="feature-desc">От 500⭐</div>
-                    </div>
-                    <div class="feature-card">
-                        <div class="feature-icon">2</div>
-                        <div class="feature-title">Выберите сервер</div>
-                        <div class="feature-desc">Любая страна</div>
-                    </div>
-                    <div class="feature-card">
-                        <div class="feature-icon">3</div>
-                        <div class="feature-title">Получите ключ</div>
-                        <div class="feature-desc">QR или ссылка</div>
-                    </div>
-                    <div class="feature-card">
-                        <div class="feature-icon">4</div>
-                        <div class="feature-title">Подключитесь</div>
-                        <div class="feature-desc">В приложении</div>
-                    </div>
+        
+        <!-- Тарифы -->
+        <div class="section-title">Продлить подписку</div>
+        <div class="plans-grid">
+            <div class="plan-card">
+                <div class="plan-info">
+                    <h3>1 месяц</h3>
+                    <p>Безлимит • 12+ серверов</p>
                 </div>
-            </div>
-            <div>
-                <div class="steps-indicator">
-                    <div class="step-dot"></div>
-                    <div class="step-dot"></div>
-                    <div class="step-dot active"></div>
-                </div>
-                <button class="btn-primary" onclick="completeOnboarding()">Начать использовать</button>
-            </div>
-        </div>
-    </div>
-    
-    <!-- Главный экран: Нет подписки -->
-    <div id="mainNoSub" class="screen">
-        <div class="main-container">
-            <div class="header">
-                <div class="header-title">VPN Service</div>
+                <div class="plan-price">500⭐</div>
             </div>
             
-            <div class="empty-state">
-                <div class="empty-icon">🔒</div>
-                <h2 class="empty-title">Нет активной подписки</h2>
-                <p class="empty-desc">Выберите подходящий тариф для начала работы</p>
+            <div class="plan-card featured">
+                <div class="plan-info">
+                    <h3>3 месяца</h3>
+                    <p>Скидка 20% • Поддержка</p>
+                </div>
+                <div class="plan-price">1200⭐</div>
             </div>
             
-            <div class="section-title">Тарифные планы</div>
-            <div class="plans-grid">
-                <div class="plan-card" onclick="buyPlan('1month', 500)">
-                    <div class="plan-info">
-                        <h3>1 месяц</h3>
-                        <p>Безлимит • 12+ серверов</p>
-                    </div>
-                    <div class="plan-price">500⭐</div>
+            <div class="plan-card">
+                <div class="plan-info">
+                    <h3>12 месяцев</h3>
+                    <p>Dedicated IP • VIP</p>
                 </div>
-                
-                <div class="plan-card featured" onclick="buyPlan('3month', 1200)">
-                    <div class="plan-info">
-                        <h3>3 месяца</h3>
-                        <p>Скидка 20% • Поддержка</p>
-                    </div>
-                    <div class="plan-price">1200⭐</div>
-                </div>
-                
-                <div class="plan-card" onclick="buyPlan('12month', 4000)">
-                    <div class="plan-info">
-                        <h3>12 месяцев</h3>
-                        <p>Dedicated IP • VIP</p>
-                    </div>
-                    <div class="plan-price">4000⭐</div>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <!-- Главный экран: С подпиской -->
-    <div id="mainWithSub" class="screen">
-        <div class="main-container">
-            <div class="header">
-                <div class="header-title">VPN Service</div>
-                <div class="header-status">Active</div>
-            </div>
-            
-            <div class="server-card">
-                <div class="server-info">
-                    <div class="server-flag" id="currentFlag">CN</div>
-                    <div class="server-details">
-                        <h3 id="currentCountry">Китай</h3>
-                        <p id="currentProtocol">VLESS • TCP</p>
-                    </div>
-                </div>
-                <div class="server-arrow">
-                    <svg viewBox="0 0 24 24">
-                        <path d="M9 18l6-6-6-6"/>
-                    </svg>
-                </div>
-            </div>
-            
-            <div class="connection-card">
-                <div class="connection-header">
-                    <div class="connection-status">
-                        <div class="status-indicator"></div>
-                        <span class="status-text">Connected</span>
-                    </div>
-                    <div class="connection-ip" id="ipAddress" onclick="toggleIP()">45.142.•••.•••</div>
-                </div>
-                
-                <div class="info-grid">
-                    <div class="info-item">
-                        <div class="info-label">Протокол</div>
-                        <div class="info-value">VLESS</div>
-                    </div>
-                    <div class="info-item">
-                        <div class="info-label">Порт</div>
-                        <div class="info-value">443</div>
-                    </div>
-                </div>
-                
-                <div class="qr-container">
-                    <div id="qrcode"></div>
-                </div>
-                <div class="qr-hint">Отсканируйте QR-код в приложении</div>
-                
-                <div class="config-link" id="configLink">
-                    vless://example@45.142.120.45:443?encryption=none&security=tls&type=ws#China-Server
-                </div>
-                
-                <button class="copy-button" onclick="copyConfig()">Скопировать конфигурацию</button>
-                <div class="expiry-info" id="expiryInfo">Действует до 21.02.2026 23:59</div>
-            </div>
-            
-            <div class="section-title">Продлить подписку</div>
-            <div class="plans-grid">
-                <div class="plan-card" onclick="buyPlan('1month', 500)">
-                    <div class="plan-info">
-                        <h3>1 месяц</h3>
-                        <p>Безлимит • 12+ серверов</p>
-                    </div>
-                    <div class="plan-price">500⭐</div>
-                </div>
-                
-                <div class="plan-card featured" onclick="buyPlan('3month', 1200)">
-                    <div class="plan-info">
-                        <h3>3 месяца</h3>
-                        <p>Скидка 20% • Поддержка</p>
-                    </div>
-                    <div class="plan-price">1200⭐</div>
-                </div>
-                
-                <div class="plan-card" onclick="buyPlan('12month', 4000)">
-                    <div class="plan-info">
-                        <h3>12 месяцев</h3>
-                        <p>Dedicated IP • VIP</p>
-                    </div>
-                    <div class="plan-price">4000⭐</div>
-                </div>
+                <div class="plan-price">4000⭐</div>
             </div>
         </div>
     </div>
@@ -703,71 +399,19 @@
         tg.setHeaderColor('#000000');
         tg.setBackgroundColor('#000000');
         
-        const userId = tg.initDataUnsafe.user?.id;
-        let currentConfig = '';
         let ipRevealed = false;
         let fullIP = '45.142.120.45';
         
-        // Проверка онбординга
-        const onboardingDone = localStorage.getItem('vpn_onboarding');
-        if (onboardingDone) {
-            checkSubscription();
-        }
+        // Генерация QR-кода при загрузке
+        const configLink = 'vless://uuid-example@45.142.120.45:443?encryption=none&security=tls&type=ws&host=server.com&path=/ws#China-VLESS';
         
-        function nextStep(step) {
-            tg.HapticFeedback.impactOccurred('light');
-            showScreen(`onboarding${step}`);
-        }
-        
-        function skipOnboarding() {
-            tg.HapticFeedback.impactOccurred('medium');
-            completeOnboarding();
-        }
-        
-        function completeOnboarding() {
-            tg.HapticFeedback.notificationOccurred('success');
-            localStorage.setItem('vpn_onboarding', 'true');
-            checkSubscription();
-        }
-        
-        function checkSubscription() {
-            // Пока показываем экран без подписки
-            showScreen('mainNoSub');
-        }
-        
-        function showScreen(id) {
-            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-            document.getElementById(id).classList.add('active');
-        }
-        
-        function buyPlan(plan, price) {
-            tg.HapticFeedback.impactOccurred('medium');
-            tg.sendData(JSON.stringify({
-                action: 'buy_plan',
-                plan: plan,
-                price: price,
-                user_id: userId
-            }));
-            
-            // Симуляция покупки
-            setTimeout(() => {
-                showScreen('mainWithSub');
-                generateQR('vless://test@45.142.120.45:443?encryption=none#Test');
-            }, 500);
-        }
-        
-        function generateQR(text) {
-            document.getElementById('qrcode').innerHTML = '';
-            new QRCode(document.getElementById('qrcode'), {
-                text: text,
-                width: 180,
-                height: 180,
-                colorDark: '#000000',
-                colorLight: '#ffffff'
-            });
-            currentConfig = text;
-            document.getElementById('configLink').textContent = text;
-        }
+        new QRCode(document.getElementById('qrcode'), {
+            text: configLink,
+            width: 180,
+            height: 180,
+            colorDark: '#000000',
+            colorLight: '#ffffff'
+        });
         
         function toggleIP() {
             tg.HapticFeedback.impactOccurred('light');
@@ -779,11 +423,13 @@
         function copyConfig() {
             tg.HapticFeedback.notificationOccurred('success');
             if (navigator.clipboard) {
-                navigator.clipboard.writeText(currentConfig);
+                navigator.clipboard.writeText(configLink);
             }
-            event.target.textContent = 'Скопировано!';
+            
+            const btn = event.target;
+            btn.textContent = 'Скопировано!';
             setTimeout(() => {
-                event.target.textContent = 'Скопировать конфигурацию';
+                btn.textContent = 'Скопировать конфигурацию';
             }, 2000);
         }
     </script>
