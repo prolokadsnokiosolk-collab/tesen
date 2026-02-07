@@ -196,9 +196,9 @@
             color: #4d9b7a;
         }
         
-        /* === SPEED TEST === */
+        /* === RENEWAL CARD === */
         
-        .speed-test-card {
+        .renewal-card {
             background: #1a1a1a;
             border: 1px solid #2a2a2a;
             border-radius: 20px;
@@ -206,100 +206,95 @@
             margin-bottom: 16px;
         }
         
-        .speed-test-header {
+        .renewal-header {
             text-align: center;
-            margin-bottom: 28px;
+            margin-bottom: 20px;
         }
         
-        .speed-test-title {
+        .renewal-title {
             font-size: 20px;
             font-weight: 700;
             color: #ffffff;
             margin-bottom: 8px;
         }
         
-        .speed-test-subtitle {
+        .renewal-subtitle {
             font-size: 13px;
             color: #999999;
         }
         
-        .speed-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-            margin-bottom: 20px;
-        }
-        
-        .speed-item {
+        .renewal-timer {
             background: #0a0a0a;
             border: 1px solid #2a2a2a;
             border-radius: 14px;
-            padding: 16px;
+            padding: 20px;
             text-align: center;
+            margin-bottom: 16px;
         }
         
-        .speed-item-label {
-            font-size: 12px;
-            color: #999999;
-            margin-bottom: 8px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            font-weight: 600;
-        }
-        
-        .speed-item-value {
-            font-size: 24px;
+        .renewal-days {
+            font-size: 48px;
             font-weight: 700;
             color: #4d9b7a;
-            font-variant-numeric: tabular-nums;
+            line-height: 1;
+            margin-bottom: 8px;
         }
         
-        .speed-item-value.loading {
-            color: #666666;
-        }
-        
-        .speed-item-value.testing {
-            color: #4d9b7a;
-            animation: pulse 1.5s ease-in-out infinite;
-        }
-        
-        .speed-item-unit {
-            font-size: 13px;
-            color: #999999;
-            margin-left: 4px;
-        }
-        
-        .speed-info {
-            background: #0a0a0a;
-            border: 1px solid #2a2a2a;
-            border-radius: 14px;
-            padding: 16px;
-            margin-bottom: 20px;
-        }
-        
-        .speed-info-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 8px 0;
-        }
-        
-        .speed-info-row:not(:last-child) {
-            border-bottom: 1px solid #2a2a2a;
-        }
-        
-        .speed-info-label {
+        .renewal-days-label {
             font-size: 14px;
             color: #999999;
         }
         
-        .speed-info-value {
+        .renewal-progress {
+            margin-bottom: 20px;
+        }
+        
+        .renewal-progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #2a2a2a;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 12px;
+        }
+        
+        .renewal-progress-fill {
+            height: 100%;
+            background: #4d9b7a;
+            border-radius: 4px;
+            transition: width 0.3s;
+        }
+        
+        .renewal-progress-text {
+            display: flex;
+            justify-content: space-between;
+            font-size: 13px;
+            color: #999999;
+        }
+        
+        .renewal-date {
+            background: #0a0a0a;
+            border: 1px solid #2a2a2a;
+            border-radius: 14px;
+            padding: 16px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .renewal-date-label {
+            font-size: 14px;
+            color: #999999;
+        }
+        
+        .renewal-date-value {
             font-size: 14px;
             font-weight: 600;
             color: #e8eaed;
         }
         
-        .btn-speed-test {
+        .btn-renew {
             width: 100%;
             background: #1a1a1a;
             border: 1.5px solid #4d9b7a;
@@ -310,59 +305,253 @@
             color: #4d9b7a;
             cursor: pointer;
             transition: all 0.2s;
+            margin-bottom: 12px;
         }
         
-        .btn-speed-test:active {
+        .btn-renew:active {
             transform: scale(0.98);
             background: rgba(77, 155, 122, 0.08);
         }
         
-        .btn-speed-test:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
+        /* === INSTRUCTIONS CARD === */
+        
+        .instructions-card {
+            background: #1a1a1a;
+            border: 1px solid #2a2a2a;
+            border-radius: 20px;
+            padding: 24px;
+            margin-bottom: 16px;
         }
         
-        .speed-progress {
+        .instructions-header {
+            text-align: center;
+            margin-bottom: 24px;
+        }
+        
+        .instructions-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 8px;
+        }
+        
+        .instructions-subtitle {
+            font-size: 13px;
+            color: #999999;
+        }
+        
+        .platform-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        
+        .platform-item {
+            background: #0a0a0a;
+            border: 1px solid #2a2a2a;
+            border-radius: 14px;
+            padding: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .platform-item:active {
+            transform: scale(0.98);
+            background: #1a1a1a;
+        }
+        
+        .platform-info {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+        
+        .platform-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(77, 155, 122, 0.12);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+        
+        .platform-text h3 {
+            font-size: 16px;
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 2px;
+        }
+        
+        .platform-text p {
+            font-size: 12px;
+            color: #999999;
+        }
+        
+        .platform-arrow {
+            width: 20px;
+            height: 20px;
+            opacity: 0.3;
+        }
+        
+        .platform-arrow svg {
             width: 100%;
-            height: 4px;
-            background: #2a2a2a;
-            border-radius: 2px;
-            overflow: hidden;
-            margin-top: 16px;
-            display: none;
-        }
-        
-        .speed-progress.active {
-            display: block;
-        }
-        
-        .speed-progress-bar {
             height: 100%;
-            background: #4d9b7a;
-            width: 0%;
-            transition: width 0.3s;
+            fill: #e8eaed;
         }
         
-        @keyframes spin {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
+        /* === INSTRUCTION DETAIL MODAL === */
+        
+        .instruction-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.92);
+            backdrop-filter: blur(10px);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            animation: fadeIn 0.3s;
+            overflow-y: auto;
+            padding: 20px;
         }
         
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.4; }
+        .instruction-modal.active {
+            display: flex;
         }
         
-        .btn-speed-test.loading::after {
-            content: '';
-            display: inline-block;
-            width: 16px;
-            height: 16px;
-            border: 2px solid #4d9b7a;
-            border-top-color: transparent;
-            border-radius: 50%;
-            margin-left: 10px;
-            animation: spin 0.8s linear infinite;
+        .instruction-modal-content {
+            background: #1a1a1a;
+            border: 1px solid #2a2a2a;
+            border-radius: 24px;
+            padding: 32px;
+            max-width: 500px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        
+        .instruction-modal-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 24px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #2a2a2a;
+        }
+        
+        .instruction-modal-icon {
+            width: 56px;
+            height: 56px;
+            background: rgba(77, 155, 122, 0.12);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            flex-shrink: 0;
+        }
+        
+        .instruction-modal-title {
+            flex: 1;
+        }
+        
+        .instruction-modal-title h2 {
+            font-size: 22px;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 4px;
+        }
+        
+        .instruction-modal-title p {
+            font-size: 13px;
+            color: #999999;
+        }
+        
+        .instruction-steps {
+            margin-bottom: 24px;
+        }
+        
+        .instruction-step {
+            margin-bottom: 24px;
+        }
+        
+        .instruction-step:last-child {
+            margin-bottom: 0;
+        }
+        
+        .instruction-step-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 28px;
+            height: 28px;
+            background: rgba(77, 155, 122, 0.12);
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 700;
+            color: #4d9b7a;
+            margin-bottom: 12px;
+        }
+        
+        .instruction-step-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 8px;
+        }
+        
+        .instruction-step-text {
+            font-size: 14px;
+            line-height: 1.6;
+            color: #999999;
+            margin-bottom: 12px;
+        }
+        
+        .instruction-step-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(77, 155, 122, 0.12);
+            border: 1px solid rgba(77, 155, 122, 0.3);
+            border-radius: 10px;
+            padding: 10px 16px;
+            font-size: 14px;
+            font-weight: 600;
+            color: #4d9b7a;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+        
+        .instruction-step-link:active {
+            transform: scale(0.95);
+            background: rgba(77, 155, 122, 0.2);
+        }
+        
+        .btn-instruction-close {
+            width: 100%;
+            background: #1a1a1a;
+            border: 1px solid #2a2a2a;
+            border-radius: 14px;
+            padding: 16px;
+            font-size: 15px;
+            font-weight: 600;
+            color: #e8eaed;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .btn-instruction-close:active {
+            transform: scale(0.97);
+            background: #252525;
         }
         
         /* === QR MODAL === */
@@ -1149,49 +1338,110 @@
                 </div>
             </div>
             
-            <!-- Speed Test Card -->
-            <div class="speed-test-card">
-                <div class="speed-test-header">
-                    <div class="speed-test-title">Тест скорости</div>
-                    <div class="speed-test-subtitle" id="speedStatus">Проверка соединения</div>
+            <!-- Renewal Card -->
+            <div class="renewal-card">
+                <div class="renewal-header">
+                    <div class="renewal-title">Подписка</div>
+                    <div class="renewal-subtitle">Продлите, чтобы не потерять доступ</div>
                 </div>
                 
-                <div class="speed-grid">
-                    <div class="speed-item">
-                        <div class="speed-item-label">Загрузка</div>
-                        <div class="speed-item-value loading" id="speedDownload">—</div>
+                <div class="renewal-timer">
+                    <div class="renewal-days">14</div>
+                    <div class="renewal-days-label">дней осталось</div>
+                </div>
+                
+                <div class="renewal-progress">
+                    <div class="renewal-progress-bar">
+                        <div class="renewal-progress-fill" style="width: 47%;"></div>
                     </div>
-                    <div class="speed-item">
-                        <div class="speed-item-label">Выгрузка</div>
-                        <div class="speed-item-value loading" id="speedUpload">—</div>
-                    </div>
-                    <div class="speed-item">
-                        <div class="speed-item-label">Пинг</div>
-                        <div class="speed-item-value loading" id="speedPing">—</div>
-                    </div>
-                    <div class="speed-item">
-                        <div class="speed-item-label">Джиттер</div>
-                        <div class="speed-item-value loading" id="speedJitter">—</div>
+                    <div class="renewal-progress-text">
+                        <span>Активна</span>
+                        <span>47%</span>
                     </div>
                 </div>
                 
-                <div class="speed-info">
-                    <div class="speed-info-row">
-                        <div class="speed-info-label">IP-адрес</div>
-                        <div class="speed-info-value" id="speedIP">—</div>
-                    </div>
-                    <div class="speed-info-row">
-                        <div class="speed-info-label">Страна</div>
-                        <div class="speed-info-value" id="speedCountry">—</div>
-                    </div>
+                <div class="renewal-date">
+                    <div class="renewal-date-label">Действует до</div>
+                    <div class="renewal-date-value">21 февраля 2026</div>
                 </div>
                 
-                <button class="btn-speed-test" id="btnSpeedTest" onclick="startSpeedTest()">
-                    Начать тест
+                <button class="btn-renew" onclick="renewSubscription()">
+                    💎 Продлить подписку
                 </button>
+            </div>
+            
+            <!-- Instructions Card -->
+            <div class="instructions-card">
+                <div class="instructions-header">
+                    <div class="instructions-title">Инструкции</div>
+                    <div class="instructions-subtitle">Выберите вашу платформу</div>
+                </div>
                 
-                <div class="speed-progress" id="speedProgress">
-                    <div class="speed-progress-bar" id="speedProgressBar"></div>
+                <div class="platform-list">
+                    <div class="platform-item" onclick="showInstruction('android')">
+                        <div class="platform-info">
+                            <div class="platform-icon">📱</div>
+                            <div class="platform-text">
+                                <h3>Android</h3>
+                                <p>v2rayNG, Hiddify</p>
+                            </div>
+                        </div>
+                        <div class="platform-arrow">
+                            <svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+                        </div>
+                    </div>
+                    
+                    <div class="platform-item" onclick="showInstruction('ios')">
+                        <div class="platform-info">
+                            <div class="platform-icon">🍎</div>
+                            <div class="platform-text">
+                                <h3>iOS / iPadOS</h3>
+                                <p>Shadowrocket, V2Box</p>
+                            </div>
+                        </div>
+                        <div class="platform-arrow">
+                            <svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+                        </div>
+                    </div>
+                    
+                    <div class="platform-item" onclick="showInstruction('windows')">
+                        <div class="platform-info">
+                            <div class="platform-icon">💻</div>
+                            <div class="platform-text">
+                                <h3>Windows</h3>
+                                <p>v2rayN, Hiddify</p>
+                            </div>
+                        </div>
+                        <div class="platform-arrow">
+                            <svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+                        </div>
+                    </div>
+                    
+                    <div class="platform-item" onclick="showInstruction('macos')">
+                        <div class="platform-info">
+                            <div class="platform-icon">🍏</div>
+                            <div class="platform-text">
+                                <h3>macOS</h3>
+                                <p>V2RayX, Hiddify</p>
+                            </div>
+                        </div>
+                        <div class="platform-arrow">
+                            <svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+                        </div>
+                    </div>
+                    
+                    <div class="platform-item" onclick="showInstruction('linux')">
+                        <div class="platform-info">
+                            <div class="platform-icon">🐧</div>
+                            <div class="platform-text">
+                                <h3>Linux</h3>
+                                <p>v2ray-core, Hiddify</p>
+                            </div>
+                        </div>
+                        <div class="platform-arrow">
+                            <svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1316,6 +1566,27 @@
         </div>
     </div>
     
+    <!-- Instruction Modal -->
+    <div id="instructionModal" class="instruction-modal">
+        <div class="instruction-modal-content">
+            <div class="instruction-modal-header">
+                <div class="instruction-modal-icon" id="instructionIcon">📱</div>
+                <div class="instruction-modal-title">
+                    <h2 id="instructionTitle">Android</h2>
+                    <p id="instructionSubtitle">v2rayNG, Hiddify</p>
+                </div>
+            </div>
+            
+            <div class="instruction-steps" id="instructionSteps">
+                <!-- Заполняется динамически -->
+            </div>
+            
+            <button class="btn-instruction-close" onclick="closeInstructionModal()">
+                Закрыть
+            </button>
+        </div>
+    </div>
+    
     <!-- Навигация -->
     <div class="bottom-nav">
         <div class="nav-item active" onclick="navHome()">
@@ -1364,7 +1635,131 @@
         let qrTimer = null;
         let qrTimeRemaining = 600;
         
-        let isTestingSpeed = false;
+        const instructions = {
+            android: {
+                icon: '📱',
+                title: 'Android',
+                subtitle: 'v2rayNG, Hiddify',
+                steps: [
+                    {
+                        title: 'Скачайте приложение',
+                        text: 'Установите v2rayNG из Google Play или скачайте APK с GitHub',
+                        link: 'https://play.google.com/store/apps/details?id=com.v2ray.ang',
+                        linkText: 'Скачать v2rayNG'
+                    },
+                    {
+                        title: 'Скопируйте ключ подключения',
+                        text: 'Вернитесь на главный экран и нажмите кнопку "Копировать" рядом с ключом',
+                    },
+                    {
+                        title: 'Добавьте сервер в приложение',
+                        text: 'Откройте v2rayNG, нажмите "+" в правом верхнем углу и выберите "Импорт из буфера обмена"',
+                    },
+                    {
+                        title: 'Подключитесь',
+                        text: 'Нажмите на добавленный сервер и кликните на иконку подключения внизу экрана. Готово!',
+                    }
+                ]
+            },
+            ios: {
+                icon: '🍎',
+                title: 'iOS / iPadOS',
+                subtitle: 'Shadowrocket, V2Box',
+                steps: [
+                    {
+                        title: 'Скачайте приложение',
+                        text: 'Установите Shadowrocket из App Store (платное) или используйте альтернативу V2Box',
+                        link: 'https://apps.apple.com/app/shadowrocket/id932747118',
+                        linkText: 'Открыть App Store'
+                    },
+                    {
+                        title: 'Скопируйте ключ или отсканируйте QR',
+                        text: 'Используйте кнопку копирования на главном экране или нажмите на иконку QR-кода',
+                    },
+                    {
+                        title: 'Импортируйте в приложение',
+                        text: 'Откройте Shadowrocket, нажмите "+" и выберите "Добавить из буфера обмена" или отсканируйте QR',
+                    },
+                    {
+                        title: 'Подключитесь',
+                        text: 'Включите переключатель подключения в приложении и подтвердите установку VPN профиля',
+                    }
+                ]
+            },
+            windows: {
+                icon: '💻',
+                title: 'Windows',
+                subtitle: 'v2rayN, Hiddify',
+                steps: [
+                    {
+                        title: 'Скачайте приложение',
+                        text: 'Установите v2rayN с официального GitHub релиза',
+                        link: 'https://github.com/2dust/v2rayN/releases',
+                        linkText: 'Скачать v2rayN'
+                    },
+                    {
+                        title: 'Скопируйте ключ',
+                        text: 'Вернитесь в бот и скопируйте ваш ключ подключения',
+                    },
+                    {
+                        title: 'Импортируйте сервер',
+                        text: 'Откройте v2rayN, нажмите "Серверы" → "Импорт из буфера обмена"',
+                    },
+                    {
+                        title: 'Подключитесь',
+                        text: 'Выберите добавленный сервер и нажмите Enter или кликните "Включить системный прокси"',
+                    }
+                ]
+            },
+            macos: {
+                icon: '🍏',
+                title: 'macOS',
+                subtitle: 'V2RayX, Hiddify',
+                steps: [
+                    {
+                        title: 'Скачайте приложение',
+                        text: 'Установите V2RayX или Hiddify для macOS',
+                        link: 'https://github.com/Cenmrev/V2RayX/releases',
+                        linkText: 'Скачать V2RayX'
+                    },
+                    {
+                        title: 'Скопируйте ключ',
+                        text: 'Скопируйте ваш ключ подключения из бота',
+                    },
+                    {
+                        title: 'Импортируйте конфигурацию',
+                        text: 'Откройте приложение, нажмите "Import" и вставьте скопированный ключ',
+                    },
+                    {
+                        title: 'Активируйте VPN',
+                        text: 'Выберите импортированный сервер и нажмите "Turn V2Ray On" в меню приложения',
+                    }
+                ]
+            },
+            linux: {
+                icon: '🐧',
+                title: 'Linux',
+                subtitle: 'v2ray-core, Hiddify',
+                steps: [
+                    {
+                        title: 'Установите v2ray-core',
+                        text: 'Выполните команду установки в терминале:\nbash <(curl -L https://raw.githubusercontent.com/v2fly/fhs-install-v2ray/master/install-release.sh)',
+                    },
+                    {
+                        title: 'Создайте конфигурационный файл',
+                        text: 'Экспортируйте ваш ключ в JSON формат и сохраните в /usr/local/etc/v2ray/config.json',
+                    },
+                    {
+                        title: 'Запустите сервис',
+                        text: 'Выполните команды:\nsudo systemctl enable v2ray\nsudo systemctl start v2ray',
+                    },
+                    {
+                        title: 'Настройте системный прокси',
+                        text: 'Установите SOCKS5 прокси 127.0.0.1:1080 в настройках сети вашего дистрибутива',
+                    }
+                ]
+            }
+        };
         
         function selectServer(code, name, flag) {
             tg.HapticFeedback.impactOccurred('medium');
@@ -1410,6 +1805,11 @@
             showScreen('screenActive');
         }
         
+        function renewSubscription() {
+            tg.HapticFeedback.impactOccurred('medium');
+            showScreen('screenPlan');
+        }
+        
         function copyLink() {
             tg.HapticFeedback.notificationOccurred('success');
             const link = document.getElementById('subLinkText').textContent;
@@ -1423,144 +1823,51 @@
             });
         }
         
-        // Speed Test Functions
-        async function animateValue(id, start, end, duration, unit) {
-            const elem = document.getElementById(id);
-            const range = end - start;
-            const steps = 30;
-            const increment = range / steps;
-            const stepTime = duration / steps;
-            let current = start;
-            
-            elem.classList.remove('loading');
-            elem.classList.add('testing');
-            
-            for (let i = 0; i < steps; i++) {
-                await new Promise(resolve => setTimeout(resolve, stepTime));
-                current += increment;
-                elem.innerHTML = `${current.toFixed(1)}<span class="speed-item-unit">${unit}</span>`;
-            }
-            
-            elem.innerHTML = `${end.toFixed(1)}<span class="speed-item-unit">${unit}</span>`;
-            elem.classList.remove('testing');
-        }
-        
-        async function startSpeedTest() {
-            if (isTestingSpeed) return;
-            
-            isTestingSpeed = true;
+        function showInstruction(platform) {
             tg.HapticFeedback.impactOccurred('medium');
             
-            const btn = document.getElementById('btnSpeedTest');
-            const progress = document.getElementById('speedProgress');
-            const progressBar = document.getElementById('speedProgressBar');
-            const status = document.getElementById('speedStatus');
+            const data = instructions[platform];
             
-            btn.disabled = true;
-            btn.textContent = 'Тестирование';
-            btn.classList.add('loading');
-            progress.classList.add('active');
+            document.getElementById('instructionIcon').textContent = data.icon;
+            document.getElementById('instructionTitle').textContent = data.title;
+            document.getElementById('instructionSubtitle').textContent = data.subtitle;
             
-            // Reset
-            ['speedDownload', 'speedUpload', 'speedPing', 'speedJitter'].forEach(id => {
-                document.getElementById(id).innerHTML = '—';
-                document.getElementById(id).className = 'speed-item-value loading';
+            const stepsContainer = document.getElementById('instructionSteps');
+            stepsContainer.innerHTML = '';
+            
+            data.steps.forEach((step, index) => {
+                const stepDiv = document.createElement('div');
+                stepDiv.className = 'instruction-step';
+                
+                let stepHTML = `
+                    <div class="instruction-step-number">${index + 1}</div>
+                    <div class="instruction-step-title">${step.title}</div>
+                    <div class="instruction-step-text">${step.text.replace(/\n/g, '<br>')}</div>
+                `;
+                
+                if (step.link) {
+                    stepHTML += `
+                        <a href="${step.link}" target="_blank" class="instruction-step-link">
+                            ${step.linkText}
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                <polyline points="15 3 21 3 21 9"></polyline>
+                                <line x1="10" y1="14" x2="21" y2="3"></line>
+                            </svg>
+                        </a>
+                    `;
+                }
+                
+                stepDiv.innerHTML = stepHTML;
+                stepsContainer.appendChild(stepDiv);
             });
             
-            try {
-                // 1. IP и геолокация (10%)
-                status.textContent = 'Определение местоположения...';
-                progressBar.style.width = '10%';
-                
-                const ipData = await fetch('https://ipapi.co/json/').catch(() => null);
-                if (ipData) {
-                    const ipInfo = await ipData.json();
-                    document.getElementById('speedIP').textContent = ipInfo.ip || '—';
-                    document.getElementById('speedCountry').textContent = 
-                        `${ipInfo.country_name || '—'}`;
-                }
-                
-                progressBar.style.width = '20%';
-                
-                // 2. Пинг (20-40%)
-                status.textContent = 'Измерение пинга...';
-                const pings = [];
-                
-                for (let i = 0; i < 3; i++) {
-                    const start = performance.now();
-                    try {
-                        await fetch('https://www.cloudflare.com/cdn-cgi/trace', { 
-                            method: 'HEAD',
-                            cache: 'no-store'
-                        });
-                        pings.push(performance.now() - start);
-                    } catch {
-                        pings.push(Math.random() * 20 + 10);
-                    }
-                }
-                
-                const avgPing = pings.reduce((a, b) => a + b) / pings.length;
-                await animateValue('speedPing', 0, avgPing, 600, 'ms');
-                progressBar.style.width = '40%';
-                
-                // 3. Джиттер (40-50%)
-                status.textContent = 'Расчёт джиттера...';
-                const variance = pings.reduce((sum, p) => sum + Math.pow(p - avgPing, 2), 0) / pings.length;
-                const jitter = Math.sqrt(variance);
-                await animateValue('speedJitter', 0, jitter, 500, 'ms');
-                progressBar.style.width = '50%';
-                
-                // 4. Download (50-75%)
-                status.textContent = 'Тестирование загрузки...';
-                const dlStart = performance.now();
-                let downloadSpeed = 0;
-                
-                try {
-                    const controller = new AbortController();
-                    const timeout = setTimeout(() => controller.abort(), 3000);
-                    
-                    const response = await fetch('https://picsum.photos/800/800', {
-                        signal: controller.signal,
-                        cache: 'no-store'
-                    });
-                    clearTimeout(timeout);
-                    
-                    const blob = await response.blob();
-                    const duration = (performance.now() - dlStart) / 1000;
-                    downloadSpeed = (blob.size * 8) / (duration * 1000000);
-                } catch {
-                    downloadSpeed = Math.random() * 50 + 20;
-                }
-                
-                await animateValue('speedDownload', 0, downloadSpeed, 800, 'Мбит/с');
-                progressBar.style.width = '75%';
-                
-                // 5. Upload (75-100%)
-                status.textContent = 'Тестирование выгрузки...';
-                await new Promise(r => setTimeout(r, 400));
-                const uploadSpeed = downloadSpeed * (0.3 + Math.random() * 0.4);
-                await animateValue('speedUpload', 0, uploadSpeed, 800, 'Мбит/с');
-                progressBar.style.width = '100%';
-                
-                status.textContent = 'Тест завершён';
-                tg.HapticFeedback.notificationOccurred('success');
-                
-            } catch (error) {
-                console.error('Speed test error:', error);
-                status.textContent = 'Ошибка теста';
-            }
-            
-            btn.disabled = false;
-            btn.textContent = 'Повторить тест';
-            btn.classList.remove('loading');
-            
-            setTimeout(() => {
-                progress.classList.remove('active');
-                progressBar.style.width = '0%';
-                status.textContent = 'Проверка соединения';
-            }, 2000);
-            
-            isTestingSpeed = false;
+            document.getElementById('instructionModal').classList.add('active');
+        }
+        
+        function closeInstructionModal() {
+            tg.HapticFeedback.impactOccurred('light');
+            document.getElementById('instructionModal').classList.remove('active');
         }
         
         function openQRModal() {
