@@ -15,7 +15,7 @@
         }
         
         body {
-            background: #111015;
+            background: linear-gradient(180deg, #1a2d2a 0%, #111015 50%, #0d1210 100%);
             color: #FDFFFF;
             font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
             padding: 0;
@@ -55,10 +55,7 @@
             font-size: 28px;
             font-weight: 700;
             margin-bottom: 6px;
-            background: linear-gradient(135deg, #4CAC8E 0%, #49AAD3 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: #FDFFFF;
         }
         
         .header-subtitle {
@@ -68,8 +65,8 @@
         
         /* Карточки выбора */
         .selection-card {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(76, 172, 142, 0.15);
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.08);
             border-radius: 16px;
             padding: 20px;
             margin-bottom: 12px;
@@ -85,9 +82,9 @@
         }
         
         .selection-card.selected {
-            background: rgba(76, 172, 142, 0.1);
-            border-color: #4CAC8E;
-            box-shadow: 0 8px 24px rgba(76, 172, 142, 0.2);
+            background: rgba(76, 172, 142, 0.08);
+            border-color: rgba(76, 172, 142, 0.4);
+            box-shadow: 0 0 24px rgba(76, 172, 142, 0.15);
         }
         
         .selection-info {
@@ -99,7 +96,7 @@
         .selection-icon {
             width: 44px;
             height: 44px;
-            background: rgba(76, 172, 142, 0.15);
+            background: rgba(76, 172, 142, 0.12);
             border-radius: 10px;
             display: flex;
             align-items: center;
@@ -113,6 +110,7 @@
             font-size: 17px;
             font-weight: 600;
             margin-bottom: 2px;
+            color: #FDFFFF;
         }
         
         .selection-text p {
@@ -123,19 +121,19 @@
         .selection-arrow {
             width: 24px;
             height: 24px;
-            opacity: 0.5;
+            opacity: 0.3;
         }
         
         .selection-arrow svg {
             width: 100%;
             height: 100%;
-            fill: #4CAC8E;
+            fill: #FDFFFF;
         }
         
         /* Тарифы */
         .plan-card {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(76, 172, 142, 0.15);
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.08);
             border-radius: 16px;
             padding: 20px;
             margin-bottom: 12px;
@@ -149,9 +147,9 @@
         }
         
         .plan-card.selected {
-            background: rgba(76, 172, 142, 0.1);
-            border-color: #4CAC8E;
-            box-shadow: 0 8px 24px rgba(76, 172, 142, 0.2);
+            background: rgba(76, 172, 142, 0.08);
+            border-color: rgba(76, 172, 142, 0.4);
+            box-shadow: 0 0 24px rgba(76, 172, 142, 0.15);
         }
         
         .plan-badge {
@@ -163,6 +161,7 @@
             border-radius: 10px;
             font-size: 11px;
             font-weight: 700;
+            color: #FDFFFF;
         }
         
         .plan-header {
@@ -175,20 +174,18 @@
         .plan-period {
             font-size: 18px;
             font-weight: 700;
+            color: #FDFFFF;
         }
         
         .plan-price {
             font-size: 24px;
             font-weight: 700;
-            background: linear-gradient(135deg, #4CAC8E 0%, #49AAD3 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: #4CAC8E;
         }
         
         .plan-price-small {
             font-size: 13px;
-            color: rgba(157, 162, 164, 0.6);
+            color: rgba(157, 162, 164, 0.5);
             text-decoration: line-through;
         }
         
@@ -200,8 +197,8 @@
         /* Промокод */
         .promo-input {
             width: 100%;
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(76, 172, 142, 0.2);
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.08);
             border-radius: 12px;
             padding: 14px;
             font-size: 15px;
@@ -212,9 +209,8 @@
         
         .promo-input:focus {
             outline: none;
-            border-color: #4CAC8E;
-            background: rgba(76, 172, 142, 0.08);
-            box-shadow: 0 0 0 3px rgba(76, 172, 142, 0.1);
+            border-color: rgba(76, 172, 142, 0.4);
+            background: rgba(76, 172, 142, 0.05);
         }
         
         .promo-input::placeholder {
@@ -233,7 +229,7 @@
             color: #FDFFFF;
             cursor: pointer;
             transition: all 0.2s;
-            box-shadow: 0 8px 24px rgba(76, 172, 142, 0.3);
+            box-shadow: 0 8px 24px rgba(76, 172, 142, 0.25);
         }
         
         .btn-primary:active {
@@ -242,8 +238,8 @@
         
         .btn-secondary {
             width: 100%;
-            background: rgba(76, 172, 142, 0.1);
-            border: 1px solid rgba(76, 172, 142, 0.2);
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.08);
             border-radius: 14px;
             padding: 16px;
             font-size: 15px;
@@ -255,7 +251,7 @@
         
         /* Экран с подпиской */
         .status-card {
-            background: rgba(76, 172, 142, 0.1);
+            background: rgba(76, 172, 142, 0.08);
             border: 1px solid rgba(76, 172, 142, 0.3);
             border-radius: 20px;
             padding: 24px;
@@ -267,7 +263,7 @@
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            background: rgba(76, 172, 142, 0.2);
+            background: rgba(76, 172, 142, 0.15);
             padding: 6px 14px;
             border-radius: 16px;
             font-size: 13px;
@@ -293,6 +289,7 @@
             font-size: 20px;
             font-weight: 700;
             margin-bottom: 6px;
+            color: #FDFFFF;
         }
         
         .status-date {
@@ -301,8 +298,8 @@
         }
         
         .connection-card {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(76, 172, 142, 0.15);
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.08);
             border-radius: 20px;
             padding: 24px;
             margin-bottom: 20px;
@@ -312,10 +309,7 @@
             font-size: 18px;
             font-weight: 700;
             margin-bottom: 16px;
-            background: linear-gradient(135deg, #4CAC8E 0%, #49AAD3 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: #FDFFFF;
         }
         
         .server-info-row {
@@ -323,7 +317,7 @@
             justify-content: space-between;
             align-items: center;
             padding: 12px 0;
-            border-bottom: 1px solid rgba(76, 172, 142, 0.1);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
         
         .server-info-row:last-child {
@@ -361,8 +355,8 @@
         }
         
         .config-box {
-            background: rgba(0, 0, 0, 0.3);
-            border: 1px solid rgba(76, 172, 142, 0.2);
+            background: rgba(0, 0, 0, 0.25);
+            border: 1px solid rgba(255, 255, 255, 0.05);
             border-radius: 12px;
             padding: 14px;
             margin-bottom: 12px;
@@ -376,8 +370,8 @@
         /* === ЭКРАН ПОДДЕРЖКИ === */
         
         .support-hero {
-            background: rgba(73, 170, 211, 0.1);
-            border: 1px solid rgba(73, 170, 211, 0.2);
+            background: rgba(73, 170, 211, 0.06);
+            border: 1px solid rgba(73, 170, 211, 0.15);
             border-radius: 20px;
             padding: 24px;
             text-align: center;
@@ -387,7 +381,7 @@
         .support-icon {
             width: 64px;
             height: 64px;
-            background: rgba(73, 170, 211, 0.2);
+            background: rgba(73, 170, 211, 0.12);
             border-radius: 16px;
             display: flex;
             align-items: center;
@@ -409,6 +403,7 @@
             font-size: 22px;
             font-weight: 700;
             margin-bottom: 8px;
+            color: #FDFFFF;
         }
         
         .support-subtitle {
@@ -420,15 +415,12 @@
             font-size: 18px;
             font-weight: 700;
             margin-bottom: 12px;
-            background: linear-gradient(135deg, #4CAC8E 0%, #49AAD3 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: #FDFFFF;
         }
         
         .faq-item {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(76, 172, 142, 0.15);
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.08);
             border-radius: 16px;
             padding: 16px;
             margin-bottom: 12px;
@@ -451,12 +443,13 @@
             font-size: 15px;
             font-weight: 600;
             flex: 1;
+            color: #FDFFFF;
         }
         
         .faq-toggle {
             width: 24px;
             height: 24px;
-            background: rgba(76, 172, 142, 0.2);
+            background: rgba(76, 172, 142, 0.12);
             border-radius: 6px;
             display: flex;
             align-items: center;
@@ -493,7 +486,7 @@
         }
         
         .contact-card {
-            background: rgba(76, 172, 142, 0.1);
+            background: rgba(76, 172, 142, 0.08);
             border: 1px solid rgba(76, 172, 142, 0.3);
             border-radius: 20px;
             padding: 24px;
@@ -528,7 +521,7 @@
             color: #FDFFFF;
             cursor: pointer;
             transition: all 0.2s;
-            box-shadow: 0 8px 24px rgba(76, 172, 142, 0.3);
+            box-shadow: 0 8px 24px rgba(76, 172, 142, 0.25);
         }
         
         .btn-contact:active {
@@ -543,7 +536,7 @@
             right: 0;
             background: rgba(17, 16, 21, 0.95);
             backdrop-filter: blur(20px);
-            border-top: 1px solid rgba(76, 172, 142, 0.1);
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
             padding: 10px 20px calc(10px + env(safe-area-inset-bottom));
             display: flex;
             justify-content: center;
@@ -561,8 +554,8 @@
             padding: 12px;
             border-radius: 16px;
             transition: all 0.2s;
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(76, 172, 142, 0.1);
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
         }
         
         .nav-item:active {
@@ -570,9 +563,8 @@
         }
         
         .nav-item.active {
-            background: rgba(76, 172, 142, 0.15);
+            background: rgba(76, 172, 142, 0.1);
             border-color: rgba(76, 172, 142, 0.3);
-            box-shadow: 0 4px 12px rgba(76, 172, 142, 0.2);
         }
         
         .nav-icon {
