@@ -75,7 +75,7 @@
             display: flex;
             align-items: center;
             gap: 16px;
-            margin-bottom: 24px;
+            margin-bottom: 20px;
         }
         
         .sub-flag {
@@ -103,27 +103,31 @@
             font-weight: 600;
         }
         
-        .btn-show-qr {
-            width: 100%;
-            background: #1a1a1a;
-            border: 1.5px solid #4d9b7a;
-            border-radius: 14px;
-            padding: 16px;
-            font-size: 16px;
-            font-weight: 600;
-            color: #4d9b7a;
-            cursor: pointer;
-            margin-bottom: 18px;
+        .btn-qr-icon {
+            width: 44px;
+            height: 44px;
+            background: rgba(77, 155, 122, 0.12);
+            border: 1px solid rgba(77, 155, 122, 0.3);
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
+            cursor: pointer;
             transition: all 0.2s;
+            flex-shrink: 0;
         }
         
-        .btn-show-qr:active {
-            transform: scale(0.98);
-            background: rgba(77, 155, 122, 0.08);
+        .btn-qr-icon:active {
+            transform: scale(0.95);
+            background: rgba(77, 155, 122, 0.2);
+        }
+        
+        .btn-qr-icon svg {
+            width: 22px;
+            height: 22px;
+            stroke: #4d9b7a;
+            fill: none;
+            stroke-width: 2;
         }
         
         .sub-link-box {
@@ -969,17 +973,15 @@
                         <div class="sub-server" id="subServer">Китай</div>
                         <div class="sub-protocol" id="subProtocol">VLESS</div>
                     </div>
+                    <button class="btn-qr-icon" onclick="openQRModal()">
+                        <svg viewBox="0 0 24 24">
+                            <rect x="3" y="3" width="7" height="7"/>
+                            <rect x="14" y="3" width="7" height="7"/>
+                            <rect x="14" y="14" width="7" height="7"/>
+                            <rect x="3" y="14" width="7" height="7"/>
+                        </svg>
+                    </button>
                 </div>
-                
-                <button class="btn-show-qr" onclick="openQRModal()">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <rect x="3" y="3" width="7" height="7"/>
-                        <rect x="14" y="3" width="7" height="7"/>
-                        <rect x="14" y="14" width="7" height="7"/>
-                        <rect x="3" y="14" width="7" height="7"/>
-                    </svg>
-                    Показать QR-код
-                </button>
                 
                 <div class="sub-link-box">
                     <div class="sub-link-text" id="subLinkText">vless://uuid@45.142.120.45:443?encryption=none&security=tls&type=ws#VPN</div>
