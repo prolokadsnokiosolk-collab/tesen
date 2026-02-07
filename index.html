@@ -17,7 +17,7 @@
         body {
             background: #0a0a0a;
             color: #e8eaed;
-            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
             padding: 0;
             min-height: 100vh;
             padding-bottom: 90px;
@@ -25,7 +25,7 @@
             overflow-x: hidden;
         }
         
-        /* Animated Background */
+        /* Animated Gradient Background */
         body::before {
             content: '';
             position: fixed;
@@ -34,25 +34,194 @@
             width: 200%;
             height: 200%;
             background: 
-                radial-gradient(circle at 20% 30%, rgba(77, 155, 122, 0.08) 0%, transparent 50%),
-                radial-gradient(circle at 80% 70%, rgba(61, 138, 106, 0.06) 0%, transparent 50%),
-                radial-gradient(circle at 50% 50%, rgba(77, 155, 122, 0.04) 0%, transparent 50%);
-            animation: backgroundMove 20s ease-in-out infinite;
+                radial-gradient(circle at 20% 30%, rgba(255, 255, 255, 0.06) 0%, transparent 40%),
+                radial-gradient(circle at 80% 70%, rgba(255, 255, 255, 0.04) 0%, transparent 40%),
+                radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.03) 0%, transparent 50%);
+            animation: moveBackground 25s ease-in-out infinite;
             pointer-events: none;
             z-index: 0;
         }
         
-        @keyframes backgroundMove {
+        @keyframes moveBackground {
             0%, 100% { transform: translate(0, 0) rotate(0deg); }
-            33% { transform: translate(5%, -5%) rotate(120deg); }
-            66% { transform: translate(-5%, 5%) rotate(240deg); }
+            50% { transform: translate(5%, -5%) rotate(180deg); }
+        }
+        
+        /* Grid Lines */
+        .grid-lines {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+            background-size: 80px 80px;
+            pointer-events: none;
+            z-index: 0;
+            animation: gridMove 20s linear infinite;
+        }
+        
+        @keyframes gridMove {
+            0% { transform: translateY(0); opacity: 0.4; }
+            50% { opacity: 0.6; }
+            100% { transform: translateY(80px); opacity: 0.4; }
+        }
+        
+        /* Diagonal Lines */
+        .diagonal-lines {
+            position: fixed;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background-image: 
+                repeating-linear-gradient(
+                    45deg,
+                    transparent,
+                    transparent 100px,
+                    rgba(255, 255, 255, 0.015) 100px,
+                    rgba(255, 255, 255, 0.015) 101px
+                ),
+                repeating-linear-gradient(
+                    -45deg,
+                    transparent,
+                    transparent 100px,
+                    rgba(255, 255, 255, 0.01) 100px,
+                    rgba(255, 255, 255, 0.01) 101px
+                );
+            pointer-events: none;
+            z-index: 0;
+            animation: diagonalMove 30s linear infinite;
+        }
+        
+        @keyframes diagonalMove {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            100% { transform: translate(50px, 50px) rotate(360deg); }
+        }
+        
+        /* Random Lines */
+        .random-lines {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(135deg, transparent 25%, rgba(255, 255, 255, 0.01) 25%, rgba(255, 255, 255, 0.01) 50%, transparent 50%, transparent 75%, rgba(255, 255, 255, 0.01) 75%, rgba(255, 255, 255, 0.01)),
+                linear-gradient(45deg, transparent 25%, rgba(255, 255, 255, 0.01) 25%, rgba(255, 255, 255, 0.01) 50%, transparent 50%, transparent 75%, rgba(255, 255, 255, 0.01) 75%, rgba(255, 255, 255, 0.01));
+            background-size: 120px 120px, 120px 120px;
+            background-position: 0 0, 60px 60px;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.3;
+            animation: randomShift 40s linear infinite;
+        }
+        
+        @keyframes randomShift {
+            0% { background-position: 0 0, 60px 60px; opacity: 0.3; }
+            50% { background-position: 120px 120px, 180px 180px; opacity: 0.5; }
+            100% { background-position: 0 0, 60px 60px; opacity: 0.3; }
+        }
+        
+        /* Noise Texture */
+        .noise-texture {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg"><filter id="noiseFilter"><feTurbulence type="fractalNoise" baseFrequency="1.2" numOctaves="4" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23noiseFilter)" opacity="0.04"/></svg>');
+            background-size: 200px 200px;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.6;
+            animation: noiseMove 8s steps(10) infinite;
+        }
+        
+        @keyframes noiseMove {
+            0%, 100% { transform: translate(0, 0); }
+            25% { transform: translate(-5%, -5%); }
+            50% { transform: translate(-10%, 5%); }
+            75% { transform: translate(5%, -10%); }
+        }
+        
+        /* Circuit Pattern */
+        .circuit-pattern {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(90deg, transparent 49%, rgba(255, 255, 255, 0.015) 49%, rgba(255, 255, 255, 0.015) 51%, transparent 51%),
+                linear-gradient(0deg, transparent 49%, rgba(255, 255, 255, 0.015) 49%, rgba(255, 255, 255, 0.015) 51%, transparent 51%);
+            background-size: 40px 40px;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.5;
+        }
+        
+        /* Dots Pattern */
+        .dots-pattern {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                radial-gradient(circle, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+            background-size: 60px 60px, 90px 90px;
+            background-position: 0 0, 30px 45px;
+            pointer-events: none;
+            z-index: 0;
+            animation: dotsFloat 50s linear infinite;
+        }
+        
+        @keyframes dotsFloat {
+            0% { transform: translate(0, 0); opacity: 0.4; }
+            50% { opacity: 0.6; }
+            100% { transform: translate(-60px, -90px); opacity: 0.4; }
+        }
+        
+        /* Spotlight */
+        .spotlight {
+            position: fixed;
+            top: -30%;
+            left: 50%;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.06) 0%, transparent 60%);
+            transform: translateX(-50%);
+            pointer-events: none;
+            z-index: 0;
+            animation: spotlight 15s ease-in-out infinite;
+        }
+        
+        @keyframes spotlight {
+            0%, 100% { transform: translateX(-50%) scale(1); opacity: 0.5; }
+            50% { transform: translateX(-50%) scale(1.3); opacity: 0.7; }
+        }
+        
+        /* Vignette */
+        .vignette {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(ellipse at center, transparent 0%, rgba(0, 0, 0, 0.4) 100%);
+            pointer-events: none;
+            z-index: 1;
         }
         
         .screen {
             display: none;
             opacity: 0;
             position: relative;
-            z-index: 1;
+            z-index: 2;
         }
         
         .screen.active {
@@ -60,30 +229,9 @@
             animation: fadeInScreen 0.6s ease-out forwards;
         }
         
-        .screen.fade-out {
-            animation: fadeOutScreen 0.4s ease-out forwards;
-        }
-        
         @keyframes fadeInScreen {
-            from { 
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to { 
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        @keyframes fadeOutScreen {
-            from { 
-                opacity: 1;
-                transform: translateY(0);
-            }
-            to { 
-                opacity: 0;
-                transform: translateY(-20px);
-            }
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         
         .container {
@@ -93,17 +241,18 @@
             position: relative;
         }
         
-        /* Glass Header */
+        /* Header */
         .header {
-            margin-bottom: 32px;
+            margin-bottom: 28px;
             padding: 24px 20px;
-            background: rgba(26, 26, 26, 0.6);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
+            background: rgba(26, 26, 26, 0.5);
+            backdrop-filter: blur(40px);
+            -webkit-backdrop-filter: blur(40px);
             border: 1px solid rgba(255, 255, 255, 0.06);
-            border-radius: 24px;
+            border-radius: 20px;
             position: relative;
             overflow: hidden;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
         }
         
         .header::before {
@@ -113,17 +262,14 @@
             left: 0;
             right: 0;
             height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(77, 155, 122, 0.3), transparent);
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.08), transparent);
         }
         
         .header-title {
-            font-size: 32px;
+            font-size: 28px;
             font-weight: 800;
             margin-bottom: 8px;
-            background: linear-gradient(135deg, #ffffff 0%, #b8babb 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: #ffffff;
             letter-spacing: -0.5px;
         }
         
@@ -140,31 +286,33 @@
             content: '';
             width: 6px;
             height: 6px;
-            background: #4d9b7a;
+            background: #ffffff;
             border-radius: 50%;
             display: inline-block;
-            box-shadow: 0 0 8px rgba(77, 155, 122, 0.6);
+            box-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
             animation: pulse 2s ease-in-out infinite;
         }
         
         @keyframes pulse {
             0%, 100% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.6; transform: scale(0.8); }
+            50% { opacity: 0.4; transform: scale(0.8); }
         }
         
-        /* === GLASSMORPHISM CARDS === */
-        
+        /* Glass Card */
         .glass-card {
-            background: rgba(26, 26, 26, 0.7);
-            backdrop-filter: blur(30px);
-            -webkit-backdrop-filter: blur(30px);
+            background: rgba(26, 26, 26, 0.5);
+            backdrop-filter: blur(40px);
+            -webkit-backdrop-filter: blur(40px);
             border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 24px;
+            border-radius: 20px;
             padding: 24px;
             margin-bottom: 16px;
             position: relative;
             overflow: hidden;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 
+                0 4px 24px rgba(0, 0, 0, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.05);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
         
         .glass-card::before {
@@ -173,42 +321,340 @@
             top: 0;
             left: 0;
             right: 0;
-            height: 2px;
-            background: linear-gradient(90deg, 
-                transparent 0%, 
-                rgba(77, 155, 122, 0.5) 50%, 
-                transparent 100%);
-            opacity: 0;
-            transition: opacity 0.4s;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
         }
         
-        .glass-card:hover::before {
-            opacity: 1;
+        .glass-card:hover {
+            border-color: rgba(255, 255, 255, 0.12);
+            box-shadow: 
+                0 8px 40px rgba(0, 0, 0, 0.5),
+                inset 0 1px 0 rgba(255, 255, 255, 0.08);
+            transform: translateY(-2px);
         }
         
-        .glass-card-glow {
+        /* Selection Card */
+        .selection-card {
+            background: rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(40px);
+            -webkit-backdrop-filter: blur(40px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 12px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            box-shadow: 
+                0 2px 8px rgba(0, 0, 0, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.05);
+        }
+        
+        .selection-card:hover {
+            background: rgba(255, 255, 255, 0.06);
+            border-color: rgba(255, 255, 255, 0.12);
+            transform: translateY(-2px);
+            box-shadow: 
+                0 4px 20px rgba(0, 0, 0, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.08);
+        }
+        
+        .selection-info {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+        }
+        
+        .selection-icon {
+            width: 48px;
+            height: 48px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            transition: all 0.3s;
+            font-size: 16px;
+            font-weight: 700;
+            color: #ffffff;
+        }
+        
+        .selection-card:hover .selection-icon {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.15);
+        }
+        
+        .selection-icon svg {
+            width: 24px;
+            height: 24px;
+            stroke: #ffffff;
+            fill: none;
+            stroke-width: 1.5;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+        
+        .selection-text h3 {
+            font-size: 17px;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 4px;
+            letter-spacing: -0.3px;
+        }
+        
+        .selection-text p {
+            font-size: 13px;
+            color: #9CA3AF;
+        }
+        
+        .selection-arrow {
+            transition: all 0.3s;
+        }
+        
+        .selection-arrow svg {
+            width: 20px;
+            height: 20px;
+            stroke: #6B7280;
+            fill: none;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+        
+        .selection-card:hover .selection-arrow {
+            transform: translateX(4px);
+        }
+        
+        .selection-card:hover .selection-arrow svg {
+            stroke: #ffffff;
+        }
+        
+        /* Plan Card */
+        .plan-card {
+            background: rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(40px);
+            -webkit-backdrop-filter: blur(40px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            padding: 22px;
+            margin-bottom: 12px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            box-shadow: 
+                0 2px 8px rgba(0, 0, 0, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.05);
+        }
+        
+        .plan-card:hover {
+            background: rgba(255, 255, 255, 0.06);
+            border-color: rgba(255, 255, 255, 0.12);
+            transform: translateY(-2px);
+            box-shadow: 
+                0 4px 20px rgba(0, 0, 0, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.08);
+        }
+        
+        .plan-card.selected {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.15);
+        }
+        
+        .plan-badge {
             position: absolute;
-            top: 50%;
+            top: -1px;
+            right: 20px;
+            background: #ffffff;
+            padding: 5px 12px;
+            border-radius: 0 0 10px 10px;
+            font-size: 10px;
+            font-weight: 800;
+            color: #0a0a0a;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            box-shadow: 0 4px 12px rgba(255, 255, 255, 0.2);
+        }
+        
+        .plan-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .plan-period {
+            font-size: 19px;
+            font-weight: 700;
+            color: #ffffff;
+            letter-spacing: -0.5px;
+        }
+        
+        .plan-price {
+            font-size: 28px;
+            font-weight: 800;
+            color: #ffffff;
+            letter-spacing: -1px;
+        }
+        
+        .plan-desc {
+            font-size: 13px;
+            color: #9CA3AF;
+        }
+        
+        /* Buttons */
+        .btn-primary {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            border: none;
+            border-radius: 14px;
+            padding: 18px;
+            font-size: 15px;
+            font-weight: 700;
+            color: #0a0a0a;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            letter-spacing: 0.3px;
+            position: relative;
+            box-shadow: 
+                0 4px 16px rgba(255, 255, 255, 0.15),
+                inset 0 1px 0 rgba(255, 255, 255, 1);
+        }
+        
+        .btn-primary:hover {
+            background: #ffffff;
+            box-shadow: 
+                0 6px 24px rgba(255, 255, 255, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 1);
+            transform: translateY(-2px);
+        }
+        
+        .btn-primary:active {
+            transform: translateY(0);
+        }
+        
+        .btn-secondary {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 14px;
+            padding: 18px;
+            font-size: 15px;
+            font-weight: 600;
+            color: #E5E7EB;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 12px;
+            box-shadow: 
+                0 2px 8px rgba(0, 0, 0, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.05);
+        }
+        
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.15);
+            transform: translateY(-2px);
+        }
+        
+        /* Input */
+        .promo-input {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 14px;
+            padding: 18px;
+            font-size: 15px;
+            color: #e8eaed;
+            font-family: inherit;
+            margin-bottom: 16px;
+            transition: all 0.3s;
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+        }
+        
+        .promo-input:focus {
+            outline: none;
+            border-color: rgba(255, 255, 255, 0.15);
+            background: rgba(255, 255, 255, 0.06);
+        }
+        
+        .promo-input::placeholder {
+            color: #666666;
+        }
+        
+        /* Navigation */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
             left: 50%;
-            width: 300px;
-            height: 300px;
-            background: radial-gradient(circle, rgba(77, 155, 122, 0.15) 0%, transparent 70%);
-            transform: translate(-50%, -50%);
-            opacity: 0;
-            transition: opacity 0.4s;
-            pointer-events: none;
-        }
-        
-        .glass-card:hover .glass-card-glow {
-            opacity: 1;
-        }
-        
-        /* === SUBSCRIPTION CARD === */
-        
-        .subscription-card {
-            background: rgba(26, 26, 26, 0.7);
+            transform: translateX(-50%);
+            max-width: 440px;
+            width: calc(100% - 40px);
+            background: rgba(26, 26, 26, 0.8);
             backdrop-filter: blur(30px);
             -webkit-backdrop-filter: blur(30px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 10px;
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            z-index: 1000;
+        }
+        
+        .nav-item {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            padding: 12px;
+            border-radius: 16px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            background: transparent;
+        }
+        
+        .nav-item.active {
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .nav-icon {
+            width: 28px;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .nav-icon svg {
+            width: 24px;
+            height: 24px;
+            stroke: #666666;
+            fill: none;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            transition: stroke 0.3s;
+        }
+        
+        .nav-item.active .nav-icon svg {
+            stroke: #ffffff;
+        }
+        
+        /* Subscription Card */
+        .subscription-card {
+            background: rgba(26, 26, 26, 0.5);
+            backdrop-filter: blur(40px);
+            -webkit-backdrop-filter: blur(40px);
             border: 1px solid rgba(255, 255, 255, 0.08);
             border-radius: 24px;
             padding: 28px;
@@ -216,23 +662,6 @@
             position: relative;
             overflow: hidden;
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
-        }
-        
-        .subscription-card::after {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(77, 155, 122, 0.1) 0%, transparent 60%);
-            animation: rotateGlow 15s linear infinite;
-            pointer-events: none;
-        }
-        
-        @keyframes rotateGlow {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
         }
         
         .sub-header {
@@ -247,26 +676,15 @@
         .sub-flag-wrapper {
             width: 64px;
             height: 64px;
-            background: rgba(77, 155, 122, 0.1);
-            border: 2px solid rgba(77, 155, 122, 0.2);
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 16px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 32px;
             flex-shrink: 0;
-            position: relative;
-            box-shadow: 0 4px 16px rgba(77, 155, 122, 0.2);
-        }
-        
-        .sub-flag-wrapper::before {
-            content: '';
-            position: absolute;
-            inset: -2px;
-            background: linear-gradient(135deg, rgba(77, 155, 122, 0.3), transparent);
-            border-radius: 16px;
-            z-index: -1;
-            opacity: 0.5;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
         }
         
         .sub-info {
@@ -283,95 +701,58 @@
         
         .sub-protocol {
             font-size: 14px;
-            color: #4d9b7a;
+            color: #E5E7EB;
             font-weight: 600;
             display: inline-flex;
             align-items: center;
             gap: 6px;
             padding: 4px 10px;
-            background: rgba(77, 155, 122, 0.12);
+            background: rgba(255, 255, 255, 0.06);
             border-radius: 8px;
-            border: 1px solid rgba(77, 155, 122, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
         
         .sub-protocol::before {
             content: '●';
             font-size: 8px;
-            color: #4d9b7a;
+            color: #ffffff;
             animation: pulse 2s ease-in-out infinite;
-        }
-        
-        .sub-meta {
-            display: flex;
-            gap: 12px;
-            margin-top: 8px;
-        }
-        
-        .sub-meta-item {
-            font-size: 12px;
-            color: #666666;
-            display: flex;
-            align-items: center;
-            gap: 4px;
-        }
-        
-        .sub-meta-item svg {
-            width: 14px;
-            height: 14px;
-            stroke: #666666;
         }
         
         .btn-qr-icon {
             width: 52px;
             height: 52px;
-            background: rgba(77, 155, 122, 0.12);
-            border: 1px solid rgba(77, 155, 122, 0.3);
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 14px;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.3s;
             flex-shrink: 0;
-            position: relative;
         }
         
-        .btn-qr-icon::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: rgba(77, 155, 122, 0.2);
-            border-radius: 14px;
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-        
-        .btn-qr-icon:active::before {
-            opacity: 1;
+        .btn-qr-icon:active {
+            background: rgba(255, 255, 255, 0.1);
+            transform: scale(0.95);
         }
         
         .btn-qr-icon svg {
             width: 24px;
             height: 24px;
-            stroke: #4d9b7a;
+            stroke: #ffffff;
             fill: none;
             stroke-width: 2;
-            transition: transform 0.3s;
-        }
-        
-        .btn-qr-icon:active svg {
-            transform: scale(0.9);
         }
         
         .sub-link-box {
-            background: rgba(10, 10, 10, 0.8);
+            background: rgba(10, 10, 10, 0.6);
             border: 1px solid rgba(255, 255, 255, 0.06);
             border-radius: 14px;
             padding: 16px;
             margin-bottom: 16px;
             position: relative;
-            overflow: hidden;
-            z-index: 1;
         }
         
         .sub-link-label {
@@ -391,7 +772,6 @@
             overflow: hidden;
             text-overflow: ellipsis;
             padding-right: 44px;
-            line-height: 1.4;
         }
         
         .btn-copy-link {
@@ -399,7 +779,7 @@
             right: 12px;
             top: 50%;
             transform: translateY(-50%);
-            background: rgba(77, 155, 122, 0.15);
+            background: rgba(255, 255, 255, 0.08);
             border: none;
             border-radius: 10px;
             width: 36px;
@@ -408,64 +788,45 @@
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            color: #4d9b7a;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            color: #ffffff;
+            transition: all 0.3s;
         }
         
         .btn-copy-link:active {
-            background: rgba(77, 155, 122, 0.25);
+            background: rgba(255, 255, 255, 0.15);
             transform: translateY(-50%) scale(0.95);
         }
         
         .btn-connect {
             width: 100%;
-            background: linear-gradient(135deg, #4d9b7a 0%, #3d8a6a 100%);
+            background: rgba(255, 255, 255, 0.95);
             border: none;
             border-radius: 16px;
             padding: 18px;
             font-size: 16px;
             font-weight: 700;
-            color: #ffffff;
+            color: #0a0a0a;
             cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.3s;
             margin-top: 16px;
-            box-shadow: 0 4px 20px rgba(77, 155, 122, 0.3);
-            position: relative;
-            overflow: hidden;
-            z-index: 1;
+            box-shadow: 0 4px 20px rgba(255, 255, 255, 0.15);
             letter-spacing: 0.5px;
-        }
-        
-        .btn-connect::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, transparent 100%);
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-        
-        .btn-connect:active::before {
-            opacity: 1;
         }
         
         .btn-connect:active {
             transform: translateY(2px);
-            box-shadow: 0 2px 12px rgba(77, 155, 122, 0.4);
         }
         
-        /* === RENEWAL CARD === */
-        
+        /* Renewal Card */
         .renewal-card {
-            background: rgba(26, 26, 26, 0.7);
-            backdrop-filter: blur(30px);
-            -webkit-backdrop-filter: blur(30px);
+            background: rgba(26, 26, 26, 0.5);
+            backdrop-filter: blur(40px);
+            -webkit-backdrop-filter: blur(40px);
             border: 1px solid rgba(255, 255, 255, 0.08);
             border-radius: 24px;
             padding: 28px;
             margin-bottom: 20px;
-            position: relative;
-            overflow: hidden;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
         }
         
         .renewal-header {
@@ -483,15 +844,6 @@
         .renewal-subtitle {
             font-size: 13px;
             color: #999999;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-        
-        .renewal-subtitle svg {
-            width: 14px;
-            height: 14px;
-            stroke: #999999;
         }
         
         .renewal-stats {
@@ -502,30 +854,16 @@
         }
         
         .renewal-stat {
-            background: rgba(10, 10, 10, 0.6);
+            background: rgba(255, 255, 255, 0.04);
             border: 1px solid rgba(255, 255, 255, 0.06);
             border-radius: 18px;
             padding: 20px;
-            position: relative;
-            overflow: hidden;
             transition: all 0.3s;
         }
         
-        .renewal-stat::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, #4d9b7a, #3d8a6a);
-            transform: scaleX(0);
-            transform-origin: left;
-            transition: transform 0.3s;
-        }
-        
-        .renewal-stat:hover::before {
-            transform: scaleX(1);
+        .renewal-stat:hover {
+            background: rgba(255, 255, 255, 0.06);
+            border-color: rgba(255, 255, 255, 0.1);
         }
         
         .renewal-stat-label {
@@ -535,21 +873,12 @@
             text-transform: uppercase;
             letter-spacing: 0.8px;
             font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-        
-        .renewal-stat-label svg {
-            width: 12px;
-            height: 12px;
-            stroke: #666666;
         }
         
         .renewal-stat-value {
             font-size: 28px;
             font-weight: 800;
-            color: #4d9b7a;
+            color: #ffffff;
             line-height: 1;
             letter-spacing: -1px;
         }
@@ -558,27 +887,14 @@
             font-size: 13px;
             color: #999999;
             margin-top: 6px;
-            font-weight: 500;
         }
         
         .renewal-date-box {
-            background: rgba(77, 155, 122, 0.08);
-            border: 1px solid rgba(77, 155, 122, 0.2);
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
             border-radius: 16px;
             padding: 18px;
             margin-bottom: 20px;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .renewal-date-box::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            bottom: 0;
-            width: 4px;
-            background: linear-gradient(180deg, #4d9b7a, #3d8a6a);
         }
         
         .renewal-date-label {
@@ -588,174 +904,43 @@
             text-transform: uppercase;
             letter-spacing: 0.8px;
             font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-        
-        .renewal-date-label svg {
-            width: 12px;
-            height: 12px;
-            stroke: #666666;
         }
         
         .renewal-date-value {
             font-size: 16px;
             font-weight: 600;
             color: #e8eaed;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        
-        .renewal-date-badge {
-            font-size: 11px;
-            padding: 3px 8px;
-            background: rgba(77, 155, 122, 0.15);
-            border-radius: 6px;
-            color: #4d9b7a;
-            font-weight: 600;
         }
         
         .btn-renew {
             width: 100%;
-            background: linear-gradient(135deg, #4d9b7a 0%, #3d8a6a 100%);
+            background: rgba(255, 255, 255, 0.95);
             border: none;
             border-radius: 16px;
             padding: 18px;
             font-size: 16px;
             font-weight: 700;
-            color: #ffffff;
+            color: #0a0a0a;
             cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 4px 20px rgba(77, 155, 122, 0.3);
-            position: relative;
-            overflow: hidden;
+            transition: all 0.3s;
+            box-shadow: 0 4px 20px rgba(255, 255, 255, 0.15);
             letter-spacing: 0.5px;
-        }
-        
-        .btn-renew::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, transparent 100%);
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-        
-        .btn-renew:active::before {
-            opacity: 1;
         }
         
         .btn-renew:active {
             transform: translateY(2px);
-            box-shadow: 0 2px 12px rgba(77, 155, 122, 0.4);
         }
         
-        /* === RENEWAL SCREEN === */
-        
-        .renewal-current-card {
-            background: linear-gradient(135deg, rgba(77, 155, 122, 0.12) 0%, rgba(77, 155, 122, 0.06) 100%);
-            backdrop-filter: blur(30px);
-            -webkit-backdrop-filter: blur(30px);
-            border: 1px solid rgba(77, 155, 122, 0.25);
-            border-radius: 24px;
-            padding: 28px;
-            margin-bottom: 28px;
-            display: flex;
-            align-items: center;
-            gap: 24px;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .renewal-current-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, #4d9b7a, transparent);
-        }
-        
-        .renewal-current-icon {
-            width: 72px;
-            height: 72px;
-            background: rgba(77, 155, 122, 0.2);
-            border: 2px solid rgba(77, 155, 122, 0.3);
-            border-radius: 18px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 36px;
-            flex-shrink: 0;
-            position: relative;
-            box-shadow: 0 4px 16px rgba(77, 155, 122, 0.2);
-        }
-        
-        .renewal-current-info {
-            flex: 1;
-        }
-        
-        .renewal-current-label {
-            font-size: 11px;
-            color: #999999;
-            margin-bottom: 10px;
-            text-transform: uppercase;
-            letter-spacing: 0.8px;
-            font-weight: 600;
-        }
-        
-        .renewal-current-date {
-            font-size: 22px;
-            font-weight: 700;
-            color: #ffffff;
-            margin-bottom: 6px;
-            letter-spacing: -0.5px;
-        }
-        
-        .renewal-current-days {
-            font-size: 14px;
-            color: #4d9b7a;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-        
-        .renewal-current-days::before {
-            content: '';
-            width: 6px;
-            height: 6px;
-            background: #4d9b7a;
-            border-radius: 50%;
-            box-shadow: 0 0 8px rgba(77, 155, 122, 0.6);
-        }
-        
-        .renewal-plans {
-            margin-bottom: 32px;
-        }
-        
-        .renewal-payment-title {
-            font-size: 18px;
-            font-weight: 700;
-            color: #ffffff;
-            margin-bottom: 16px;
-            padding-left: 4px;
-            letter-spacing: -0.3px;
-        }
-        
-        /* === PAYMENT === */
-        
+        /* Payment Summary */
         .payment-summary {
-            background: rgba(26, 26, 26, 0.7);
-            backdrop-filter: blur(30px);
-            -webkit-backdrop-filter: blur(30px);
+            background: rgba(26, 26, 26, 0.5);
+            backdrop-filter: blur(40px);
+            -webkit-backdrop-filter: blur(40px);
             border: 1px solid rgba(255, 255, 255, 0.08);
             border-radius: 22px;
             padding: 24px;
             margin-bottom: 28px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
         }
         
         .payment-summary-row {
@@ -768,15 +953,6 @@
         .payment-summary-label {
             font-size: 14px;
             color: #999999;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        
-        .payment-summary-label svg {
-            width: 16px;
-            height: 16px;
-            stroke: #999999;
         }
         
         .payment-summary-value {
@@ -793,7 +969,7 @@
         
         .payment-summary-total {
             padding-top: 16px;
-            background: rgba(77, 155, 122, 0.06);
+            background: rgba(255, 255, 255, 0.04);
             margin: 0 -24px -24px -24px;
             padding: 20px 24px;
             border-radius: 0 0 22px 22px;
@@ -808,10 +984,11 @@
         .payment-summary-total .payment-summary-value {
             font-size: 24px;
             font-weight: 800;
-            color: #4d9b7a;
+            color: #ffffff;
             letter-spacing: -0.5px;
         }
         
+        /* Payment Method */
         .payment-methods {
             display: flex;
             flex-direction: column;
@@ -820,41 +997,42 @@
         }
         
         .payment-method {
-            background: rgba(26, 26, 26, 0.7);
-            backdrop-filter: blur(30px);
-            -webkit-backdrop-filter: blur(30px);
-            border: 2px solid rgba(255, 255, 255, 0.08);
+            background: rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(40px);
+            -webkit-backdrop-filter: blur(40px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
             border-radius: 20px;
             padding: 20px;
             display: flex;
             align-items: center;
             gap: 18px;
             cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
+            transition: all 0.3s;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
         }
         
-        .payment-method:active {
-            transform: translateY(2px);
+        .payment-method:hover {
+            background: rgba(255, 255, 255, 0.06);
+            border-color: rgba(255, 255, 255, 0.12);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
         }
         
         .payment-method.selected {
-            background: rgba(77, 155, 122, 0.1);
-            border-color: #4d9b7a;
-            box-shadow: 0 4px 20px rgba(77, 155, 122, 0.2);
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.15);
         }
         
         .payment-method-icon {
             width: 56px;
             height: 56px;
-            background: rgba(77, 155, 122, 0.12);
+            background: rgba(255, 255, 255, 0.05);
             border-radius: 14px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 28px;
             flex-shrink: 0;
-            border: 1px solid rgba(77, 155, 122, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
         
         .payment-method-info {
@@ -872,345 +1050,198 @@
         .payment-method-desc {
             font-size: 13px;
             color: #999999;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-        
-        .payment-method-desc svg {
-            width: 14px;
-            height: 14px;
-            stroke: #999999;
         }
         
         .payment-method-badge {
-            background: rgba(77, 155, 122, 0.15);
-            border: 1px solid rgba(77, 155, 122, 0.3);
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
             border-radius: 10px;
             padding: 6px 12px;
             font-size: 11px;
             font-weight: 700;
-            color: #4d9b7a;
+            color: #ffffff;
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
         
-        /* === CONNECTION MODAL === */
-        
-        .connection-modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.95);
-            backdrop-filter: blur(20px);
-            display: none;
-            align-items: center;
-            justify-content: center;
-            z-index: 9999;
-            padding: 20px;
-            opacity: 0;
-            transition: opacity 0.4s;
-        }
-        
-        .connection-modal.active {
-            display: flex;
-            opacity: 1;
-        }
-        
-        .connection-modal-content {
-            background: rgba(26, 26, 26, 0.95);
+        /* Support */
+        .support-hero {
+            background: rgba(26, 26, 26, 0.5);
             backdrop-filter: blur(40px);
             -webkit-backdrop-filter: blur(40px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 28px;
-            padding: 36px;
-            max-width: 460px;
-            width: 100%;
-            max-height: 90vh;
-            overflow-y: auto;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-        }
-        
-        .connection-modal-header {
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 24px;
+            padding: 32px;
             text-align: center;
-            margin-bottom: 32px;
-            padding-bottom: 28px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            margin-bottom: 28px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
         }
         
-        .connection-modal-title {
-            font-size: 26px;
+        .support-icon {
+            width: 72px;
+            height: 72px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+        }
+        
+        .support-icon svg {
+            width: 36px;
+            height: 36px;
+            stroke: #ffffff;
+            fill: none;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+        
+        .support-title {
+            font-size: 24px;
             font-weight: 800;
-            color: #ffffff;
             margin-bottom: 10px;
+            color: #ffffff;
             letter-spacing: -0.5px;
         }
         
-        .connection-modal-subtitle {
+        .support-subtitle {
             font-size: 14px;
             color: #999999;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
         }
         
-        .connection-modal-subtitle svg {
-            width: 16px;
-            height: 16px;
-            stroke: #999999;
-        }
-        
-        .connection-step {
-            display: none;
-            opacity: 0;
-        }
-        
-        .connection-step.active {
-            display: block;
-            animation: fadeIn 0.4s forwards;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .step-indicator {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin-bottom: 28px;
-        }
-        
-        .step-dot {
-            width: 8px;
-            height: 8px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        
-        .step-dot.active {
-            width: 28px;
-            border-radius: 4px;
-            background: linear-gradient(90deg, #4d9b7a, #3d8a6a);
-            box-shadow: 0 0 12px rgba(77, 155, 122, 0.4);
-        }
-        
-        .platform-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 14px;
-            margin-bottom: 24px;
-        }
-        
-        .platform-card {
-            background: rgba(10, 10, 10, 0.6);
-            border: 2px solid rgba(255, 255, 255, 0.08);
-            border-radius: 18px;
-            padding: 24px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-        }
-        
-        .platform-card:active {
-            transform: translateY(2px);
-        }
-        
-        .platform-card.selected {
-            background: rgba(77, 155, 122, 0.1);
-            border-color: #4d9b7a;
-            box-shadow: 0 4px 20px rgba(77, 155, 122, 0.2);
-        }
-        
-        .platform-card-icon {
-            font-size: 40px;
-            margin-bottom: 14px;
-        }
-        
-        .platform-card-name {
-            font-size: 15px;
+        .section-header {
+            font-size: 18px;
             font-weight: 700;
+            margin-bottom: 16px;
             color: #ffffff;
-            letter-spacing: -0.2px;
+            letter-spacing: -0.3px;
         }
         
-        .app-list {
-            display: flex;
-            flex-direction: column;
-            gap: 14px;
-            margin-bottom: 24px;
-        }
-        
-        .app-item {
-            background: rgba(10, 10, 10, 0.6);
-            border: 2px solid rgba(255, 255, 255, 0.08);
+        .faq-item {
+            background: rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(40px);
+            -webkit-backdrop-filter: blur(40px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
             border-radius: 18px;
-            padding: 18px;
-            display: flex;
-            align-items: center;
-            gap: 18px;
+            padding: 20px;
+            margin-bottom: 14px;
             cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.3s;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
         }
         
-        .app-item:active {
-            transform: translateY(2px);
+        .faq-item:hover {
+            background: rgba(255, 255, 255, 0.06);
+            border-color: rgba(255, 255, 255, 0.12);
         }
         
-        .app-item.selected {
-            background: rgba(77, 155, 122, 0.1);
-            border-color: #4d9b7a;
-            box-shadow: 0 4px 20px rgba(77, 155, 122, 0.2);
-        }
-        
-        .app-item-icon {
-            width: 52px;
-            height: 52px;
-            background: rgba(77, 155, 122, 0.12);
-            border-radius: 13px;
+        .faq-header {
             display: flex;
+            justify-content: space-between;
             align-items: center;
-            justify-content: center;
-            font-size: 26px;
-            flex-shrink: 0;
-            border: 1px solid rgba(77, 155, 122, 0.2);
+            gap: 14px;
         }
         
-        .app-item-info {
-            flex: 1;
-        }
-        
-        .app-item-name {
+        .faq-question {
             font-size: 16px;
             font-weight: 700;
+            flex: 1;
             color: #ffffff;
-            margin-bottom: 4px;
             letter-spacing: -0.2px;
         }
         
-        .app-item-desc {
-            font-size: 12px;
-            color: #999999;
-        }
-        
-        .app-item-badge {
-            background: rgba(77, 155, 122, 0.15);
-            border: 1px solid rgba(77, 155, 122, 0.3);
+        .faq-toggle {
+            width: 28px;
+            height: 28px;
+            background: rgba(255, 255, 255, 0.06);
             border-radius: 8px;
-            padding: 5px 10px;
-            font-size: 10px;
-            font-weight: 700;
-            color: #4d9b7a;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-        
-        .connection-actions {
             display: flex;
-            flex-direction: column;
-            gap: 12px;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
         }
         
-        .btn-connection-primary {
+        .faq-toggle svg {
+            width: 18px;
+            height: 18px;
+            fill: #ffffff;
+            transition: transform 0.3s;
+        }
+        
+        .faq-item.open .faq-toggle svg {
+            transform: rotate(180deg);
+        }
+        
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s;
+        }
+        
+        .faq-item.open .faq-answer {
+            max-height: 600px;
+        }
+        
+        .faq-answer-content {
+            padding-top: 16px;
+            font-size: 14px;
+            line-height: 1.7;
+            color: #b8babb;
+        }
+        
+        .contact-card {
+            background: rgba(26, 26, 26, 0.5);
+            backdrop-filter: blur(40px);
+            -webkit-backdrop-filter: blur(40px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 24px;
+            padding: 28px;
+            text-align: center;
+            margin-top: 28px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+        }
+        
+        .contact-info {
+            margin-bottom: 24px;
+        }
+        
+        .contact-label {
+            font-size: 13px;
+            color: #999999;
+            margin-bottom: 10px;
+        }
+        
+        .contact-value {
+            font-size: 18px;
+            font-weight: 700;
+            color: #ffffff;
+            letter-spacing: -0.2px;
+        }
+        
+        .btn-contact {
             width: 100%;
-            background: linear-gradient(135deg, #4d9b7a 0%, #3d8a6a 100%);
+            background: rgba(255, 255, 255, 0.95);
             border: none;
             border-radius: 16px;
             padding: 18px;
             font-size: 16px;
             font-weight: 700;
-            color: #ffffff;
+            color: #0a0a0a;
             cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 4px 20px rgba(77, 155, 122, 0.3);
+            transition: all 0.3s;
+            box-shadow: 0 4px 20px rgba(255, 255, 255, 0.15);
             letter-spacing: 0.5px;
         }
         
-        .btn-connection-primary:active {
+        .btn-contact:active {
             transform: translateY(2px);
-            box-shadow: 0 2px 12px rgba(77, 155, 122, 0.4);
         }
         
-        .btn-connection-primary:disabled {
-            opacity: 0.4;
-            cursor: not-allowed;
-            transform: none;
-        }
-        
-        .btn-connection-secondary {
-            width: 100%;
-            background: rgba(26, 26, 26, 0.7);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 16px;
-            padding: 18px;
-            font-size: 15px;
-            font-weight: 600;
-            color: #e8eaed;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        
-        .btn-connection-secondary:active {
-            transform: translateY(2px);
-            background: rgba(36, 36, 36, 0.7);
-        }
-        
-        .connection-info-box {
-            background: rgba(77, 155, 122, 0.08);
-            border: 1px solid rgba(77, 155, 122, 0.25);
-            border-radius: 16px;
-            padding: 18px;
-            margin-bottom: 24px;
-        }
-        
-        .connection-info-text {
-            font-size: 14px;
-            line-height: 1.6;
-            color: #b8babb;
-            text-align: center;
-        }
-        
-        .connection-success {
-            text-align: center;
-            padding: 24px 0;
-        }
-        
-        .connection-success-icon {
-            width: 88px;
-            height: 88px;
-            background: rgba(77, 155, 122, 0.15);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 44px;
-            margin: 0 auto 24px;
-            border: 2px solid rgba(77, 155, 122, 0.3);
-            box-shadow: 0 8px 24px rgba(77, 155, 122, 0.2);
-        }
-        
-        .connection-success-title {
-            font-size: 24px;
-            font-weight: 800;
-            color: #ffffff;
-            margin-bottom: 10px;
-            letter-spacing: -0.5px;
-        }
-        
-        .connection-success-text {
-            font-size: 14px;
-            color: #999999;
-            line-height: 1.6;
-        }
-        
-        /* === QR MODAL === */
-        
+        /* QR Modal */
         .qr-modal {
             position: fixed;
             top: 0;
@@ -1271,79 +1302,9 @@
             display: inline-block;
         }
         
-        .qr-timer {
-            margin-bottom: 24px;
-        }
-        
-        .qr-timer-label {
-            font-size: 11px;
-            color: #666666;
-            margin-bottom: 10px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.8px;
-        }
-        
-        .qr-timer-bar {
-            width: 100%;
-            height: 6px;
-            background: rgba(255, 255, 255, 0.06);
-            border-radius: 3px;
-            overflow: hidden;
-            margin-bottom: 10px;
-        }
-        
-        .qr-timer-fill {
-            height: 100%;
-            background: linear-gradient(90deg, #4d9b7a, #3d8a6a);
-            width: 100%;
-            transition: width 1s linear;
-            box-shadow: 0 0 10px rgba(77, 155, 122, 0.5);
-        }
-        
-        .qr-timer-text {
-            font-size: 16px;
-            font-weight: 700;
-            color: #4d9b7a;
-            letter-spacing: 1px;
-        }
-        
-        .qr-actions {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-            margin-bottom: 16px;
-        }
-        
-        .btn-qr-action {
-            background: rgba(26, 26, 26, 0.7);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 14px;
-            padding: 16px;
-            font-size: 14px;
-            font-weight: 600;
-            color: #e8eaed;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            transition: all 0.3s;
-        }
-        
-        .btn-qr-action:active {
-            transform: translateY(2px);
-            background: rgba(36, 36, 36, 0.7);
-        }
-        
-        .btn-qr-refresh {
-            border-color: #4d9b7a;
-            color: #4d9b7a;
-        }
-        
         .btn-qr-close {
             width: 100%;
-            background: rgba(26, 26, 26, 0.7);
+            background: rgba(255, 255, 255, 0.05);
             border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 16px;
             padding: 18px;
@@ -1356,543 +1317,25 @@
         
         .btn-qr-close:active {
             transform: translateY(2px);
-            background: rgba(36, 36, 36, 0.7);
-        }
-        
-        /* === SELECTION CARDS === */
-        
-        .selection-card {
-            background: rgba(26, 26, 26, 0.7);
-            backdrop-filter: blur(30px);
-            -webkit-backdrop-filter: blur(30px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 20px;
-            padding: 22px;
-            margin-bottom: 14px;
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .selection-card:active {
-            transform: translateY(2px);
-        }
-        
-        .selection-card.selected {
-            background: rgba(77, 155, 122, 0.1);
-            border-color: #4d9b7a;
-            box-shadow: 0 4px 20px rgba(77, 155, 122, 0.2);
-        }
-        
-        .selection-info {
-            display: flex;
-            align-items: center;
-            gap: 18px;
-        }
-        
-        .selection-icon {
-            width: 52px;
-            height: 52px;
-            background: rgba(77, 155, 122, 0.12);
-            border: 1px solid rgba(77, 155, 122, 0.2);
-            border-radius: 14px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 16px;
-            font-weight: 800;
-            color: #4d9b7a;
-            letter-spacing: -0.5px;
-        }
-        
-        .selection-text h3 {
-            font-size: 18px;
-            font-weight: 700;
-            margin-bottom: 4px;
-            color: #ffffff;
-            letter-spacing: -0.3px;
-        }
-        
-        .selection-text p {
-            font-size: 13px;
-            color: #999999;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-        
-        .selection-text p svg {
-            width: 14px;
-            height: 14px;
-            stroke: #999999;
-        }
-        
-        .selection-arrow {
-            width: 28px;
-            height: 28px;
-            opacity: 0.3;
-            transition: all 0.3s;
-        }
-        
-        .selection-card:active .selection-arrow {
-            transform: translateX(4px);
-        }
-        
-        .selection-arrow svg {
-            width: 100%;
-            height: 100%;
-            fill: #e8eaed;
-        }
-        
-        /* === PLAN CARDS === */
-        
-        .plan-card {
-            background: rgba(26, 26, 26, 0.7);
-            backdrop-filter: blur(30px);
-            -webkit-backdrop-filter: blur(30px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 20px;
-            padding: 24px;
-            margin-bottom: 14px;
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .plan-card:active {
-            transform: translateY(2px);
-        }
-        
-        .plan-card.selected {
-            background: rgba(77, 155, 122, 0.1);
-            border-color: #4d9b7a;
-            box-shadow: 0 4px 20px rgba(77, 155, 122, 0.2);
-        }
-        
-        .plan-badge {
-            position: absolute;
-            top: -1px;
-            right: 20px;
-            background: linear-gradient(135deg, #4d9b7a, #3d8a6a);
-            padding: 6px 14px;
-            border-radius: 0 0 12px 12px;
-            font-size: 11px;
-            font-weight: 800;
-            color: #ffffff;
-            text-transform: uppercase;
-            letter-spacing: 0.8px;
-            box-shadow: 0 4px 12px rgba(77, 155, 122, 0.4);
-        }
-        
-        .plan-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 10px;
-        }
-        
-        .plan-period {
-            font-size: 20px;
-            font-weight: 700;
-            color: #ffffff;
-            letter-spacing: -0.3px;
-        }
-        
-        .plan-price {
-            font-size: 28px;
-            font-weight: 800;
-            color: #4d9b7a;
-            letter-spacing: -1px;
-        }
-        
-        .plan-price-small {
-            font-size: 14px;
-            color: rgba(153, 153, 153, 0.4);
-            text-decoration: line-through;
-            margin-left: 8px;
-        }
-        
-        .plan-per-month {
-            font-size: 13px;
-            color: #999999;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-        
-        .plan-per-month svg {
-            width: 14px;
-            height: 14px;
-            stroke: #999999;
-        }
-        
-        .promo-input {
-            width: 100%;
-            background: rgba(26, 26, 26, 0.7);
-            backdrop-filter: blur(30px);
-            -webkit-backdrop-filter: blur(30px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 16px;
-            padding: 18px;
-            font-size: 15px;
-            color: #e8eaed;
-            font-family: inherit;
-            margin-bottom: 20px;
-            transition: all 0.3s;
-        }
-        
-        .promo-input:focus {
-            outline: none;
-            border-color: #4d9b7a;
-            box-shadow: 0 0 0 3px rgba(77, 155, 122, 0.1);
-            background: rgba(26, 26, 26, 0.9);
-        }
-        
-        .promo-input::placeholder {
-            color: #666666;
-        }
-        
-        .btn-primary {
-            width: 100%;
-            background: linear-gradient(135deg, #4d9b7a 0%, #3d8a6a 100%);
-            border: none;
-            border-radius: 16px;
-            padding: 18px;
-            font-size: 16px;
-            font-weight: 700;
-            color: #ffffff;
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 4px 20px rgba(77, 155, 122, 0.3);
-            letter-spacing: 0.5px;
-        }
-        
-        .btn-primary:active {
-            transform: translateY(2px);
-            box-shadow: 0 2px 12px rgba(77, 155, 122, 0.4);
-        }
-        
-        .btn-primary:disabled {
-            opacity: 0.4;
-            cursor: not-allowed;
-            transform: none;
-        }
-        
-        .btn-loading::after {
-            content: '';
-            position: absolute;
-            right: 18px;
-            top: 50%;
-            width: 18px;
-            height: 18px;
-            margin-top: -9px;
-            border: 2px solid #ffffff;
-            border-top-color: transparent;
-            border-radius: 50%;
-            animation: spin 0.8s linear infinite;
-        }
-        
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-        
-        .btn-secondary {
-            width: 100%;
-            background: rgba(26, 26, 26, 0.7);
-            backdrop-filter: blur(30px);
-            -webkit-backdrop-filter: blur(30px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 16px;
-            padding: 18px;
-            font-size: 15px;
-            font-weight: 600;
-            color: #e8eaed;
-            cursor: pointer;
-            margin-top: 12px;
-            transition: all 0.3s;
-        }
-        
-        .btn-secondary:active {
-            transform: translateY(2px);
-            background: rgba(36, 36, 36, 0.7);
-        }
-        
-        /* === SUPPORT === */
-        
-        .support-hero {
-            background: rgba(26, 26, 26, 0.7);
-            backdrop-filter: blur(30px);
-            -webkit-backdrop-filter: blur(30px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 24px;
-            padding: 32px;
-            text-align: center;
-            margin-bottom: 28px;
-        }
-        
-        .support-icon {
-            width: 72px;
-            height: 72px;
-            background: rgba(77, 155, 122, 0.12);
-            border: 2px solid rgba(77, 155, 122, 0.2);
-            border-radius: 18px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 20px;
-            box-shadow: 0 4px 16px rgba(77, 155, 122, 0.2);
-        }
-        
-        .support-icon svg {
-            width: 36px;
-            height: 36px;
-            stroke: #4d9b7a;
-            fill: none;
-            stroke-width: 2;
-            stroke-linecap: round;
-            stroke-linejoin: round;
-        }
-        
-        .support-title {
-            font-size: 24px;
-            font-weight: 800;
-            margin-bottom: 10px;
-            color: #ffffff;
-            letter-spacing: -0.5px;
-        }
-        
-        .support-subtitle {
-            font-size: 14px;
-            color: #999999;
-        }
-        
-        .section-header {
-            font-size: 20px;
-            font-weight: 700;
-            margin-bottom: 16px;
-            color: #ffffff;
-            letter-spacing: -0.3px;
-        }
-        
-        .faq-item {
-            background: rgba(26, 26, 26, 0.7);
-            backdrop-filter: blur(30px);
-            -webkit-backdrop-filter: blur(30px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 18px;
-            padding: 20px;
-            margin-bottom: 14px;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        
-        .faq-item:active {
-            transform: translateY(2px);
-        }
-        
-        .faq-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 14px;
-        }
-        
-        .faq-question {
-            font-size: 16px;
-            font-weight: 700;
-            flex: 1;
-            color: #ffffff;
-            letter-spacing: -0.2px;
-        }
-        
-        .faq-toggle {
-            width: 28px;
-            height: 28px;
-            background: rgba(77, 155, 122, 0.12);
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s;
-        }
-        
-        .faq-toggle svg {
-            width: 18px;
-            height: 18px;
-            fill: #4d9b7a;
-            transition: transform 0.3s;
-        }
-        
-        .faq-item.open .faq-toggle svg {
-            transform: rotate(180deg);
-        }
-        
-        .faq-answer {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        
-        .faq-item.open .faq-answer {
-            max-height: 600px;
-        }
-        
-        .faq-answer-content {
-            padding-top: 16px;
-            font-size: 14px;
-            line-height: 1.7;
-            color: #b8babb;
-        }
-        
-        .contact-card {
-            background: rgba(26, 26, 26, 0.7);
-            backdrop-filter: blur(30px);
-            -webkit-backdrop-filter: blur(30px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 24px;
-            padding: 28px;
-            text-align: center;
-            margin-top: 28px;
-        }
-        
-        .contact-info {
-            margin-bottom: 24px;
-        }
-        
-        .contact-label {
-            font-size: 13px;
-            color: #999999;
-            margin-bottom: 10px;
-        }
-        
-        .contact-value {
-            font-size: 18px;
-            font-weight: 700;
-            color: #4d9b7a;
-            letter-spacing: -0.2px;
-        }
-        
-        .btn-contact {
-            width: 100%;
-            background: linear-gradient(135deg, #4d9b7a 0%, #3d8a6a 100%);
-            border: none;
-            border-radius: 16px;
-            padding: 18px;
-            font-size: 16px;
-            font-weight: 700;
-            color: #ffffff;
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 4px 20px rgba(77, 155, 122, 0.3);
-            letter-spacing: 0.5px;
-        }
-        
-        .btn-contact:active {
-            transform: translateY(2px);
-            box-shadow: 0 2px 12px rgba(77, 155, 122, 0.4);
-        }
-        
-        /* === NAVIGATION === */
-        
-        .bottom-nav {
-            position: fixed;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            max-width: 440px;
-            width: calc(100% - 40px);
-            background: rgba(26, 26, 26, 0.9);
-            backdrop-filter: blur(30px);
-            -webkit-backdrop-filter: blur(30px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 24px;
-            padding: 10px;
-            display: flex;
-            justify-content: center;
-            gap: 8px;
-            margin-bottom: 20px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
-            z-index: 1000;
-        }
-        
-        .nav-item {
-            flex: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            padding: 12px;
-            border-radius: 16px;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            background: transparent;
-            position: relative;
-        }
-        
-        .nav-item:active {
-            transform: scale(0.95);
-        }
-        
-        .nav-item.active {
-            background: linear-gradient(135deg, #4d9b7a, #3d8a6a);
-            box-shadow: 0 4px 16px rgba(77, 155, 122, 0.3);
-        }
-        
-        .nav-icon {
-            width: 28px;
-            height: 28px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .nav-icon svg {
-            width: 24px;
-            height: 24px;
-            stroke: #666666;
-            fill: none;
-            stroke-width: 2;
-            stroke-linecap: round;
-            stroke-linejoin: round;
-            transition: stroke 0.3s;
-        }
-        
-        .nav-item.active .nav-icon svg {
-            stroke: #ffffff;
-        }
-        
-        /* === SCROLLBAR === */
-        
-        ::-webkit-scrollbar {
-            width: 10px;
-            height: 10px;
-        }
-        
-        ::-webkit-scrollbar-track {
-            background: rgba(0, 0, 0, 0.2);
-        }
-        
-        ::-webkit-scrollbar-thumb {
-            background: rgba(77, 155, 122, 0.3);
-            border-radius: 5px;
-        }
-        
-        ::-webkit-scrollbar-thumb:hover {
-            background: rgba(77, 155, 122, 0.5);
         }
     </style>
 </head>
 <body>
+    <div class="grid-lines"></div>
+    <div class="diagonal-lines"></div>
+    <div class="random-lines"></div>
+    <div class="noise-texture"></div>
+    <div class="circuit-pattern"></div>
+    <div class="dots-pattern"></div>
+    <div class="spotlight"></div>
+    <div class="vignette"></div>
+
     <!-- 1. Выбор сервера -->
     <div id="screenServer" class="screen active">
         <div class="container">
             <div class="header">
                 <div class="header-title">Выбор сервера</div>
-                <div class="header-subtitle">Шаг 1 из 4 • Выберите локацию</div>
+                <div class="header-subtitle">Шаг 1 из 4</div>
             </div>
             
             <div class="selection-card" onclick="selectServer('cn', 'Китай', '🇨🇳')">
@@ -1900,17 +1343,11 @@
                     <div class="selection-icon">CN</div>
                     <div class="selection-text">
                         <h3>Китай</h3>
-                        <p>
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <circle cx="12" cy="12" r="10"/>
-                                <polyline points="12 6 12 12 16 14"/>
-                            </svg>
-                            Ping: 8ms • Высокая скорость
-                        </p>
+                        <p>Ping: 8ms • Высокая скорость</p>
                     </div>
                 </div>
                 <div class="selection-arrow">
-                    <svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+                    <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
                 </div>
             </div>
             
@@ -1919,17 +1356,11 @@
                     <div class="selection-icon">NL</div>
                     <div class="selection-text">
                         <h3>Нидерланды</h3>
-                        <p>
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <circle cx="12" cy="12" r="10"/>
-                                <polyline points="12 6 12 12 16 14"/>
-                            </svg>
-                            Ping: 12ms • Стабильное подключение
-                        </p>
+                        <p>Ping: 12ms • Стабильное подключение</p>
                     </div>
                 </div>
                 <div class="selection-arrow">
-                    <svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+                    <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
                 </div>
             </div>
             
@@ -1938,17 +1369,11 @@
                     <div class="selection-icon">US</div>
                     <div class="selection-text">
                         <h3>США</h3>
-                        <p>
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <circle cx="12" cy="12" r="10"/>
-                                <polyline points="12 6 12 12 16 14"/>
-                            </svg>
-                            Ping: 45ms • Отлично для стриминга
-                        </p>
+                        <p>Ping: 45ms • Отлично для стриминга</p>
                     </div>
                 </div>
                 <div class="selection-arrow">
-                    <svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+                    <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
                 </div>
             </div>
             
@@ -1957,17 +1382,11 @@
                     <div class="selection-icon">DE</div>
                     <div class="selection-text">
                         <h3>Германия</h3>
-                        <p>
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <circle cx="12" cy="12" r="10"/>
-                                <polyline points="12 6 12 12 16 14"/>
-                            </svg>
-                            Ping: 18ms • Надёжный сервер
-                        </p>
+                        <p>Ping: 18ms • Надёжный сервер</p>
                     </div>
                 </div>
                 <div class="selection-arrow">
-                    <svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+                    <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
                 </div>
             </div>
         </div>
@@ -1978,7 +1397,7 @@
         <div class="container">
             <div class="header">
                 <div class="header-title">Выбор протокола</div>
-                <div class="header-subtitle">Шаг 2 из 4 • Тип шифрования</div>
+                <div class="header-subtitle">Шаг 2 из 4</div>
             </div>
             
             <div class="selection-card" onclick="selectProtocol('VLESS')">
@@ -1986,17 +1405,11 @@
                     <div class="selection-icon">V</div>
                     <div class="selection-text">
                         <h3>VLESS</h3>
-                        <p>
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
-                                <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
-                            </svg>
-                            Рекомендуется • Лучшая производительность
-                        </p>
+                        <p>Рекомендуется • Лучшая производительность</p>
                     </div>
                 </div>
                 <div class="selection-arrow">
-                    <svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+                    <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
                 </div>
             </div>
             
@@ -2005,17 +1418,11 @@
                     <div class="selection-icon">VM</div>
                     <div class="selection-text">
                         <h3>VMess</h3>
-                        <p>
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
-                                <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
-                            </svg>
-                            Стандартный протокол • Проверенная надёжность
-                        </p>
+                        <p>Стандартный протокол • Проверенная надёжность</p>
                     </div>
                 </div>
                 <div class="selection-arrow">
-                    <svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+                    <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
                 </div>
             </div>
             
@@ -2024,17 +1431,11 @@
                     <div class="selection-icon">T</div>
                     <div class="selection-text">
                         <h3>Trojan</h3>
-                        <p>
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
-                                <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
-                            </svg>
-                            Высокая скорость • Обход блокировок
-                        </p>
+                        <p>Высокая скорость • Обход блокировок</p>
                     </div>
                 </div>
                 <div class="selection-arrow">
-                    <svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+                    <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
                 </div>
             </div>
             
@@ -2043,17 +1444,11 @@
                     <div class="selection-icon">SS</div>
                     <div class="selection-text">
                         <h3>Shadowsocks</h3>
-                        <p>
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
-                                <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
-                            </svg>
-                            Легковесный • Минимальное потребление
-                        </p>
+                        <p>Легковесный • Минимальное потребление</p>
                     </div>
                 </div>
                 <div class="selection-arrow">
-                    <svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+                    <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
                 </div>
             </div>
             
@@ -2074,50 +1469,27 @@
             <div class="plan-card" onclick="selectPlan('1month', 500)">
                 <div class="plan-header">
                     <div class="plan-period">1 месяц</div>
-                    <div>
-                        <div class="plan-price">500⭐</div>
-                    </div>
+                    <div class="plan-price">500⭐</div>
                 </div>
-                <div class="plan-per-month">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
-                    </svg>
-                    500⭐ в месяц • Безлимитный трафик
-                </div>
+                <div class="plan-desc">500⭐ в месяц • Безлимитный трафик</div>
             </div>
             
             <div class="plan-card" onclick="selectPlan('6month', 2400)">
                 <div class="plan-badge">Скидка 20%</div>
                 <div class="plan-header">
                     <div class="plan-period">6 месяцев</div>
-                    <div>
-                        <div class="plan-price">2400⭐</div>
-                        <span class="plan-price-small">3000⭐</span>
-                    </div>
+                    <div class="plan-price">2400⭐</div>
                 </div>
-                <div class="plan-per-month">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
-                    </svg>
-                    400⭐ в месяц • Выгодное предложение
-                </div>
+                <div class="plan-desc">400⭐ в месяц • Выгодное предложение</div>
             </div>
             
             <div class="plan-card" onclick="selectPlan('12month', 4000)">
                 <div class="plan-badge">Скидка 33%</div>
                 <div class="plan-header">
                     <div class="plan-period">12 месяцев</div>
-                    <div>
-                        <div class="plan-price">4000⭐</div>
-                        <span class="plan-price-small">6000⭐</span>
-                    </div>
+                    <div class="plan-price">4000⭐</div>
                 </div>
-                <div class="plan-per-month">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
-                    </svg>
-                    333⭐ в месяц • Максимальная экономия
-                </div>
+                <div class="plan-desc">333⭐ в месяц • Максимальная экономия</div>
             </div>
             
             <input 
@@ -2146,27 +1518,12 @@
             </div>
             
             <div class="payment-summary glass-card">
-                <div class="glass-card-glow"></div>
                 <div class="payment-summary-row">
-                    <span class="payment-summary-label">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
-                            <line x1="16" y1="2" x2="16" y2="6"/>
-                            <line x1="8" y1="2" x2="8" y2="6"/>
-                            <line x1="3" y1="10" x2="21" y2="10"/>
-                        </svg>
-                        Тариф
-                    </span>
+                    <span class="payment-summary-label">Тариф</span>
                     <span class="payment-summary-value" id="paymentPlan">1 месяц</span>
                 </div>
                 <div class="payment-summary-row">
-                    <span class="payment-summary-label">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/>
-                            <line x1="7" y1="7" x2="7.01" y2="7"/>
-                        </svg>
-                        Промокод
-                    </span>
+                    <span class="payment-summary-label">Промокод</span>
                     <span class="payment-summary-value" id="paymentPromo">—</span>
                 </div>
                 <div class="payment-summary-divider"></div>
@@ -2181,27 +1538,16 @@
                     <div class="payment-method-icon">⭐</div>
                     <div class="payment-method-info">
                         <div class="payment-method-name">Telegram Stars</div>
-                        <div class="payment-method-desc">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <polyline points="20 6 9 17 4 12"/>
-                            </svg>
-                            Быстро и безопасно • Мгновенная активация
-                        </div>
+                        <div class="payment-method-desc">Быстро и безопасно • Мгновенная активация</div>
                     </div>
-                    <div class="payment-method-badge">Популярно</div>
+                    <div class="payment-method-badge">TOP</div>
                 </div>
                 
                 <div class="payment-method" onclick="selectPaymentMethod('sbp')">
                     <div class="payment-method-icon">🏦</div>
                     <div class="payment-method-info">
                         <div class="payment-method-name">СБП</div>
-                        <div class="payment-method-desc">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <rect x="1" y="4" width="22" height="16" rx="2" ry="2"/>
-                                <line x1="1" y1="10" x2="23" y2="10"/>
-                            </svg>
-                            Система быстрых платежей • Без комиссии
-                        </div>
+                        <div class="payment-method-desc">Система быстрых платежей • Без комиссии</div>
                     </div>
                 </div>
                 
@@ -2209,13 +1555,7 @@
                     <div class="payment-method-icon">₿</div>
                     <div class="payment-method-info">
                         <div class="payment-method-name">Криптовалюта</div>
-                        <div class="payment-method-desc">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <line x1="12" y1="1" x2="12" y2="23"/>
-                                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
-                            </svg>
-                            USDT, BTC, ETH • Анонимно
-                        </div>
+                        <div class="payment-method-desc">USDT, BTC, ETH • Анонимно</div>
                     </div>
                 </div>
             </div>
@@ -2225,9 +1565,242 @@
             </button>
         </div>
     </div>
-
-    <!-- Далее продолжение HTML... -->
     
+    <!-- 5. Активная подписка -->
+    <div id="screenActive" class="screen">
+        <div class="container">
+            <div class="header">
+                <div class="header-title">Моя подписка</div>
+                <div class="header-subtitle">Активна</div>
+            </div>
+            
+            <div class="subscription-card">
+                <div class="sub-header">
+                    <div class="sub-flag-wrapper">
+                        <span id="subFlag">🇳🇱</span>
+                    </div>
+                    <div class="sub-info">
+                        <div class="sub-server" id="subServer">Нидерланды</div>
+                        <div class="sub-protocol" id="subProtocol">VLESS • Активно</div>
+                    </div>
+                    <button class="btn-qr-icon" onclick="showQRCode()">
+                        <svg viewBox="0 0 24 24">
+                            <rect x="3" y="3" width="7" height="7"/>
+                            <rect x="14" y="3" width="7" height="7"/>
+                            <rect x="14" y="14" width="7" height="7"/>
+                            <rect x="3" y="14" width="7" height="7"/>
+                        </svg>
+                    </button>
+                </div>
+                
+                <div class="sub-link-box">
+                    <div class="sub-link-label">Ключ подключения</div>
+                    <div class="sub-link-text" id="subLinkText">vless://uuid@server.com:443...</div>
+                    <button class="btn-copy-link" onclick="copyLink()">📋</button>
+                </div>
+                
+                <button class="btn-connect" onclick="openConnectionGuide()">
+                    Подключить к VPN
+                </button>
+            </div>
+            
+            <div class="renewal-card">
+                <div class="renewal-header">
+                    <div class="renewal-title">Информация</div>
+                    <div class="renewal-subtitle">Статистика использования</div>
+                </div>
+                
+                <div class="renewal-stats">
+                    <div class="renewal-stat">
+                        <div class="renewal-stat-label">Осталось</div>
+                        <div class="renewal-stat-value">14</div>
+                        <div class="renewal-stat-unit">дней</div>
+                    </div>
+                    
+                    <div class="renewal-stat">
+                        <div class="renewal-stat-label">Использовано</div>
+                        <div class="renewal-stat-value">15.2</div>
+                        <div class="renewal-stat-unit">ГБ</div>
+                    </div>
+                </div>
+                
+                <div class="renewal-date-box">
+                    <div class="renewal-date-label">Дата продления</div>
+                    <div class="renewal-date-value">21 февраля 2026</div>
+                </div>
+                
+                <button class="btn-renew" onclick="showScreen('screenRenewal')">
+                    Продлить подписку
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 6. Продление подписки -->
+    <div id="screenRenewal" class="screen">
+        <div class="container">
+            <div class="header">
+                <div class="header-title">Продление</div>
+                <div class="header-subtitle">Выберите тариф</div>
+            </div>
+            
+            <div class="renewal-card">
+                <div class="renewal-header">
+                    <div class="renewal-title">Текущая подписка</div>
+                    <div class="renewal-subtitle">Активна до 21 февраля 2026</div>
+                </div>
+                
+                <div class="renewal-date-box">
+                    <div class="renewal-date-label">Осталось</div>
+                    <div class="renewal-date-value">14 дней</div>
+                </div>
+            </div>
+            
+            <div class="plan-card" onclick="selectPlan('1month', 500)">
+                <div class="plan-header">
+                    <div class="plan-period">1 месяц</div>
+                    <div class="plan-price">500⭐</div>
+                </div>
+                <div class="plan-desc">Безлимитный трафик • Поддержка 24/7</div>
+            </div>
+            
+            <div class="plan-card" onclick="selectPlan('6month', 2400)">
+                <div class="plan-badge">Скидка 20%</div>
+                <div class="plan-header">
+                    <div class="plan-period">6 месяцев</div>
+                    <div class="plan-price">2400⭐</div>
+                </div>
+                <div class="plan-desc">Выгодное предложение • Экономия 600⭐</div>
+            </div>
+            
+            <div class="plan-card" onclick="selectPlan('12month', 4000)">
+                <div class="plan-badge">Скидка 33%</div>
+                <div class="plan-header">
+                    <div class="plan-period">12 месяцев</div>
+                    <div class="plan-price">4000⭐</div>
+                </div>
+                <div class="plan-desc">Максимальная экономия • Лучшая цена</div>
+            </div>
+            
+            <button class="btn-primary" onclick="goToPayment()">
+                Продолжить к оплате →
+            </button>
+            
+            <button class="btn-secondary" onclick="showScreen('screenActive')">
+                ← Назад
+            </button>
+        </div>
+    </div>
+    
+    <!-- 7. Поддержка -->
+    <div id="screenSupport" class="screen">
+        <div class="container">
+            <div class="header">
+                <div class="header-title">Поддержка</div>
+                <div class="header-subtitle">Мы всегда на связи</div>
+            </div>
+            
+            <div class="support-hero">
+                <div class="support-icon">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                    </svg>
+                </div>
+                <div class="support-title">Нужна помощь?</div>
+                <div class="support-subtitle">Ответим на любой вопрос в течение 5 минут</div>
+            </div>
+            
+            <div class="section-header">Частые вопросы</div>
+            
+            <div class="faq-item" onclick="toggleFAQ(this)">
+                <div class="faq-header">
+                    <div class="faq-question">Как подключиться к VPN?</div>
+                    <div class="faq-toggle">
+                        <svg viewBox="0 0 24 24">
+                            <polyline points="6 9 12 15 18 9"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-content">
+                        Нажмите на кнопку "Подключить к VPN" в вашей активной подписке. Выберите вашу платформу и приложение, затем следуйте инструкциям для установки.
+                    </div>
+                </div>
+            </div>
+            
+            <div class="faq-item" onclick="toggleFAQ(this)">
+                <div class="faq-header">
+                    <div class="faq-question">Что делать если не работает?</div>
+                    <div class="faq-toggle">
+                        <svg viewBox="0 0 24 24">
+                            <polyline points="6 9 12 15 18 9"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-content">
+                        Попробуйте перезапустить приложение и переключиться на другой протокол. Если проблема сохраняется, свяжитесь с нашей поддержкой.
+                    </div>
+                </div>
+            </div>
+            
+            <div class="contact-card">
+                <div class="contact-info">
+                    <div class="contact-label">Telegram поддержка</div>
+                    <div class="contact-value">@vpn_support</div>
+                </div>
+                <button class="btn-contact" onclick="openSupport()">
+                    Написать в поддержку
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- QR Modal -->
+    <div id="qrModal" class="qr-modal">
+        <div class="qr-modal-content">
+            <div class="qr-modal-title">QR-код подключения</div>
+            <div class="qr-modal-subtitle">Отсканируйте в приложении VPN</div>
+            
+            <div class="qr-code-wrapper">
+                <div id="qrcode"></div>
+            </div>
+            
+            <button class="btn-qr-close" onclick="closeQRCode()">
+                Закрыть
+            </button>
+        </div>
+    </div>
+    
+    <!-- Bottom Navigation -->
+    <div class="bottom-nav">
+        <div class="nav-item" onclick="showScreen('screenActive')">
+            <div class="nav-icon">
+                <svg viewBox="0 0 24 24">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                    <polyline points="9 22 9 12 15 12 15 22"/>
+                </svg>
+            </div>
+        </div>
+        
+        <div class="nav-item" onclick="showScreen('screenRenewal')">
+            <div class="nav-icon">
+                <svg viewBox="0 0 24 24">
+                    <circle cx="12" cy="12" r="10"/>
+                    <polyline points="12 6 12 12 16 14"/>
+                </svg>
+            </div>
+        </div>
+        
+        <div class="nav-item" onclick="showScreen('screenSupport')">
+            <div class="nav-icon">
+                <svg viewBox="0 0 24 24">
+                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                </svg>
+            </div>
+        </div>
+    </div>
+
     <script>
         let tg = window.Telegram.WebApp;
         tg.ready();
@@ -2246,54 +1819,24 @@
         let selectedPlanName = '';
         let selectedPaymentMethod = '';
         
-        let selectedRenewalPlan = '';
-        let selectedRenewalPrice = 0;
-        let selectedRenewalPayment = '';
-        
-        let qrTimer = null;
-        let qrTimeRemaining = 600;
-        
-        let currentStep = 1;
-        let selectedPlatformType = '';
-        let selectedApp = '';
-        
-        const apps = {
-            android: [
-                { id: 'v2rayng', name: 'v2rayNG', desc: 'Рекомендуется для Android', badge: 'FREE', icon: '📱', url: 'https://play.google.com/store/apps/details?id=com.v2ray.ang' },
-                { id: 'hiddify', name: 'Hiddify', desc: 'Простой и понятный интерфейс', badge: 'FREE', icon: '🔒', url: 'https://play.google.com/store/apps/details?id=app.hiddify.com' }
-            ],
-            ios: [
-                { id: 'shadowrocket', name: 'Shadowrocket', desc: 'Лучший VPN клиент для iOS', badge: 'PAID', icon: '🚀', url: 'https://apps.apple.com/app/shadowrocket/id932747118' },
-                { id: 'v2box', name: 'V2Box', desc: 'Бесплатная альтернатива', badge: 'FREE', icon: '📦', url: 'https://apps.apple.com/app/v2box/id6446814690' }
-            ],
-            windows: [
-                { id: 'v2rayn', name: 'v2rayN', desc: 'Популярный клиент для Windows', badge: 'FREE', icon: '💻', url: 'https://github.com/2dust/v2rayN/releases' },
-                { id: 'hiddify', name: 'Hiddify', desc: 'Современный и удобный интерфейс', badge: 'FREE', icon: '🔐', url: 'https://github.com/hiddify/hiddify-next/releases' }
-            ],
-            macos: [
-                { id: 'v2rayx', name: 'V2RayX', desc: 'Стабильный клиент для macOS', badge: 'FREE', icon: '🍏', url: 'https://github.com/Cenmrev/V2RayX/releases' },
-                { id: 'hiddify', name: 'Hiddify', desc: 'Кроссплатформенный клиент', badge: 'FREE', icon: '🔒', url: 'https://github.com/hiddify/hiddify-next/releases' }
-            ]
-        };
-        
         function selectServer(code, name, flag) {
             tg.HapticFeedback.impactOccurred('medium');
             selectedServer = code;
             selectedServerName = name;
             selectedServerFlag = flag;
-            smoothTransition('screenServer', 'screenProtocol');
+            showScreen('screenProtocol');
         }
         
         function selectProtocol(protocol) {
             tg.HapticFeedback.impactOccurred('medium');
             selectedProtocol = protocol;
-            smoothTransition('screenProtocol', 'screenPlan');
+            showScreen('screenPlan');
         }
         
         function selectPlan(plan, price) {
             tg.HapticFeedback.impactOccurred('light');
             
-            document.querySelectorAll('#screenPlan .plan-card').forEach(c => c.classList.remove('selected'));
+            document.querySelectorAll('.plan-card').forEach(c => c.classList.remove('selected'));
             event.currentTarget.classList.add('selected');
             
             selectedPlan = plan;
@@ -2326,13 +1869,13 @@
             
             document.getElementById('paymentTotal').textContent = selectedPrice + '⭐';
             
-            smoothTransition('screenPlan', 'screenPayment');
+            showScreen('screenPayment');
         }
         
         function selectPaymentMethod(method) {
             tg.HapticFeedback.impactOccurred('medium');
             
-            document.querySelectorAll('#screenPayment .payment-method').forEach(c => c.classList.remove('selected'));
+            document.querySelectorAll('.payment-method').forEach(c => c.classList.remove('selected'));
             event.currentTarget.classList.add('selected');
             
             selectedPaymentMethod = method;
@@ -2362,80 +1905,111 @@
                     break;
                     
                 case 'sbp':
-                    tg.showPopup({
-                        title: 'Оплата через СБП',
-                        message: 'Сейчас откроется форма оплаты через Систему быстрых платежей',
-                        buttons: [
-                            {id: 'ok', type: 'default', text: 'Продолжить'},
-                            {id: 'cancel', type: 'cancel'}
-                        ]
-                    }, (buttonId) => {
-                        if (buttonId === 'ok') {
-                            tg.showAlert('Функция в разработке');
-                        }
-                    });
+                    tg.showAlert('Функция в разработке');
                     break;
                     
                 case 'crypto':
-                    tg.showPopup({
-                        title: 'Оплата криптовалютой',
-                        message: 'Выберите предпочитаемую валюту:\n\nUSDT (TRC-20)\nBitcoin (BTC)\nEthereum (ETH)',
-                        buttons: [
-                            {id: 'usdt', type: 'default', text: 'USDT'},
-                            {id: 'btc', type: 'default', text: 'BTC'},
-                            {id: 'cancel', type: 'cancel'}
-                        ]
-                    }, (buttonId) => {
-                        if (buttonId !== 'cancel') {
-                            tg.showAlert('Функция в разработке');
-                        }
-                    });
+                    tg.showAlert('Функция в разработке');
                     break;
             }
         }
         
         function completeSubscription() {
-            // Здесь будет реальная логика после успешной оплаты
             tg.showPopup({
                 title: '✨ Поздравляем!',
                 message: 'Подписка успешно активирована. Добро пожаловать в безопасный интернет!',
                 buttons: [{id: 'ok', type: 'ok'}]
             }, () => {
-                // Redirect to active subscription screen
                 document.getElementById('subFlag').textContent = selectedServerFlag;
                 document.getElementById('subServer').textContent = selectedServerName;
-                document.getElementById('subProtocol').textContent = selectedProtocol;
+                document.getElementById('subProtocol').textContent = selectedProtocol + ' • Активно';
                 
                 const config = `vless://uuid@server.example.com:443?encryption=none&security=tls&type=ws#${selectedServerName}-${selectedProtocol}`;
                 document.getElementById('subLinkText').textContent = config;
                 
-                smoothTransition('screenPayment', 'screenActive');
+                showScreen('screenActive');
+                updateNavActive('screenActive');
             });
         }
         
-        function smoothTransition(fromScreen, toScreen) {
-            const from = document.getElementById(fromScreen);
-            const to = document.getElementById(toScreen);
-            
-            from.classList.add('fade-out');
-            
-            setTimeout(() => {
-                from.classList.remove('active', 'fade-out');
-                to.classList.add('active');
-            }, 400);
-        }
-        
-        function goBack(screen) {
+        function showScreen(screenId) {
             tg.HapticFeedback.impactOccurred('light');
-            const current = document.querySelector('.screen.active');
-            smoothTransition(current.id, screen);
+            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+            document.getElementById(screenId).classList.add('active');
+            updateNavActive(screenId);
         }
         
-        function showScreen(id) {
-            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-            document.getElementById(id).classList.add('active');
+        function goBack(screenId) {
+            tg.HapticFeedback.impactOccurred('light');
+            showScreen(screenId);
+        }
+        
+        function updateNavActive(screenId) {
+            document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+            
+            const navMapping = {
+                'screenActive': 0,
+                'screenRenewal': 1,
+                'screenSupport': 2
+            };
+            
+            const index = navMapping[screenId];
+            if (index !== undefined) {
+                document.querySelectorAll('.nav-item')[index].classList.add('active');
+            }
+        }
+        
+        function copyLink() {
+            tg.HapticFeedback.impactOccurred('medium');
+            const linkText = document.getElementById('subLinkText').textContent;
+            
+            navigator.clipboard.writeText(linkText).then(() => {
+                tg.showPopup({
+                    title: '✅ Скопировано',
+                    message: 'Ключ подключения скопирован в буфер обмена',
+                    buttons: [{id: 'ok', type: 'ok'}]
+                });
+            });
+        }
+        
+        function showQRCode() {
+            tg.HapticFeedback.impactOccurred('medium');
+            const modal = document.getElementById('qrModal');
+            modal.classList.add('active');
+            
+            const qrcodeDiv = document.getElementById('qrcode');
+            qrcodeDiv.innerHTML = '';
+            
+            const linkText = document.getElementById('subLinkText').textContent;
+            new QRCode(qrcodeDiv, {
+                text: linkText,
+                width: 256,
+                height: 256,
+                colorDark: '#000000',
+                colorLight: '#ffffff',
+                correctLevel: QRCode.CorrectLevel.H
+            });
+        }
+        
+        function closeQRCode() {
+            tg.HapticFeedback.impactOccurred('light');
+            document.getElementById('qrModal').classList.remove('active');
+        }
+        
+        function openConnectionGuide() {
+            tg.HapticFeedback.impactOccurred('medium');
+            tg.showAlert('Гайд по подключению в разработке');
+        }
+        
+        function toggleFAQ(element) {
+            tg.HapticFeedback.impactOccurred('light');
+            element.classList.toggle('open');
+        }
+        
+        function openSupport() {
+            tg.HapticFeedback.impactOccurred('medium');
+            tg.openTelegramLink('https://t.me/vpn_support');
         }
     </script>
-
 </body>
 </html>
