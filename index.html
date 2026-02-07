@@ -196,6 +196,25 @@
             color: #4d9b7a;
         }
         
+        .btn-connect {
+            width: 100%;
+            background: #4d9b7a;
+            border: none;
+            border-radius: 14px;
+            padding: 16px;
+            font-size: 17px;
+            font-weight: 700;
+            color: #ffffff;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-top: 14px;
+        }
+        
+        .btn-connect:active {
+            transform: scale(0.98);
+            background: #3d8a6a;
+        }
+        
         /* === RENEWAL CARD === */
         
         .renewal-card {
@@ -313,101 +332,9 @@
             background: rgba(77, 155, 122, 0.08);
         }
         
-        /* === INSTRUCTIONS CARD === */
+        /* === CONNECTION MODAL === */
         
-        .instructions-card {
-            background: #1a1a1a;
-            border: 1px solid #2a2a2a;
-            border-radius: 20px;
-            padding: 24px;
-            margin-bottom: 16px;
-        }
-        
-        .instructions-header {
-            text-align: center;
-            margin-bottom: 24px;
-        }
-        
-        .instructions-title {
-            font-size: 20px;
-            font-weight: 700;
-            color: #ffffff;
-            margin-bottom: 8px;
-        }
-        
-        .instructions-subtitle {
-            font-size: 13px;
-            color: #999999;
-        }
-        
-        .platform-list {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-        
-        .platform-item {
-            background: #0a0a0a;
-            border: 1px solid #2a2a2a;
-            border-radius: 14px;
-            padding: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-        
-        .platform-item:active {
-            transform: scale(0.98);
-            background: #1a1a1a;
-        }
-        
-        .platform-info {
-            display: flex;
-            align-items: center;
-            gap: 14px;
-        }
-        
-        .platform-icon {
-            width: 40px;
-            height: 40px;
-            background: rgba(77, 155, 122, 0.12);
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 20px;
-            flex-shrink: 0;
-        }
-        
-        .platform-text h3 {
-            font-size: 16px;
-            font-weight: 600;
-            color: #ffffff;
-            margin-bottom: 2px;
-        }
-        
-        .platform-text p {
-            font-size: 12px;
-            color: #999999;
-        }
-        
-        .platform-arrow {
-            width: 20px;
-            height: 20px;
-            opacity: 0.3;
-        }
-        
-        .platform-arrow svg {
-            width: 100%;
-            height: 100%;
-            fill: #e8eaed;
-        }
-        
-        /* === INSTRUCTION DETAIL MODAL === */
-        
-        .instruction-modal {
+        .connection-modal {
             position: fixed;
             top: 0;
             left: 0;
@@ -420,123 +347,207 @@
             justify-content: center;
             z-index: 9999;
             animation: fadeIn 0.3s;
-            overflow-y: auto;
             padding: 20px;
         }
         
-        .instruction-modal.active {
+        .connection-modal.active {
             display: flex;
         }
         
-        .instruction-modal-content {
+        .connection-modal-content {
             background: #1a1a1a;
             border: 1px solid #2a2a2a;
             border-radius: 24px;
             padding: 32px;
-            max-width: 500px;
+            max-width: 450px;
             width: 100%;
-            max-height: 90vh;
+            max-height: 85vh;
             overflow-y: auto;
         }
         
-        .instruction-modal-header {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            margin-bottom: 24px;
-            padding-bottom: 20px;
+        .connection-modal-header {
+            text-align: center;
+            margin-bottom: 28px;
+            padding-bottom: 24px;
             border-bottom: 1px solid #2a2a2a;
         }
         
-        .instruction-modal-icon {
-            width: 56px;
-            height: 56px;
-            background: rgba(77, 155, 122, 0.12);
-            border-radius: 14px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 28px;
-            flex-shrink: 0;
-        }
-        
-        .instruction-modal-title {
-            flex: 1;
-        }
-        
-        .instruction-modal-title h2 {
+        .connection-modal-title {
             font-size: 22px;
             font-weight: 700;
-            color: #ffffff;
-            margin-bottom: 4px;
-        }
-        
-        .instruction-modal-title p {
-            font-size: 13px;
-            color: #999999;
-        }
-        
-        .instruction-steps {
-            margin-bottom: 24px;
-        }
-        
-        .instruction-step {
-            margin-bottom: 24px;
-        }
-        
-        .instruction-step:last-child {
-            margin-bottom: 0;
-        }
-        
-        .instruction-step-number {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 28px;
-            height: 28px;
-            background: rgba(77, 155, 122, 0.12);
-            border-radius: 8px;
-            font-size: 14px;
-            font-weight: 700;
-            color: #4d9b7a;
-            margin-bottom: 12px;
-        }
-        
-        .instruction-step-title {
-            font-size: 16px;
-            font-weight: 600;
             color: #ffffff;
             margin-bottom: 8px;
         }
         
-        .instruction-step-text {
+        .connection-modal-subtitle {
             font-size: 14px;
-            line-height: 1.6;
             color: #999999;
-            margin-bottom: 12px;
         }
         
-        .instruction-step-link {
-            display: inline-flex;
-            align-items: center;
+        .connection-step {
+            display: none;
+        }
+        
+        .connection-step.active {
+            display: block;
+            animation: fadeIn 0.3s;
+        }
+        
+        .step-indicator {
+            display: flex;
+            justify-content: center;
             gap: 8px;
-            background: rgba(77, 155, 122, 0.12);
-            border: 1px solid rgba(77, 155, 122, 0.3);
-            border-radius: 10px;
-            padding: 10px 16px;
-            font-size: 14px;
-            font-weight: 600;
-            color: #4d9b7a;
-            text-decoration: none;
+            margin-bottom: 24px;
+        }
+        
+        .step-dot {
+            width: 8px;
+            height: 8px;
+            background: #2a2a2a;
+            border-radius: 50%;
+            transition: all 0.3s;
+        }
+        
+        .step-dot.active {
+            width: 24px;
+            border-radius: 4px;
+            background: #4d9b7a;
+        }
+        
+        .platform-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        
+        .platform-card {
+            background: #0a0a0a;
+            border: 2px solid #2a2a2a;
+            border-radius: 14px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
             transition: all 0.2s;
         }
         
-        .instruction-step-link:active {
+        .platform-card:active {
             transform: scale(0.95);
-            background: rgba(77, 155, 122, 0.2);
         }
         
-        .btn-instruction-close {
+        .platform-card.selected {
+            background: rgba(77, 155, 122, 0.08);
+            border-color: #4d9b7a;
+        }
+        
+        .platform-card-icon {
+            font-size: 36px;
+            margin-bottom: 12px;
+        }
+        
+        .platform-card-name {
+            font-size: 15px;
+            font-weight: 600;
+            color: #ffffff;
+        }
+        
+        .app-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        
+        .app-item {
+            background: #0a0a0a;
+            border: 2px solid #2a2a2a;
+            border-radius: 14px;
+            padding: 16px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .app-item:active {
+            transform: scale(0.98);
+        }
+        
+        .app-item.selected {
+            background: rgba(77, 155, 122, 0.08);
+            border-color: #4d9b7a;
+        }
+        
+        .app-item-icon {
+            width: 48px;
+            height: 48px;
+            background: rgba(77, 155, 122, 0.12);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            flex-shrink: 0;
+        }
+        
+        .app-item-info {
+            flex: 1;
+        }
+        
+        .app-item-name {
+            font-size: 16px;
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 4px;
+        }
+        
+        .app-item-desc {
+            font-size: 12px;
+            color: #999999;
+        }
+        
+        .app-item-badge {
+            background: rgba(77, 155, 122, 0.12);
+            border: 1px solid rgba(77, 155, 122, 0.3);
+            border-radius: 8px;
+            padding: 4px 10px;
+            font-size: 11px;
+            font-weight: 700;
+            color: #4d9b7a;
+            text-transform: uppercase;
+        }
+        
+        .connection-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        
+        .btn-connection-primary {
+            width: 100%;
+            background: #4d9b7a;
+            border: none;
+            border-radius: 14px;
+            padding: 16px;
+            font-size: 16px;
+            font-weight: 700;
+            color: #ffffff;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .btn-connection-primary:active {
+            transform: scale(0.98);
+            background: #3d8a6a;
+        }
+        
+        .btn-connection-primary:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .btn-connection-secondary {
             width: 100%;
             background: #1a1a1a;
             border: 1px solid #2a2a2a;
@@ -549,9 +560,53 @@
             transition: all 0.2s;
         }
         
-        .btn-instruction-close:active {
-            transform: scale(0.97);
+        .btn-connection-secondary:active {
+            transform: scale(0.98);
             background: #252525;
+        }
+        
+        .connection-info-box {
+            background: rgba(77, 155, 122, 0.08);
+            border: 1px solid rgba(77, 155, 122, 0.3);
+            border-radius: 14px;
+            padding: 16px;
+            margin-bottom: 20px;
+        }
+        
+        .connection-info-text {
+            font-size: 14px;
+            line-height: 1.6;
+            color: #999999;
+            text-align: center;
+        }
+        
+        .connection-success {
+            text-align: center;
+            padding: 20px 0;
+        }
+        
+        .connection-success-icon {
+            width: 80px;
+            height: 80px;
+            background: rgba(77, 155, 122, 0.12);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            margin: 0 auto 20px;
+        }
+        
+        .connection-success-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 8px;
+        }
+        
+        .connection-success-text {
+            font-size: 14px;
+            color: #999999;
         }
         
         /* === QR MODAL === */
@@ -1336,6 +1391,10 @@
                     <div class="sub-info-label">Статус сервера</div>
                     <div class="sub-info-value active">● Онлайн</div>
                 </div>
+                
+                <button class="btn-connect" onclick="startConnection()">
+                    Подключить
+                </button>
             </div>
             
             <!-- Renewal Card -->
@@ -1368,81 +1427,6 @@
                 <button class="btn-renew" onclick="renewSubscription()">
                     💎 Продлить подписку
                 </button>
-            </div>
-            
-            <!-- Instructions Card -->
-            <div class="instructions-card">
-                <div class="instructions-header">
-                    <div class="instructions-title">Инструкции</div>
-                    <div class="instructions-subtitle">Выберите вашу платформу</div>
-                </div>
-                
-                <div class="platform-list">
-                    <div class="platform-item" onclick="showInstruction('android')">
-                        <div class="platform-info">
-                            <div class="platform-icon">📱</div>
-                            <div class="platform-text">
-                                <h3>Android</h3>
-                                <p>v2rayNG, Hiddify</p>
-                            </div>
-                        </div>
-                        <div class="platform-arrow">
-                            <svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
-                        </div>
-                    </div>
-                    
-                    <div class="platform-item" onclick="showInstruction('ios')">
-                        <div class="platform-info">
-                            <div class="platform-icon">🍎</div>
-                            <div class="platform-text">
-                                <h3>iOS / iPadOS</h3>
-                                <p>Shadowrocket, V2Box</p>
-                            </div>
-                        </div>
-                        <div class="platform-arrow">
-                            <svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
-                        </div>
-                    </div>
-                    
-                    <div class="platform-item" onclick="showInstruction('windows')">
-                        <div class="platform-info">
-                            <div class="platform-icon">💻</div>
-                            <div class="platform-text">
-                                <h3>Windows</h3>
-                                <p>v2rayN, Hiddify</p>
-                            </div>
-                        </div>
-                        <div class="platform-arrow">
-                            <svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
-                        </div>
-                    </div>
-                    
-                    <div class="platform-item" onclick="showInstruction('macos')">
-                        <div class="platform-info">
-                            <div class="platform-icon">🍏</div>
-                            <div class="platform-text">
-                                <h3>macOS</h3>
-                                <p>V2RayX, Hiddify</p>
-                            </div>
-                        </div>
-                        <div class="platform-arrow">
-                            <svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
-                        </div>
-                    </div>
-                    
-                    <div class="platform-item" onclick="showInstruction('linux')">
-                        <div class="platform-info">
-                            <div class="platform-icon">🐧</div>
-                            <div class="platform-text">
-                                <h3>Linux</h3>
-                                <p>v2ray-core, Hiddify</p>
-                            </div>
-                        </div>
-                        <div class="platform-arrow">
-                            <svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
@@ -1514,6 +1498,104 @@
         </div>
     </div>
     
+    <!-- Connection Modal -->
+    <div id="connectionModal" class="connection-modal">
+        <div class="connection-modal-content">
+            <div class="connection-modal-header">
+                <div class="connection-modal-title">Подключение</div>
+                <div class="connection-modal-subtitle">Настройка VPN в 3 шага</div>
+            </div>
+            
+            <div class="step-indicator">
+                <div class="step-dot active" id="stepDot1"></div>
+                <div class="step-dot" id="stepDot2"></div>
+                <div class="step-dot" id="stepDot3"></div>
+            </div>
+            
+            <!-- Step 1: Platform Selection -->
+            <div class="connection-step active" id="step1">
+                <div class="platform-grid">
+                    <div class="platform-card" onclick="selectPlatform('android')">
+                        <div class="platform-card-icon">📱</div>
+                        <div class="platform-card-name">Android</div>
+                    </div>
+                    <div class="platform-card" onclick="selectPlatform('ios')">
+                        <div class="platform-card-icon">🍎</div>
+                        <div class="platform-card-name">iOS</div>
+                    </div>
+                    <div class="platform-card" onclick="selectPlatform('windows')">
+                        <div class="platform-card-icon">💻</div>
+                        <div class="platform-card-name">Windows</div>
+                    </div>
+                    <div class="platform-card" onclick="selectPlatform('macos')">
+                        <div class="platform-card-icon">🍏</div>
+                        <div class="platform-card-name">macOS</div>
+                    </div>
+                </div>
+                
+                <div class="connection-actions">
+                    <button class="btn-connection-secondary" onclick="closeConnectionModal()">
+                        Отмена
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Step 2: App Selection -->
+            <div class="connection-step" id="step2">
+                <div class="app-list" id="appList">
+                    <!-- Заполняется динамически -->
+                </div>
+                
+                <div class="connection-actions">
+                    <button class="btn-connection-primary" id="btnNext2" disabled onclick="goToStep3()">
+                        Далее
+                    </button>
+                    <button class="btn-connection-secondary" onclick="goToStep(1)">
+                        Назад
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Step 3: Install & Connect -->
+            <div class="connection-step" id="step3">
+                <div class="connection-info-box">
+                    <div class="connection-info-text" id="installText">
+                        Нажмите "Установить" чтобы перейти в магазин приложений. После установки вернитесь сюда и нажмите "Подключить"
+                    </div>
+                </div>
+                
+                <div class="connection-actions">
+                    <button class="btn-connection-primary" id="btnInstall" onclick="installApp()">
+                        Установить приложение
+                    </button>
+                    <button class="btn-connection-primary" id="btnConnect" style="display:none;" onclick="connectToApp()">
+                        Подключить
+                    </button>
+                    <button class="btn-connection-secondary" onclick="goToStep(2)">
+                        Назад
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Step 4: Success -->
+            <div class="connection-step" id="stepSuccess">
+                <div class="connection-success">
+                    <div class="connection-success-icon">✓</div>
+                    <div class="connection-success-title">Готово!</div>
+                    <div class="connection-success-text">
+                        Вы будете перенаправлены в приложение с автоматической настройкой
+                    </div>
+                </div>
+                
+                <div class="connection-actions">
+                    <button class="btn-connection-primary" onclick="closeConnectionModal()">
+                        Закрыть
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
     <!-- QR Modal -->
     <div id="qrModal" class="qr-modal">
         <div class="qr-modal-content">
@@ -1561,27 +1643,6 @@
             </div>
             
             <button class="btn-qr-close" onclick="closeQRModal()">
-                Закрыть
-            </button>
-        </div>
-    </div>
-    
-    <!-- Instruction Modal -->
-    <div id="instructionModal" class="instruction-modal">
-        <div class="instruction-modal-content">
-            <div class="instruction-modal-header">
-                <div class="instruction-modal-icon" id="instructionIcon">📱</div>
-                <div class="instruction-modal-title">
-                    <h2 id="instructionTitle">Android</h2>
-                    <p id="instructionSubtitle">v2rayNG, Hiddify</p>
-                </div>
-            </div>
-            
-            <div class="instruction-steps" id="instructionSteps">
-                <!-- Заполняется динамически -->
-            </div>
-            
-            <button class="btn-instruction-close" onclick="closeInstructionModal()">
                 Закрыть
             </button>
         </div>
@@ -1635,130 +1696,27 @@
         let qrTimer = null;
         let qrTimeRemaining = 600;
         
-        const instructions = {
-            android: {
-                icon: '📱',
-                title: 'Android',
-                subtitle: 'v2rayNG, Hiddify',
-                steps: [
-                    {
-                        title: 'Скачайте приложение',
-                        text: 'Установите v2rayNG из Google Play или скачайте APK с GitHub',
-                        link: 'https://play.google.com/store/apps/details?id=com.v2ray.ang',
-                        linkText: 'Скачать v2rayNG'
-                    },
-                    {
-                        title: 'Скопируйте ключ подключения',
-                        text: 'Вернитесь на главный экран и нажмите кнопку "Копировать" рядом с ключом',
-                    },
-                    {
-                        title: 'Добавьте сервер в приложение',
-                        text: 'Откройте v2rayNG, нажмите "+" в правом верхнем углу и выберите "Импорт из буфера обмена"',
-                    },
-                    {
-                        title: 'Подключитесь',
-                        text: 'Нажмите на добавленный сервер и кликните на иконку подключения внизу экрана. Готово!',
-                    }
-                ]
-            },
-            ios: {
-                icon: '🍎',
-                title: 'iOS / iPadOS',
-                subtitle: 'Shadowrocket, V2Box',
-                steps: [
-                    {
-                        title: 'Скачайте приложение',
-                        text: 'Установите Shadowrocket из App Store (платное) или используйте альтернативу V2Box',
-                        link: 'https://apps.apple.com/app/shadowrocket/id932747118',
-                        linkText: 'Открыть App Store'
-                    },
-                    {
-                        title: 'Скопируйте ключ или отсканируйте QR',
-                        text: 'Используйте кнопку копирования на главном экране или нажмите на иконку QR-кода',
-                    },
-                    {
-                        title: 'Импортируйте в приложение',
-                        text: 'Откройте Shadowrocket, нажмите "+" и выберите "Добавить из буфера обмена" или отсканируйте QR',
-                    },
-                    {
-                        title: 'Подключитесь',
-                        text: 'Включите переключатель подключения в приложении и подтвердите установку VPN профиля',
-                    }
-                ]
-            },
-            windows: {
-                icon: '💻',
-                title: 'Windows',
-                subtitle: 'v2rayN, Hiddify',
-                steps: [
-                    {
-                        title: 'Скачайте приложение',
-                        text: 'Установите v2rayN с официального GitHub релиза',
-                        link: 'https://github.com/2dust/v2rayN/releases',
-                        linkText: 'Скачать v2rayN'
-                    },
-                    {
-                        title: 'Скопируйте ключ',
-                        text: 'Вернитесь в бот и скопируйте ваш ключ подключения',
-                    },
-                    {
-                        title: 'Импортируйте сервер',
-                        text: 'Откройте v2rayN, нажмите "Серверы" → "Импорт из буфера обмена"',
-                    },
-                    {
-                        title: 'Подключитесь',
-                        text: 'Выберите добавленный сервер и нажмите Enter или кликните "Включить системный прокси"',
-                    }
-                ]
-            },
-            macos: {
-                icon: '🍏',
-                title: 'macOS',
-                subtitle: 'V2RayX, Hiddify',
-                steps: [
-                    {
-                        title: 'Скачайте приложение',
-                        text: 'Установите V2RayX или Hiddify для macOS',
-                        link: 'https://github.com/Cenmrev/V2RayX/releases',
-                        linkText: 'Скачать V2RayX'
-                    },
-                    {
-                        title: 'Скопируйте ключ',
-                        text: 'Скопируйте ваш ключ подключения из бота',
-                    },
-                    {
-                        title: 'Импортируйте конфигурацию',
-                        text: 'Откройте приложение, нажмите "Import" и вставьте скопированный ключ',
-                    },
-                    {
-                        title: 'Активируйте VPN',
-                        text: 'Выберите импортированный сервер и нажмите "Turn V2Ray On" в меню приложения',
-                    }
-                ]
-            },
-            linux: {
-                icon: '🐧',
-                title: 'Linux',
-                subtitle: 'v2ray-core, Hiddify',
-                steps: [
-                    {
-                        title: 'Установите v2ray-core',
-                        text: 'Выполните команду установки в терминале:\nbash <(curl -L https://raw.githubusercontent.com/v2fly/fhs-install-v2ray/master/install-release.sh)',
-                    },
-                    {
-                        title: 'Создайте конфигурационный файл',
-                        text: 'Экспортируйте ваш ключ в JSON формат и сохраните в /usr/local/etc/v2ray/config.json',
-                    },
-                    {
-                        title: 'Запустите сервис',
-                        text: 'Выполните команды:\nsudo systemctl enable v2ray\nsudo systemctl start v2ray',
-                    },
-                    {
-                        title: 'Настройте системный прокси',
-                        text: 'Установите SOCKS5 прокси 127.0.0.1:1080 в настройках сети вашего дистрибутива',
-                    }
-                ]
-            }
+        let currentStep = 1;
+        let selectedPlatformType = '';
+        let selectedApp = '';
+        
+        const apps = {
+            android: [
+                { id: 'v2rayng', name: 'v2rayNG', desc: 'Рекомендуется', badge: 'FREE', icon: '📱', url: 'https://play.google.com/store/apps/details?id=com.v2ray.ang', scheme: 'v2rayng://' },
+                { id: 'hiddify', name: 'Hiddify', desc: 'Простой интерфейс', badge: 'FREE', icon: '🔒', url: 'https://play.google.com/store/apps/details?id=app.hiddify.com', scheme: 'hiddify://' }
+            ],
+            ios: [
+                { id: 'shadowrocket', name: 'Shadowrocket', desc: 'Лучший для iOS', badge: 'PAID', icon: '🚀', url: 'https://apps.apple.com/app/shadowrocket/id932747118', scheme: 'shadowrocket://add/' },
+                { id: 'v2box', name: 'V2Box', desc: 'Бесплатная альтернатива', badge: 'FREE', icon: '📦', url: 'https://apps.apple.com/app/v2box/id6446814690', scheme: 'v2box://add/' }
+            ],
+            windows: [
+                { id: 'v2rayn', name: 'v2rayN', desc: 'Популярный клиент', badge: 'FREE', icon: '💻', url: 'https://github.com/2dust/v2rayN/releases', scheme: 'v2rayn://' },
+                { id: 'hiddify', name: 'Hiddify', desc: 'Удобный интерфейс', badge: 'FREE', icon: '🔐', url: 'https://github.com/hiddify/hiddify-next/releases', scheme: 'hiddify://' }
+            ],
+            macos: [
+                { id: 'v2rayx', name: 'V2RayX', desc: 'Стабильный', badge: 'FREE', icon: '🍏', url: 'https://github.com/Cenmrev/V2RayX/releases', scheme: 'v2rayx://' },
+                { id: 'hiddify', name: 'Hiddify', desc: 'Современный UI', badge: 'FREE', icon: '🔒', url: 'https://github.com/hiddify/hiddify-next/releases', scheme: 'hiddify://' }
+            ]
         };
         
         function selectServer(code, name, flag) {
@@ -1823,51 +1781,127 @@
             });
         }
         
-        function showInstruction(platform) {
+        // Connection Flow
+        function startConnection() {
             tg.HapticFeedback.impactOccurred('medium');
-            
-            const data = instructions[platform];
-            
-            document.getElementById('instructionIcon').textContent = data.icon;
-            document.getElementById('instructionTitle').textContent = data.title;
-            document.getElementById('instructionSubtitle').textContent = data.subtitle;
-            
-            const stepsContainer = document.getElementById('instructionSteps');
-            stepsContainer.innerHTML = '';
-            
-            data.steps.forEach((step, index) => {
-                const stepDiv = document.createElement('div');
-                stepDiv.className = 'instruction-step';
-                
-                let stepHTML = `
-                    <div class="instruction-step-number">${index + 1}</div>
-                    <div class="instruction-step-title">${step.title}</div>
-                    <div class="instruction-step-text">${step.text.replace(/\n/g, '<br>')}</div>
-                `;
-                
-                if (step.link) {
-                    stepHTML += `
-                        <a href="${step.link}" target="_blank" class="instruction-step-link">
-                            ${step.linkText}
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                                <polyline points="15 3 21 3 21 9"></polyline>
-                                <line x1="10" y1="14" x2="21" y2="3"></line>
-                            </svg>
-                        </a>
-                    `;
-                }
-                
-                stepDiv.innerHTML = stepHTML;
-                stepsContainer.appendChild(stepDiv);
-            });
-            
-            document.getElementById('instructionModal').classList.add('active');
+            currentStep = 1;
+            selectedPlatformType = '';
+            selectedApp = '';
+            document.getElementById('connectionModal').classList.add('active');
+            goToStep(1);
         }
         
-        function closeInstructionModal() {
+        function closeConnectionModal() {
             tg.HapticFeedback.impactOccurred('light');
-            document.getElementById('instructionModal').classList.remove('active');
+            document.getElementById('connectionModal').classList.remove('active');
+        }
+        
+        function selectPlatform(platform) {
+            tg.HapticFeedback.impactOccurred('medium');
+            
+            document.querySelectorAll('.platform-card').forEach(c => c.classList.remove('selected'));
+            event.currentTarget.classList.add('selected');
+            
+            selectedPlatformType = platform;
+            
+            setTimeout(() => {
+                goToStep(2);
+                loadApps(platform);
+            }, 300);
+        }
+        
+        function loadApps(platform) {
+            const appList = document.getElementById('appList');
+            appList.innerHTML = '';
+            
+            apps[platform].forEach(app => {
+                const appDiv = document.createElement('div');
+                appDiv.className = 'app-item';
+                appDiv.onclick = () => selectApp(app.id, platform);
+                
+                appDiv.innerHTML = `
+                    <div class="app-item-icon">${app.icon}</div>
+                    <div class="app-item-info">
+                        <div class="app-item-name">${app.name}</div>
+                        <div class="app-item-desc">${app.desc}</div>
+                    </div>
+                    <div class="app-item-badge">${app.badge}</div>
+                `;
+                
+                appList.appendChild(appDiv);
+            });
+        }
+        
+        function selectApp(appId, platform) {
+            tg.HapticFeedback.impactOccurred('light');
+            
+            document.querySelectorAll('.app-item').forEach(c => c.classList.remove('selected'));
+            event.currentTarget.classList.add('selected');
+            
+            selectedApp = appId;
+            document.getElementById('btnNext2').disabled = false;
+        }
+        
+        function goToStep(step) {
+            currentStep = step;
+            
+            // Hide all steps
+            document.querySelectorAll('.connection-step').forEach(s => s.classList.remove('active'));
+            
+            // Show current step
+            if (step === 4) {
+                document.getElementById('stepSuccess').classList.add('active');
+            } else {
+                document.getElementById(`step${step}`).classList.add('active');
+            }
+            
+            // Update indicators
+            document.querySelectorAll('.step-dot').forEach((dot, i) => {
+                if (i < step) {
+                    dot.classList.add('active');
+                } else {
+                    dot.classList.remove('active');
+                }
+            });
+        }
+        
+        function goToStep3() {
+            tg.HapticFeedback.impactOccurred('medium');
+            goToStep(3);
+            
+            document.getElementById('btnInstall').style.display = 'block';
+            document.getElementById('btnConnect').style.display = 'none';
+        }
+        
+        function installApp() {
+            tg.HapticFeedback.impactOccurred('medium');
+            
+            const app = apps[selectedPlatformType].find(a => a.id === selectedApp);
+            
+            // Open app store
+            window.open(app.url, '_blank');
+            
+            // Show connect button
+            document.getElementById('btnInstall').style.display = 'none';
+            document.getElementById('btnConnect').style.display = 'block';
+            document.getElementById('installText').textContent = 
+                'Приложение установлено? Нажмите "Подключить" для автоматической настройки';
+        }
+        
+        function connectToApp() {
+            tg.HapticFeedback.impactOccurred('heavy');
+            
+            const config = document.getElementById('subLinkText').textContent;
+            const app = apps[selectedPlatformType].find(a => a.id === selectedApp);
+            
+            // Try to open app with config
+            const deepLink = app.scheme + encodeURIComponent(config);
+            window.location.href = deepLink;
+            
+            // Show success
+            setTimeout(() => {
+                goToStep(4);
+            }, 500);
         }
         
         function openQRModal() {
