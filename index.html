@@ -20,7 +20,7 @@
             font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
             padding: 0;
             min-height: 100vh;
-            padding-bottom: 100px;
+            padding-bottom: 90px;
         }
         
         .screen {
@@ -710,10 +710,10 @@
             backdrop-filter: blur(20px);
             border: 1px solid #2a2a2a;
             border-radius: 20px;
-            padding: 10px;
+            padding: 8px;
             display: flex;
             justify-content: center;
-            gap: 8px;
+            gap: 6px;
             margin-bottom: 16px;
         }
         
@@ -723,11 +723,10 @@
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            padding: 12px;
+            padding: 10px;
             border-radius: 14px;
             transition: all 0.2s;
             background: transparent;
-            border: 1px solid transparent;
         }
         
         .nav-item:active {
@@ -735,30 +734,30 @@
         }
         
         .nav-item.active {
-            background: rgba(77, 155, 122, 0.1);
-            border-color: #4d9b7a;
+            background: #4d9b7a;
         }
         
         .nav-icon {
-            width: 32px;
-            height: 32px;
+            width: 28px;
+            height: 28px;
             display: flex;
             align-items: center;
             justify-content: center;
         }
         
         .nav-icon svg {
-            width: 22px;
-            height: 22px;
+            width: 24px;
+            height: 24px;
             stroke: #666666;
             fill: none;
             stroke-width: 2;
             stroke-linecap: round;
             stroke-linejoin: round;
+            transition: stroke 0.2s;
         }
         
         .nav-item.active .nav-icon svg {
-            stroke: #4d9b7a;
+            stroke: #ffffff;
         }
         
         @keyframes pulse {
