@@ -379,9 +379,6 @@
             justify-content: center;
             flex-shrink: 0;
             transition: all 0.3s;
-            font-size: 16px;
-            font-weight: 700;
-            color: #ffffff;
         }
         
         .selection-card:hover .selection-icon {
@@ -571,12 +568,37 @@
             border: 1px solid rgba(255, 255, 255, 0.08);
             border-radius: 14px;
             padding: 18px;
+            padding-left: 48px;
             font-size: 15px;
             color: #e8eaed;
             font-family: inherit;
             margin-bottom: 16px;
             transition: all 0.3s;
             box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+            position: relative;
+        }
+        
+        .promo-input-wrapper {
+            position: relative;
+            margin-bottom: 16px;
+        }
+        
+        .promo-input-icon {
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 20px;
+            height: 20px;
+            pointer-events: none;
+        }
+        
+        .promo-input-icon svg {
+            width: 20px;
+            height: 20px;
+            stroke: #666666;
+            fill: none;
+            stroke-width: 2;
         }
         
         .promo-input:focus {
@@ -682,9 +704,16 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 32px;
             flex-shrink: 0;
             box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+        }
+        
+        .sub-flag-wrapper svg {
+            width: 32px;
+            height: 32px;
+            stroke: #ffffff;
+            fill: none;
+            stroke-width: 1.5;
         }
         
         .sub-info {
@@ -713,9 +742,12 @@
         }
         
         .sub-protocol::before {
-            content: '●';
-            font-size: 8px;
-            color: #ffffff;
+            content: '';
+            width: 6px;
+            height: 6px;
+            background: #ffffff;
+            border-radius: 50%;
+            display: inline-block;
             animation: pulse 2s ease-in-out infinite;
         }
         
@@ -788,13 +820,20 @@
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            color: #ffffff;
             transition: all 0.3s;
         }
         
         .btn-copy-link:active {
             background: rgba(255, 255, 255, 0.15);
             transform: translateY(-50%) scale(0.95);
+        }
+        
+        .btn-copy-link svg {
+            width: 18px;
+            height: 18px;
+            stroke: #ffffff;
+            fill: none;
+            stroke-width: 2;
         }
         
         .btn-connect {
@@ -988,12 +1027,91 @@
             letter-spacing: -0.5px;
         }
         
+        /* Payment Currency Selector */
+        .currency-selector {
+            margin-bottom: 24px;
+        }
+        
+        .currency-selector-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 16px;
+            letter-spacing: -0.3px;
+        }
+        
+        .currency-options {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+        }
+        
+        .currency-option {
+            background: rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(40px);
+            -webkit-backdrop-filter: blur(40px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 14px;
+            padding: 16px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .currency-option:hover {
+            background: rgba(255, 255, 255, 0.06);
+            border-color: rgba(255, 255, 255, 0.12);
+        }
+        
+        .currency-option.selected {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.15);
+        }
+        
+        .currency-option-icon {
+            width: 32px;
+            height: 32px;
+            margin: 0 auto 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .currency-option-icon svg {
+            width: 24px;
+            height: 24px;
+            stroke: #ffffff;
+            fill: none;
+            stroke-width: 2;
+        }
+        
+        .currency-option-name {
+            font-size: 13px;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 4px;
+        }
+        
+        .currency-option-desc {
+            font-size: 11px;
+            color: #999999;
+        }
+        
         /* Payment Method */
         .payment-methods {
             display: flex;
             flex-direction: column;
             gap: 14px;
             margin-bottom: 24px;
+        }
+        
+        .payment-methods-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 4px;
+            letter-spacing: -0.3px;
         }
         
         .payment-method {
@@ -1030,9 +1148,16 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 28px;
             flex-shrink: 0;
             border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .payment-method-icon svg {
+            width: 28px;
+            height: 28px;
+            stroke: #ffffff;
+            fill: none;
+            stroke-width: 2;
         }
         
         .payment-method-info {
@@ -1168,7 +1293,9 @@
         .faq-toggle svg {
             width: 18px;
             height: 18px;
-            fill: #ffffff;
+            stroke: #ffffff;
+            fill: none;
+            stroke-width: 2;
             transition: transform 0.3s;
         }
         
@@ -1338,9 +1465,14 @@
                 <div class="header-subtitle">Шаг 1 из 4</div>
             </div>
             
-            <div class="selection-card" onclick="selectServer('cn', 'Китай', '🇨🇳')">
+            <div class="selection-card" onclick="selectServer('cn', 'Китай')">
                 <div class="selection-info">
-                    <div class="selection-icon">CN</div>
+                    <div class="selection-icon">
+                        <svg viewBox="0 0 24 24">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                        </svg>
+                    </div>
                     <div class="selection-text">
                         <h3>Китай</h3>
                         <p>Ping: 8ms • Высокая скорость</p>
@@ -1351,9 +1483,14 @@
                 </div>
             </div>
             
-            <div class="selection-card" onclick="selectServer('nl', 'Нидерланды', '🇳🇱')">
+            <div class="selection-card" onclick="selectServer('nl', 'Нидерланды')">
                 <div class="selection-info">
-                    <div class="selection-icon">NL</div>
+                    <div class="selection-icon">
+                        <svg viewBox="0 0 24 24">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                        </svg>
+                    </div>
                     <div class="selection-text">
                         <h3>Нидерланды</h3>
                         <p>Ping: 12ms • Стабильное подключение</p>
@@ -1364,9 +1501,14 @@
                 </div>
             </div>
             
-            <div class="selection-card" onclick="selectServer('us', 'США', '🇺🇸')">
+            <div class="selection-card" onclick="selectServer('us', 'США')">
                 <div class="selection-info">
-                    <div class="selection-icon">US</div>
+                    <div class="selection-icon">
+                        <svg viewBox="0 0 24 24">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                        </svg>
+                    </div>
                     <div class="selection-text">
                         <h3>США</h3>
                         <p>Ping: 45ms • Отлично для стриминга</p>
@@ -1377,9 +1519,14 @@
                 </div>
             </div>
             
-            <div class="selection-card" onclick="selectServer('de', 'Германия', '🇩🇪')">
+            <div class="selection-card" onclick="selectServer('de', 'Германия')">
                 <div class="selection-info">
-                    <div class="selection-icon">DE</div>
+                    <div class="selection-icon">
+                        <svg viewBox="0 0 24 24">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                        </svg>
+                    </div>
                     <div class="selection-text">
                         <h3>Германия</h3>
                         <p>Ping: 18ms • Надёжный сервер</p>
@@ -1402,7 +1549,11 @@
             
             <div class="selection-card" onclick="selectProtocol('VLESS')">
                 <div class="selection-info">
-                    <div class="selection-icon">V</div>
+                    <div class="selection-icon">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                        </svg>
+                    </div>
                     <div class="selection-text">
                         <h3>VLESS</h3>
                         <p>Рекомендуется • Лучшая производительность</p>
@@ -1415,7 +1566,12 @@
             
             <div class="selection-card" onclick="selectProtocol('VMess')">
                 <div class="selection-info">
-                    <div class="selection-icon">VM</div>
+                    <div class="selection-icon">
+                        <svg viewBox="0 0 24 24">
+                            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                            <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                        </svg>
+                    </div>
                     <div class="selection-text">
                         <h3>VMess</h3>
                         <p>Стандартный протокол • Проверенная надёжность</p>
@@ -1428,7 +1584,14 @@
             
             <div class="selection-card" onclick="selectProtocol('Trojan')">
                 <div class="selection-info">
-                    <div class="selection-icon">T</div>
+                    <div class="selection-icon">
+                        <svg viewBox="0 0 24 24">
+                            <polyline points="16 3 21 3 21 8"/>
+                            <polyline points="8 21 3 21 3 16"/>
+                            <line x1="21" y1="3" x2="14" y2="10"/>
+                            <line x1="3" y1="21" x2="10" y2="14"/>
+                        </svg>
+                    </div>
                     <div class="selection-text">
                         <h3>Trojan</h3>
                         <p>Высокая скорость • Обход блокировок</p>
@@ -1441,7 +1604,12 @@
             
             <div class="selection-card" onclick="selectProtocol('Shadowsocks')">
                 <div class="selection-info">
-                    <div class="selection-icon">SS</div>
+                    <div class="selection-icon">
+                        <svg viewBox="0 0 24 24">
+                            <circle cx="12" cy="12" r="3"/>
+                            <path d="M12 1v6m0 6v6m8.66-15L17 7.34M13 13l-3.66 3.66M23 12h-6m-6 0H5m15.66 8.66L17 17M13 11l-3.66-3.66"/>
+                        </svg>
+                    </div>
                     <div class="selection-text">
                         <h3>Shadowsocks</h3>
                         <p>Легковесный • Минимальное потребление</p>
@@ -1469,38 +1637,46 @@
             <div class="plan-card" onclick="selectPlan('1month', 500)">
                 <div class="plan-header">
                     <div class="plan-period">1 месяц</div>
-                    <div class="plan-price">500⭐</div>
+                    <div class="plan-price" data-base-price="500">500<span class="currency-symbol">⭐</span></div>
                 </div>
-                <div class="plan-desc">500⭐ в месяц • Безлимитный трафик</div>
+                <div class="plan-desc">Безлимитный трафик • Поддержка 24/7</div>
             </div>
             
             <div class="plan-card" onclick="selectPlan('6month', 2400)">
                 <div class="plan-badge">Скидка 20%</div>
                 <div class="plan-header">
                     <div class="plan-period">6 месяцев</div>
-                    <div class="plan-price">2400⭐</div>
+                    <div class="plan-price" data-base-price="2400">2400<span class="currency-symbol">⭐</span></div>
                 </div>
-                <div class="plan-desc">400⭐ в месяц • Выгодное предложение</div>
+                <div class="plan-desc">400 в месяц • Выгодное предложение</div>
             </div>
             
             <div class="plan-card" onclick="selectPlan('12month', 4000)">
                 <div class="plan-badge">Скидка 33%</div>
                 <div class="plan-header">
                     <div class="plan-period">12 месяцев</div>
-                    <div class="plan-price">4000⭐</div>
+                    <div class="plan-price" data-base-price="4000">4000<span class="currency-symbol">⭐</span></div>
                 </div>
-                <div class="plan-desc">333⭐ в месяц • Максимальная экономия</div>
+                <div class="plan-desc">333 в месяц • Максимальная экономия</div>
             </div>
             
-            <input 
-                type="text" 
-                class="promo-input" 
-                placeholder="🎫 Промокод (необязательно)"
-                id="promoInput"
-            >
+            <div class="promo-input-wrapper">
+                <div class="promo-input-icon">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/>
+                        <line x1="7" y1="7" x2="7.01" y2="7"/>
+                    </svg>
+                </div>
+                <input 
+                    type="text" 
+                    class="promo-input" 
+                    placeholder="Промокод (необязательно)"
+                    id="promoInput"
+                >
+            </div>
             
-            <button class="btn-primary" onclick="goToPayment()">
-                Продолжить к оплате →
+            <button class="btn-primary" onclick="goToCurrency()">
+                Продолжить →
             </button>
             
             <button class="btn-secondary" onclick="goBack('screenProtocol')">
@@ -1509,53 +1685,106 @@
         </div>
     </div>
     
-    <!-- 4. Выбор способа оплаты -->
-    <div id="screenPayment" class="screen">
+    <!-- 4. Выбор валюты -->
+    <div id="screenCurrency" class="screen">
         <div class="container">
             <div class="header">
                 <div class="header-title">Способ оплаты</div>
-                <div class="header-subtitle">Шаг 4 из 4 • Безопасная оплата</div>
+                <div class="header-subtitle">Шаг 4 из 4 • Выберите валюту</div>
             </div>
             
             <div class="payment-summary glass-card">
                 <div class="payment-summary-row">
                     <span class="payment-summary-label">Тариф</span>
-                    <span class="payment-summary-value" id="paymentPlan">1 месяц</span>
+                    <span class="payment-summary-value" id="currencyPlan">1 месяц</span>
                 </div>
                 <div class="payment-summary-row">
                     <span class="payment-summary-label">Промокод</span>
-                    <span class="payment-summary-value" id="paymentPromo">—</span>
+                    <span class="payment-summary-value" id="currencyPromo">—</span>
                 </div>
                 <div class="payment-summary-divider"></div>
                 <div class="payment-summary-row payment-summary-total">
                     <span class="payment-summary-label">Итого к оплате</span>
-                    <span class="payment-summary-value" id="paymentTotal">500⭐</span>
+                    <span class="payment-summary-value" id="currencyTotal">500⭐</span>
+                </div>
+            </div>
+            
+            <div class="currency-selector">
+                <div class="currency-selector-title">Валюта оплаты</div>
+                <div class="currency-options">
+                    <div class="currency-option selected" onclick="selectCurrency('stars', '⭐', 1)" data-currency="stars">
+                        <div class="currency-option-icon">
+                            <svg viewBox="0 0 24 24">
+                                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                            </svg>
+                        </div>
+                        <div class="currency-option-name">Stars</div>
+                        <div class="currency-option-desc">Telegram</div>
+                    </div>
+                    
+                    <div class="currency-option" onclick="selectCurrency('rub', '₽', 100)" data-currency="rub">
+                        <div class="currency-option-icon">
+                            <svg viewBox="0 0 24 24">
+                                <line x1="12" y1="1" x2="12" y2="23"/>
+                                <path d="M9 18h6M9 14h6M9 10h3a3 3 0 0 0 0-6H9v6"/>
+                            </svg>
+                        </div>
+                        <div class="currency-option-name">Рубли</div>
+                        <div class="currency-option-desc">СБП</div>
+                    </div>
+                    
+                    <div class="currency-option" onclick="selectCurrency('usdt', 'USDT', 5.5)" data-currency="usdt">
+                        <div class="currency-option-icon">
+                            <svg viewBox="0 0 24 24">
+                                <line x1="12" y1="1" x2="12" y2="23"/>
+                                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                            </svg>
+                        </div>
+                        <div class="currency-option-name">USDT</div>
+                        <div class="currency-option-desc">Крипта</div>
+                    </div>
                 </div>
             </div>
             
             <div class="payment-methods">
-                <div class="payment-method" onclick="selectPaymentMethod('stars')">
-                    <div class="payment-method-icon">⭐</div>
+                <div class="payment-methods-title">Как оплатить</div>
+                
+                <div class="payment-method" id="paymentStars" style="display: flex;" onclick="processPayment('stars')">
+                    <div class="payment-method-icon">
+                        <svg viewBox="0 0 24 24">
+                            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                        </svg>
+                    </div>
                     <div class="payment-method-info">
                         <div class="payment-method-name">Telegram Stars</div>
-                        <div class="payment-method-desc">Быстро и безопасно • Мгновенная активация</div>
+                        <div class="payment-method-desc">Мгновенная активация • Без комиссии</div>
                     </div>
                     <div class="payment-method-badge">TOP</div>
                 </div>
                 
-                <div class="payment-method" onclick="selectPaymentMethod('sbp')">
-                    <div class="payment-method-icon">🏦</div>
+                <div class="payment-method" id="paymentRub" style="display: none;" onclick="processPayment('rub')">
+                    <div class="payment-method-icon">
+                        <svg viewBox="0 0 24 24">
+                            <rect x="1" y="4" width="22" height="16" rx="2" ry="2"/>
+                            <line x1="1" y1="10" x2="23" y2="10"/>
+                        </svg>
+                    </div>
                     <div class="payment-method-info">
                         <div class="payment-method-name">СБП</div>
-                        <div class="payment-method-desc">Система быстрых платежей • Без комиссии</div>
+                        <div class="payment-method-desc">Система быстрых платежей • Банковская карта</div>
                     </div>
                 </div>
                 
-                <div class="payment-method" onclick="selectPaymentMethod('crypto')">
-                    <div class="payment-method-icon">₿</div>
+                <div class="payment-method" id="paymentUsdt" style="display: none;" onclick="processPayment('usdt')">
+                    <div class="payment-method-icon">
+                        <svg viewBox="0 0 24 24">
+                            <line x1="12" y1="1" x2="12" y2="23"/>
+                            <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                        </svg>
+                    </div>
                     <div class="payment-method-info">
-                        <div class="payment-method-name">Криптовалюта</div>
-                        <div class="payment-method-desc">USDT, BTC, ETH • Анонимно</div>
+                        <div class="payment-method-name">USDT (TRC-20)</div>
+                        <div class="payment-method-desc">Криптовалюта • BTC, ETH также доступны</div>
                     </div>
                 </div>
             </div>
@@ -1577,7 +1806,10 @@
             <div class="subscription-card">
                 <div class="sub-header">
                     <div class="sub-flag-wrapper">
-                        <span id="subFlag">🇳🇱</span>
+                        <svg viewBox="0 0 24 24" id="subFlagIcon">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                        </svg>
                     </div>
                     <div class="sub-info">
                         <div class="sub-server" id="subServer">Нидерланды</div>
@@ -1596,7 +1828,12 @@
                 <div class="sub-link-box">
                     <div class="sub-link-label">Ключ подключения</div>
                     <div class="sub-link-text" id="subLinkText">vless://uuid@server.com:443...</div>
-                    <button class="btn-copy-link" onclick="copyLink()">📋</button>
+                    <button class="btn-copy-link" onclick="copyLink()">
+                        <svg viewBox="0 0 24 24">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+                        </svg>
+                    </button>
                 </div>
                 
                 <button class="btn-connect" onclick="openConnectionGuide()">
@@ -1659,7 +1896,7 @@
             <div class="plan-card" onclick="selectPlan('1month', 500)">
                 <div class="plan-header">
                     <div class="plan-period">1 месяц</div>
-                    <div class="plan-price">500⭐</div>
+                    <div class="plan-price" data-base-price="500">500<span class="currency-symbol">⭐</span></div>
                 </div>
                 <div class="plan-desc">Безлимитный трафик • Поддержка 24/7</div>
             </div>
@@ -1668,7 +1905,7 @@
                 <div class="plan-badge">Скидка 20%</div>
                 <div class="plan-header">
                     <div class="plan-period">6 месяцев</div>
-                    <div class="plan-price">2400⭐</div>
+                    <div class="plan-price" data-base-price="2400">2400<span class="currency-symbol">⭐</span></div>
                 </div>
                 <div class="plan-desc">Выгодное предложение • Экономия 600⭐</div>
             </div>
@@ -1677,13 +1914,13 @@
                 <div class="plan-badge">Скидка 33%</div>
                 <div class="plan-header">
                     <div class="plan-period">12 месяцев</div>
-                    <div class="plan-price">4000⭐</div>
+                    <div class="plan-price" data-base-price="4000">4000<span class="currency-symbol">⭐</span></div>
                 </div>
                 <div class="plan-desc">Максимальная экономия • Лучшая цена</div>
             </div>
             
-            <button class="btn-primary" onclick="goToPayment()">
-                Продолжить к оплате →
+            <button class="btn-primary" onclick="goToCurrency()">
+                Продолжить →
             </button>
             
             <button class="btn-secondary" onclick="showScreen('screenActive')">
@@ -1812,18 +2049,24 @@
         
         let selectedServer = '';
         let selectedServerName = '';
-        let selectedServerFlag = '';
         let selectedProtocol = '';
         let selectedPlan = '';
         let selectedPrice = 0;
         let selectedPlanName = '';
-        let selectedPaymentMethod = '';
+        let selectedCurrency = 'stars';
+        let currencySymbol = '⭐';
+        let currencyRate = 1;
         
-        function selectServer(code, name, flag) {
+        const currencyRates = {
+            'stars': { symbol: '⭐', rate: 1 },
+            'rub': { symbol: '₽', rate: 100 },
+            'usdt': { symbol: ' USDT', rate: 5.5 }
+        };
+        
+        function selectServer(code, name) {
             tg.HapticFeedback.impactOccurred('medium');
             selectedServer = code;
             selectedServerName = name;
-            selectedServerFlag = flag;
             showScreen('screenProtocol');
         }
         
@@ -1850,7 +2093,7 @@
             selectedPlanName = planNames[plan];
         }
         
-        function goToPayment() {
+        function goToCurrency() {
             if (!selectedPlan) {
                 tg.showAlert('Пожалуйста, выберите тариф');
                 return;
@@ -1858,60 +2101,76 @@
             
             tg.HapticFeedback.impactOccurred('medium');
             
-            document.getElementById('paymentPlan').textContent = selectedPlanName;
+            document.getElementById('currencyPlan').textContent = selectedPlanName;
             
             const promo = document.getElementById('promoInput').value;
             if (promo) {
-                document.getElementById('paymentPromo').textContent = promo;
+                document.getElementById('currencyPromo').textContent = promo;
             } else {
-                document.getElementById('paymentPromo').textContent = '—';
+                document.getElementById('currencyPromo').textContent = '—';
             }
             
-            document.getElementById('paymentTotal').textContent = selectedPrice + '⭐';
+            updateCurrencyTotal();
             
-            showScreen('screenPayment');
+            showScreen('screenCurrency');
         }
         
-        function selectPaymentMethod(method) {
+        function selectCurrency(currency, symbol, rate) {
             tg.HapticFeedback.impactOccurred('medium');
             
-            document.querySelectorAll('.payment-method').forEach(c => c.classList.remove('selected'));
-            event.currentTarget.classList.add('selected');
+            selectedCurrency = currency;
+            currencySymbol = currencyRates[currency].symbol;
+            currencyRate = currencyRates[currency].rate;
             
-            selectedPaymentMethod = method;
+            // Update UI
+            document.querySelectorAll('.currency-option').forEach(c => c.classList.remove('selected'));
+            document.querySelector(`[data-currency="${currency}"]`).classList.add('selected');
             
-            setTimeout(() => {
-                processPayment(method);
-            }, 400);
+            // Show/hide payment methods
+            document.getElementById('paymentStars').style.display = currency === 'stars' ? 'flex' : 'none';
+            document.getElementById('paymentRub').style.display = currency === 'rub' ? 'flex' : 'none';
+            document.getElementById('paymentUsdt').style.display = currency === 'usdt' ? 'flex' : 'none';
+            
+            // Update all prices on screen
+            updateCurrencyTotal();
+            updatePlanPrices();
+        }
+        
+        function updateCurrencyTotal() {
+            const convertedPrice = Math.round(selectedPrice * currencyRate);
+            document.getElementById('currencyTotal').textContent = convertedPrice + currencySymbol;
+        }
+        
+        function updatePlanPrices() {
+            document.querySelectorAll('.plan-price').forEach(priceElement => {
+                const basePrice = parseInt(priceElement.getAttribute('data-base-price'));
+                const convertedPrice = Math.round(basePrice * currencyRate);
+                priceElement.innerHTML = convertedPrice + '<span class="currency-symbol">' + currencySymbol + '</span>';
+            });
         }
         
         function processPayment(method) {
             tg.HapticFeedback.impactOccurred('heavy');
             
-            switch(method) {
-                case 'stars':
-                    tg.showPopup({
-                        title: 'Оплата Telegram Stars',
-                        message: `Стоимость: ${selectedPrice}⭐\n\nПродолжить оплату?`,
-                        buttons: [
-                            {id: 'pay', type: 'default', text: 'Оплатить'},
-                            {id: 'cancel', type: 'cancel'}
-                        ]
-                    }, (buttonId) => {
-                        if (buttonId === 'pay') {
-                            completeSubscription();
-                        }
-                    });
-                    break;
-                    
-                case 'sbp':
-                    tg.showAlert('Функция в разработке');
-                    break;
-                    
-                case 'crypto':
-                    tg.showAlert('Функция в разработке');
-                    break;
-            }
+            const convertedPrice = Math.round(selectedPrice * currencyRate);
+            
+            let methodName = '';
+            if (method === 'stars') methodName = 'Telegram Stars';
+            else if (method === 'rub') methodName = 'СБП';
+            else if (method === 'usdt') methodName = 'USDT';
+            
+            tg.showPopup({
+                title: `Оплата ${methodName}`,
+                message: `Стоимость: ${convertedPrice}${currencySymbol}\n\nПродолжить оплату?`,
+                buttons: [
+                    {id: 'pay', type: 'default', text: 'Оплатить'},
+                    {id: 'cancel', type: 'cancel'}
+                ]
+            }, (buttonId) => {
+                if (buttonId === 'pay') {
+                    completeSubscription();
+                }
+            });
         }
         
         function completeSubscription() {
@@ -1920,7 +2179,6 @@
                 message: 'Подписка успешно активирована. Добро пожаловать в безопасный интернет!',
                 buttons: [{id: 'ok', type: 'ok'}]
             }, () => {
-                document.getElementById('subFlag').textContent = selectedServerFlag;
                 document.getElementById('subServer').textContent = selectedServerName;
                 document.getElementById('subProtocol').textContent = selectedProtocol + ' • Активно';
                 
