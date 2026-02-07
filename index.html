@@ -81,8 +81,8 @@
         }
         
         .selection-card.selected {
-            background: rgba(255, 107, 74, 0.1);
-            border-color: #FF6B4A;
+            background: rgba(59, 130, 246, 0.1);
+            border-color: #3B82F6;
         }
         
         .selection-info {
@@ -143,15 +143,15 @@
         }
         
         .plan-card.selected {
-            background: rgba(255, 107, 74, 0.1);
-            border-color: #FF6B4A;
+            background: rgba(59, 130, 246, 0.1);
+            border-color: #3B82F6;
         }
         
         .plan-badge {
             position: absolute;
             top: -8px;
             right: 16px;
-            background: linear-gradient(135deg, #FF6B4A 0%, #FF4757 100%);
+            background: linear-gradient(135deg, #10B981 0%, #059669 100%);
             padding: 4px 10px;
             border-radius: 10px;
             font-size: 11px;
@@ -201,7 +201,7 @@
         
         .promo-input:focus {
             outline: none;
-            border-color: #FF6B4A;
+            border-color: #3B82F6;
             background: rgba(255, 255, 255, 0.08);
         }
         
@@ -212,7 +212,7 @@
         /* Кнопки */
         .btn-primary {
             width: 100%;
-            background: linear-gradient(135deg, #FF6B4A 0%, #FF4757 100%);
+            background: linear-gradient(135deg, #3B82F6 0%, #2563EB 100%);
             border: none;
             border-radius: 14px;
             padding: 16px;
@@ -386,7 +386,7 @@
         }
         
         .nav-item.active {
-            background: rgba(255, 107, 74, 0.15);
+            background: rgba(59, 130, 246, 0.15);
         }
         
         .nav-icon {
@@ -400,7 +400,7 @@
         }
         
         .nav-item.active .nav-icon {
-            background: rgba(255, 107, 74, 0.2);
+            background: rgba(59, 130, 246, 0.2);
         }
         
         .nav-icon svg {
@@ -409,10 +409,12 @@
             stroke: rgba(255, 255, 255, 0.6);
             fill: none;
             stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
         }
         
         .nav-item.active .nav-icon svg {
-            stroke: #FF6B4A;
+            stroke: #3B82F6;
         }
         
         .nav-label {
@@ -422,7 +424,7 @@
         }
         
         .nav-item.active .nav-label {
-            color: #FF6B4A;
+            color: #3B82F6;
             font-weight: 600;
         }
     </style>
@@ -667,6 +669,7 @@
             <div class="nav-icon">
                 <svg viewBox="0 0 24 24">
                     <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                    <polyline points="9 22 9 12 15 12 15 22"/>
                 </svg>
             </div>
             <div class="nav-label">Главная</div>
@@ -685,7 +688,7 @@
             <div class="nav-icon">
                 <svg viewBox="0 0 24 24">
                     <circle cx="12" cy="12" r="3"/>
-                    <path d="M12 1v6m0 6v6m8.66-15.66l-3 3m-11.32 0l3 3m-3 8.66l3-3m8.66 0l3 3"/>
+                    <path d="M12 1v6M12 17v6M4.22 4.22l4.24 4.25M15.54 15.54l4.24 4.25M1 12h6M17 12h6M4.22 19.78l4.24-4.24M15.54 8.46l4.24-4.24"/>
                 </svg>
             </div>
             <div class="nav-label">Настройки</div>
@@ -707,7 +710,6 @@
         let selectedPlan = '';
         let selectedPrice = 0;
         
-        // Проверка подписки при загрузке
         if (localStorage.getItem('vpn_active')) {
             showScreen('screenActive');
             generateQR();
@@ -746,7 +748,6 @@
             
             const promo = document.getElementById('promoInput').value;
             
-            // Отправка в бот
             tg.sendData(JSON.stringify({
                 action: 'buy_plan',
                 server: selectedServer,
@@ -757,7 +758,6 @@
                 user_id: userId
             }));
             
-            // Активация (для теста)
             localStorage.setItem('vpn_active', 'true');
             document.getElementById('selectedServer').textContent = selectedServerName;
             document.getElementById('selectedProtocol').textContent = selectedProtocol;
@@ -805,7 +805,6 @@
             showScreen(screen);
         }
         
-        // Навигация
         function navHome() {
             tg.HapticFeedback.impactOccurred('light');
             document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
