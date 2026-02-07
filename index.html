@@ -572,7 +572,6 @@
             font-size: 15px;
             color: #e8eaed;
             font-family: inherit;
-            margin-bottom: 16px;
             transition: all 0.3s;
             box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
             position: relative;
@@ -718,6 +717,7 @@
         
         .sub-info {
             flex: 1;
+            min-width: 0;
         }
         
         .sub-server {
@@ -729,7 +729,7 @@
         }
         
         .sub-protocol {
-            font-size: 14px;
+            font-size: 13px;
             color: #E5E7EB;
             font-weight: 600;
             display: inline-flex;
@@ -739,6 +739,10 @@
             background: rgba(255, 255, 255, 0.06);
             border-radius: 8px;
             border: 1px solid rgba(255, 255, 255, 0.1);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 100%;
         }
         
         .sub-protocol::before {
@@ -748,34 +752,8 @@
             background: #ffffff;
             border-radius: 50%;
             display: inline-block;
-            animation: pulse 2s ease-in-out infinite;
-        }
-        
-        .btn-qr-icon {
-            width: 52px;
-            height: 52px;
-            background: rgba(255, 255, 255, 0.06);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 14px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s;
             flex-shrink: 0;
-        }
-        
-        .btn-qr-icon:active {
-            background: rgba(255, 255, 255, 0.1);
-            transform: scale(0.95);
-        }
-        
-        .btn-qr-icon svg {
-            width: 24px;
-            height: 24px;
-            stroke: #ffffff;
-            fill: none;
-            stroke-width: 2;
+            animation: pulse 2s ease-in-out infinite;
         }
         
         .sub-link-box {
@@ -785,6 +763,9 @@
             padding: 16px;
             margin-bottom: 16px;
             position: relative;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
         }
         
         .sub-link-label {
@@ -792,8 +773,13 @@
             color: #666666;
             text-transform: uppercase;
             letter-spacing: 0.5px;
-            margin-bottom: 8px;
             font-weight: 600;
+        }
+        
+        .sub-link-content {
+            display: flex;
+            align-items: center;
+            gap: 12px;
         }
         
         .sub-link-text {
@@ -803,14 +789,16 @@
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
-            padding-right: 44px;
+            flex: 1;
         }
         
-        .btn-copy-link {
-            position: absolute;
-            right: 12px;
-            top: 50%;
-            transform: translateY(-50%);
+        .sub-link-actions {
+            display: flex;
+            gap: 8px;
+            flex-shrink: 0;
+        }
+        
+        .btn-icon-action {
             background: rgba(255, 255, 255, 0.08);
             border: none;
             border-radius: 10px;
@@ -823,12 +811,12 @@
             transition: all 0.3s;
         }
         
-        .btn-copy-link:active {
+        .btn-icon-action:active {
             background: rgba(255, 255, 255, 0.15);
-            transform: translateY(-50%) scale(0.95);
+            transform: scale(0.95);
         }
         
-        .btn-copy-link svg {
+        .btn-icon-action svg {
             width: 18px;
             height: 18px;
             stroke: #ffffff;
@@ -987,6 +975,10 @@
             justify-content: space-between;
             align-items: center;
             padding: 12px 0;
+        }
+        
+        .payment-summary-row.hidden {
+            display: none;
         }
         
         .payment-summary-label {
@@ -1607,7 +1599,14 @@
                     <div class="selection-icon">
                         <svg viewBox="0 0 24 24">
                             <circle cx="12" cy="12" r="3"/>
-                            <path d="M12 1v6m0 6v6m8.66-15L17 7.34M13 13l-3.66 3.66M23 12h-6m-6 0H5m15.66 8.66L17 17M13 11l-3.66-3.66"/>
+                            <line x1="12" y1="1" x2="12" y2="3"/>
+                            <line x1="12" y1="21" x2="12" y2="23"/>
+                            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+                            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+                            <line x1="1" y1="12" x2="3" y2="12"/>
+                            <line x1="21" y1="12" x2="23" y2="12"/>
+                            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+                            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
                         </svg>
                     </div>
                     <div class="selection-text">
@@ -1698,7 +1697,7 @@
                     <span class="payment-summary-label">Тариф</span>
                     <span class="payment-summary-value" id="currencyPlan">1 месяц</span>
                 </div>
-                <div class="payment-summary-row">
+                <div class="payment-summary-row" id="promoRow">
                     <span class="payment-summary-label">Промокод</span>
                     <span class="payment-summary-value" id="currencyPromo">—</span>
                 </div>
@@ -1725,8 +1724,9 @@
                     <div class="currency-option" onclick="selectCurrency('rub', '₽', 100)" data-currency="rub">
                         <div class="currency-option-icon">
                             <svg viewBox="0 0 24 24">
-                                <line x1="12" y1="1" x2="12" y2="23"/>
-                                <path d="M9 18h6M9 14h6M9 10h3a3 3 0 0 0 0-6H9v6"/>
+                                <path d="M6 3h7a5 5 0 0 1 5 5v0a5 5 0 0 1-5 5H6V3z"/>
+                                <line x1="6" y1="13" x2="15" y2="13"/>
+                                <line x1="6" y1="17" x2="15" y2="17"/>
                             </svg>
                         </div>
                         <div class="currency-option-name">Рубли</div>
@@ -1815,25 +1815,29 @@
                         <div class="sub-server" id="subServer">Нидерланды</div>
                         <div class="sub-protocol" id="subProtocol">VLESS • Активно</div>
                     </div>
-                    <button class="btn-qr-icon" onclick="showQRCode()">
-                        <svg viewBox="0 0 24 24">
-                            <rect x="3" y="3" width="7" height="7"/>
-                            <rect x="14" y="3" width="7" height="7"/>
-                            <rect x="14" y="14" width="7" height="7"/>
-                            <rect x="3" y="14" width="7" height="7"/>
-                        </svg>
-                    </button>
                 </div>
                 
                 <div class="sub-link-box">
                     <div class="sub-link-label">Ключ подключения</div>
-                    <div class="sub-link-text" id="subLinkText">vless://uuid@server.com:443...</div>
-                    <button class="btn-copy-link" onclick="copyLink()">
-                        <svg viewBox="0 0 24 24">
-                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
-                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
-                        </svg>
-                    </button>
+                    <div class="sub-link-content">
+                        <div class="sub-link-text" id="subLinkText">vless://uuid@server.com:443...</div>
+                        <div class="sub-link-actions">
+                            <button class="btn-icon-action" onclick="copyLink()">
+                                <svg viewBox="0 0 24 24">
+                                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+                                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+                                </svg>
+                            </button>
+                            <button class="btn-icon-action" onclick="showQRCode()">
+                                <svg viewBox="0 0 24 24">
+                                    <rect x="3" y="3" width="7" height="7"/>
+                                    <rect x="14" y="3" width="7" height="7"/>
+                                    <rect x="14" y="14" width="7" height="7"/>
+                                    <rect x="3" y="14" width="7" height="7"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
                 </div>
                 
                 <button class="btn-connect" onclick="openConnectionGuide()">
@@ -2104,10 +2108,13 @@
             document.getElementById('currencyPlan').textContent = selectedPlanName;
             
             const promo = document.getElementById('promoInput').value;
-            if (promo) {
+            const promoRow = document.getElementById('promoRow');
+            
+            if (promo && promo.trim() !== '') {
                 document.getElementById('currencyPromo').textContent = promo;
+                promoRow.classList.remove('hidden');
             } else {
-                document.getElementById('currencyPromo').textContent = '—';
+                promoRow.classList.add('hidden');
             }
             
             updateCurrencyTotal();
