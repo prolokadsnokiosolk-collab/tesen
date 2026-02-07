@@ -20,6 +20,22 @@
             font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
             padding: 0;
             min-height: 100vh;
+            padding-bottom: 80px;
+        }
+        
+        /* Экраны */
+        .screen {
+            display: none;
+            animation: fadeIn 0.3s;
+        }
+        
+        .screen.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
         
         /* Контейнер */
@@ -31,178 +47,207 @@
         
         /* Хедер */
         .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 24px;
+            text-align: center;
+            margin-bottom: 32px;
+            padding-top: 20px;
         }
         
         .header-title {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+        
+        .header-subtitle {
+            font-size: 15px;
+            color: rgba(255, 255, 255, 0.5);
+        }
+        
+        /* Тарифы */
+        .plans-section {
+            margin-bottom: 24px;
+        }
+        
+        .plan-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid transparent;
+            border-radius: 20px;
+            padding: 24px;
+            margin-bottom: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+            position: relative;
+        }
+        
+        .plan-card:active {
+            transform: scale(0.98);
+        }
+        
+        .plan-card.selected {
+            background: rgba(255, 107, 74, 0.1);
+            border-color: #FF6B4A;
+        }
+        
+        .plan-card.featured {
+            border-color: #FF6B4A;
+        }
+        
+        .plan-badge {
+            position: absolute;
+            top: -10px;
+            right: 20px;
+            background: linear-gradient(135deg, #FF6B4A 0%, #FF4757 100%);
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 700;
+        }
+        
+        .plan-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+        
+        .plan-period {
+            font-size: 20px;
+            font-weight: 700;
+        }
+        
+        .plan-price {
             font-size: 28px;
             font-weight: 700;
         }
         
-        .status-badge {
-            background: rgba(16, 185, 129, 0.15);
-            color: #10b981;
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 13px;
-            font-weight: 600;
-        }
-        
-        /* Server Card */
-        .server-card {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 20px;
-            padding: 20px;
-            margin-bottom: 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-        
-        .server-card:active {
-            transform: scale(0.98);
-        }
-        
-        .server-info {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-        }
-        
-        .server-flag {
-            width: 48px;
-            height: 48px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 18px;
-            font-weight: 700;
-            color: rgba(255, 255, 255, 0.9);
-        }
-        
-        .server-details h3 {
-            font-size: 17px;
-            font-weight: 600;
-            margin-bottom: 4px;
-        }
-        
-        .server-details p {
-            font-size: 13px;
+        .plan-price-small {
+            font-size: 14px;
             color: rgba(255, 255, 255, 0.5);
+            margin-top: 4px;
         }
         
-        .server-arrow {
-            width: 32px;
-            height: 32px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        .plan-per-month {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.6);
         }
         
-        .server-arrow svg {
-            width: 16px;
-            height: 16px;
-            fill: rgba(255, 255, 255, 0.5);
-        }
-        
-        /* Connection Card */
-        .connection-card {
-            background: linear-gradient(135deg, rgba(255, 107, 74, 0.1) 0%, rgba(255, 71, 87, 0.05) 100%);
-            border: 1px solid rgba(255, 107, 74, 0.2);
-            border-radius: 24px;
-            padding: 24px;
+        /* Промокод */
+        .promo-section {
             margin-bottom: 24px;
         }
         
-        .connection-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-        
-        .connection-status {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        
-        .status-indicator {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: #10b981;
+        .promo-input-wrapper {
             position: relative;
         }
         
-        .status-indicator::after {
-            content: '';
-            position: absolute;
-            inset: -4px;
+        .promo-input {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 14px;
+            padding: 16px;
+            font-size: 15px;
+            color: #ffffff;
+            font-family: inherit;
+            transition: all 0.2s;
+        }
+        
+        .promo-input:focus {
+            outline: none;
+            border-color: #FF6B4A;
+            background: rgba(255, 255, 255, 0.08);
+        }
+        
+        .promo-input::placeholder {
+            color: rgba(255, 255, 255, 0.4);
+        }
+        
+        /* Кнопка подписки */
+        .subscribe-button {
+            width: 100%;
+            background: linear-gradient(135deg, #FF6B4A 0%, #FF4757 100%);
+            border: none;
+            border-radius: 16px;
+            padding: 18px;
+            font-size: 17px;
+            font-weight: 700;
+            color: #ffffff;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-bottom: 32px;
+        }
+        
+        .subscribe-button:active {
+            transform: scale(0.98);
+        }
+        
+        /* === ЭКРАН С ПОДПИСКОЙ === */
+        
+        .status-card {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.15) 0%, rgba(16, 185, 129, 0.05) 100%);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            border-radius: 20px;
+            padding: 24px;
+            margin-bottom: 24px;
+            text-align: center;
+        }
+        
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(16, 185, 129, 0.2);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            color: #10b981;
+            margin-bottom: 16px;
+        }
+        
+        .status-indicator {
+            width: 10px;
+            height: 10px;
             border-radius: 50%;
-            border: 2px solid #10b981;
-            opacity: 0.3;
+            background: #10b981;
             animation: pulse 2s infinite;
         }
         
         @keyframes pulse {
-            0%, 100% { transform: scale(1); opacity: 0.3; }
-            50% { transform: scale(1.3); opacity: 0; }
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
         }
         
-        .status-text {
-            font-size: 15px;
-            font-weight: 600;
-            color: #10b981;
-        }
-        
-        .connection-ip {
-            font-size: 13px;
-            color: rgba(255, 255, 255, 0.5);
-            cursor: pointer;
-        }
-        
-        .info-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-            margin-bottom: 20px;
-        }
-        
-        .info-item {
-            background: rgba(0, 0, 0, 0.3);
-            border-radius: 12px;
-            padding: 16px;
-        }
-        
-        .info-label {
-            font-size: 11px;
-            color: rgba(255, 255, 255, 0.5);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
+        .status-title {
+            font-size: 22px;
+            font-weight: 700;
             margin-bottom: 8px;
         }
         
-        .info-value {
+        .status-date {
             font-size: 15px;
-            font-weight: 600;
+            color: rgba(255, 255, 255, 0.6);
         }
         
-        .qr-container {
+        .connection-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 24px;
+            margin-bottom: 24px;
+        }
+        
+        .card-title {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+        
+        .qr-wrapper {
             background: #ffffff;
-            padding: 16px;
+            padding: 20px;
             border-radius: 16px;
             text-align: center;
-            margin-bottom: 16px;
+            margin-bottom: 20px;
         }
         
         #qrcode {
@@ -213,18 +258,18 @@
             font-size: 13px;
             color: rgba(255, 255, 255, 0.5);
             text-align: center;
-            margin-bottom: 16px;
+            margin-bottom: 20px;
         }
         
-        .config-link {
+        .config-box {
             background: rgba(0, 0, 0, 0.3);
             border-radius: 12px;
-            padding: 12px;
+            padding: 16px;
             margin-bottom: 16px;
             word-break: break-all;
             font-family: 'SF Mono', 'Consolas', monospace;
             font-size: 11px;
-            color: rgba(255, 255, 255, 0.6);
+            color: rgba(255, 255, 255, 0.7);
             line-height: 1.6;
         }
         
@@ -239,156 +284,218 @@
             color: #ffffff;
             cursor: pointer;
             transition: all 0.2s;
-            margin-bottom: 12px;
         }
         
         .copy-button:active {
             transform: scale(0.98);
         }
         
-        .expiry-info {
-            text-align: center;
-            font-size: 13px;
-            color: rgba(255, 255, 255, 0.5);
+        /* Нижняя навигация */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(20px);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 12px 0 20px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            max-width: 480px;
+            margin: 0 auto;
         }
         
-        /* Plans Section */
-        .section-title {
-            font-size: 20px;
-            font-weight: 700;
-            margin-bottom: 16px;
-        }
-        
-        .plans-grid {
+        .nav-item {
             display: flex;
             flex-direction: column;
-            gap: 12px;
-            margin-bottom: 40px;
-        }
-        
-        .plan-card {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 16px;
-            padding: 20px;
-            display: flex;
-            justify-content: space-between;
             align-items: center;
+            gap: 6px;
             cursor: pointer;
+            padding: 8px 24px;
+            border-radius: 12px;
             transition: all 0.2s;
         }
         
-        .plan-card:active {
-            transform: scale(0.98);
+        .nav-item:active {
+            transform: scale(0.95);
         }
         
-        .plan-card.featured {
-            background: rgba(255, 107, 74, 0.1);
-            border: 1px solid rgba(255, 107, 74, 0.3);
+        .nav-item.active {
+            background: rgba(255, 107, 74, 0.15);
         }
         
-        .plan-info h3 {
-            font-size: 17px;
+        .nav-icon {
+            width: 44px;
+            height: 44px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+        
+        .nav-item.active .nav-icon {
+            background: linear-gradient(135deg, #FF6B4A 0%, #FF4757 100%);
+        }
+        
+        .nav-icon svg {
+            width: 22px;
+            height: 22px;
+            fill: rgba(255, 255, 255, 0.7);
+        }
+        
+        .nav-item.active .nav-icon svg {
+            fill: #ffffff;
+        }
+        
+        .nav-label {
+            font-size: 11px;
+            color: rgba(255, 255, 255, 0.6);
+            font-weight: 500;
+        }
+        
+        .nav-item.active .nav-label {
+            color: #FF6B4A;
             font-weight: 600;
-            margin-bottom: 4px;
-        }
-        
-        .plan-info p {
-            font-size: 13px;
-            color: rgba(255, 255, 255, 0.5);
-        }
-        
-        .plan-price {
-            font-size: 24px;
-            font-weight: 700;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <!-- Хедер -->
-        <div class="header">
-            <div class="header-title">VPN Service</div>
-            <div class="status-badge">Active</div>
-        </div>
-        
-        <!-- Выбор сервера -->
-        <div class="server-card">
-            <div class="server-info">
-                <div class="server-flag">CN</div>
-                <div class="server-details">
-                    <h3>Китай</h3>
-                    <p>VLESS • TCP</p>
+    <!-- ЭКРАН БЕЗ ПОДПИСКИ -->
+    <div id="screenNoSubscription" class="screen active">
+        <div class="container">
+            <div class="header">
+                <div class="header-title">VPN Service</div>
+                <div class="header-subtitle">Выберите подходящий тариф</div>
+            </div>
+            
+            <!-- Тарифы -->
+            <div class="plans-section">
+                <div class="plan-card" onclick="selectPlan('1month', 500)">
+                    <div class="plan-header">
+                        <div class="plan-period">1 месяц</div>
+                        <div>
+                            <div class="plan-price">500⭐</div>
+                        </div>
+                    </div>
+                    <div class="plan-per-month">500⭐ в месяц</div>
+                </div>
+                
+                <div class="plan-card featured" onclick="selectPlan('6month', 2400)">
+                    <div class="plan-badge">-20% выгода</div>
+                    <div class="plan-header">
+                        <div class="plan-period">6 месяцев</div>
+                        <div>
+                            <div class="plan-price">2400⭐</div>
+                            <div class="plan-price-small"><s>3000⭐</s></div>
+                        </div>
+                    </div>
+                    <div class="plan-per-month">400⭐ в месяц</div>
+                </div>
+                
+                <div class="plan-card" onclick="selectPlan('12month', 4000)">
+                    <div class="plan-badge">-33% выгода</div>
+                    <div class="plan-header">
+                        <div class="plan-period">12 месяцев</div>
+                        <div>
+                            <div class="plan-price">4000⭐</div>
+                            <div class="plan-price-small"><s>6000⭐</s></div>
+                        </div>
+                    </div>
+                    <div class="plan-per-month">333⭐ в месяц</div>
                 </div>
             </div>
-            <div class="server-arrow">
+            
+            <!-- Промокод -->
+            <div class="promo-section">
+                <div class="promo-input-wrapper">
+                    <input 
+                        type="text" 
+                        class="promo-input" 
+                        placeholder="Промокод (необязательно)"
+                        id="promoInput"
+                    >
+                </div>
+            </div>
+            
+            <!-- Кнопка оформления -->
+            <button class="subscribe-button" onclick="subscribe()">
+                Оформить подписку
+            </button>
+        </div>
+    </div>
+    
+    <!-- ЭКРАН С ПОДПИСКОЙ -->
+    <div id="screenWithSubscription" class="screen">
+        <div class="container">
+            <div class="header">
+                <div class="header-title">VPN Service</div>
+                <div class="header-subtitle">Ваша подписка</div>
+            </div>
+            
+            <!-- Статус -->
+            <div class="status-card">
+                <div class="status-badge">
+                    <div class="status-indicator"></div>
+                    Активна
+                </div>
+                <div class="status-title">Подписка активна</div>
+                <div class="status-date" id="expiryDate">До 21.02.2026 23:59</div>
+            </div>
+            
+            <!-- QR и ключ -->
+            <div class="connection-card">
+                <div class="card-title">Ключ подключения</div>
+                
+                <div class="qr-wrapper">
+                    <div id="qrcode"></div>
+                </div>
+                <div class="qr-hint">Отсканируйте QR-код в приложении VPN</div>
+                
+                <div class="config-box" id="configLink">
+                    vless://uuid-example@45.142.120.45:443?encryption=none&security=tls&type=ws&path=/ws#VPN-Server
+                </div>
+                
+                <button class="copy-button" onclick="copyConfig()">
+                    Скопировать ключ
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Нижняя навигация -->
+    <div class="bottom-nav">
+        <div class="nav-item active" onclick="navHome()">
+            <div class="nav-icon">
                 <svg viewBox="0 0 24 24">
-                    <path d="M9 18l6-6-6-6"/>
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
                 </svg>
             </div>
+            <div class="nav-label">Главная</div>
         </div>
         
-        <!-- Карточка подключения -->
-        <div class="connection-card">
-            <div class="connection-header">
-                <div class="connection-status">
-                    <div class="status-indicator"></div>
-                    <span class="status-text">Connected</span>
-                </div>
-                <div class="connection-ip" id="ipAddress" onclick="toggleIP()">45.142.•••.•••</div>
+        <div class="nav-item" onclick="navSupport()">
+            <div class="nav-icon">
+                <svg viewBox="0 0 24 24">
+                    <circle cx="12" cy="12" r="10"/>
+                    <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
+                    <line x1="12" y1="17" x2="12.01" y2="17"/>
+                </svg>
             </div>
-            
-            <div class="info-grid">
-                <div class="info-item">
-                    <div class="info-label">Протокол</div>
-                    <div class="info-value">VLESS</div>
-                </div>
-                <div class="info-item">
-                    <div class="info-label">Порт</div>
-                    <div class="info-value">443</div>
-                </div>
-            </div>
-            
-            <div class="qr-container">
-                <div id="qrcode"></div>
-            </div>
-            <div class="qr-hint">Отсканируйте QR-код в приложении</div>
-            
-            <div class="config-link">
-                vless://uuid-example@45.142.120.45:443?encryption=none&security=tls&type=ws&host=server.com&path=/ws#China-VLESS
-            </div>
-            
-            <button class="copy-button" onclick="copyConfig()">
-                Скопировать конфигурацию
-            </button>
-            <div class="expiry-info">Действует до 21.02.2026 23:59</div>
+            <div class="nav-label">Поддержка</div>
         </div>
         
-        <!-- Тарифы -->
-        <div class="section-title">Продлить подписку</div>
-        <div class="plans-grid">
-            <div class="plan-card">
-                <div class="plan-info">
-                    <h3>1 месяц</h3>
-                    <p>Безлимит • 12+ серверов</p>
-                </div>
-                <div class="plan-price">500⭐</div>
+        <div class="nav-item" onclick="navSettings()">
+            <div class="nav-icon">
+                <svg viewBox="0 0 24 24">
+                    <circle cx="12" cy="12" r="3"/>
+                    <path d="M12 1v6m0 6v6M5.64 5.64l4.24 4.24m4.24 4.24l4.24 4.24M1 12h6m6 0h6M5.64 18.36l4.24-4.24m4.24-4.24l4.24-4.24"/>
+                </svg>
             </div>
-            
-            <div class="plan-card featured">
-                <div class="plan-info">
-                    <h3>3 месяца</h3>
-                    <p>Скидка 20% • Поддержка</p>
-                </div>
-                <div class="plan-price">1200⭐</div>
-            </div>
-            
-            <div class="plan-card">
-                <div class="plan-info">
-                    <h3>12 месяцев</h3>
-                    <p>Dedicated IP • VIP</p>
-                </div>
-                <div class="plan-price">4000⭐</div>
-            </div>
+            <div class="nav-label">Настройки</div>
         </div>
     </div>
 
@@ -399,38 +506,117 @@
         tg.setHeaderColor('#000000');
         tg.setBackgroundColor('#000000');
         
-        let ipRevealed = false;
-        let fullIP = '45.142.120.45';
+        const userId = tg.initDataUnsafe.user?.id;
+        let selectedPlan = null;
+        let selectedPrice = 0;
         
-        // Генерация QR-кода при загрузке
-        const configLink = 'vless://uuid-example@45.142.120.45:443?encryption=none&security=tls&type=ws&host=server.com&path=/ws#China-VLESS';
+        // Проверка подписки при загрузке
+        checkSubscription();
         
-        new QRCode(document.getElementById('qrcode'), {
-            text: configLink,
-            width: 180,
-            height: 180,
-            colorDark: '#000000',
-            colorLight: '#ffffff'
-        });
+        function checkSubscription() {
+            // Проверяем локальное хранилище
+            const hasSub = localStorage.getItem('vpn_subscription');
+            if (hasSub) {
+                showScreen('screenWithSubscription');
+                generateQR();
+            } else {
+                showScreen('screenNoSubscription');
+            }
+        }
         
-        function toggleIP() {
+        function selectPlan(plan, price) {
             tg.HapticFeedback.impactOccurred('light');
-            const el = document.getElementById('ipAddress');
-            ipRevealed = !ipRevealed;
-            el.textContent = ipRevealed ? fullIP : '45.142.•••.•••';
+            
+            // Убираем выделение со всех
+            document.querySelectorAll('.plan-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+            
+            // Выделяем выбранный
+            event.currentTarget.classList.add('selected');
+            
+            selectedPlan = plan;
+            selectedPrice = price;
+        }
+        
+        function subscribe() {
+            if (!selectedPlan) {
+                tg.showAlert('Выберите тариф');
+                return;
+            }
+            
+            tg.HapticFeedback.impactOccurred('medium');
+            
+            const promo = document.getElementById('promoInput').value;
+            
+            // Отправляем данные в бот
+            tg.sendData(JSON.stringify({
+                action: 'buy_plan',
+                plan: selectedPlan,
+                price: selectedPrice,
+                promo: promo,
+                user_id: userId
+            }));
+            
+            // Для теста сразу активируем
+            localStorage.setItem('vpn_subscription', 'true');
+            localStorage.setItem('vpn_expiry', '21.02.2026 23:59');
+            
+            showScreen('screenWithSubscription');
+            generateQR();
+        }
+        
+        function generateQR() {
+            const configLink = 'vless://uuid-example@45.142.120.45:443?encryption=none&security=tls&type=ws&path=/ws#VPN-Server';
+            
+            document.getElementById('qrcode').innerHTML = '';
+            new QRCode(document.getElementById('qrcode'), {
+                text: configLink,
+                width: 200,
+                height: 200,
+                colorDark: '#000000',
+                colorLight: '#ffffff'
+            });
         }
         
         function copyConfig() {
             tg.HapticFeedback.notificationOccurred('success');
+            
+            const config = document.getElementById('configLink').textContent;
+            
             if (navigator.clipboard) {
-                navigator.clipboard.writeText(configLink);
+                navigator.clipboard.writeText(config);
             }
             
             const btn = event.target;
-            btn.textContent = 'Скопировано!';
+            btn.textContent = '✓ Скопировано!';
             setTimeout(() => {
-                btn.textContent = 'Скопировать конфигурацию';
+                btn.textContent = 'Скопировать ключ';
             }, 2000);
+        }
+        
+        function showScreen(screenId) {
+            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+            document.getElementById(screenId).classList.add('active');
+        }
+        
+        // Навигация
+        function navHome() {
+            tg.HapticFeedback.impactOccurred('light');
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            event.currentTarget.classList.add('active');
+        }
+        
+        function navSupport() {
+            tg.HapticFeedback.impactOccurred('light');
+            tg.openTelegramLink('https://t.me/your_support');
+        }
+        
+        function navSettings() {
+            tg.HapticFeedback.impactOccurred('light');
+            tg.showAlert('Настройки в разработке');
         }
     </script>
 </body>
