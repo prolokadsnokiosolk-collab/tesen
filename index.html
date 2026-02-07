@@ -20,7 +20,7 @@
             font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
             padding: 0;
             min-height: 100vh;
-            padding-bottom: 80px;
+            padding-bottom: 70px;
         }
         
         /* Экраны */
@@ -34,8 +34,8 @@
         }
         
         @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+            from { opacity: 0; transform: translateX(20px); }
+            to { opacity: 1; transform: translateX(0); }
         }
         
         /* Контейнер */
@@ -47,15 +47,14 @@
         
         /* Хедер */
         .header {
-            text-align: center;
-            margin-bottom: 32px;
-            padding-top: 20px;
+            margin-bottom: 24px;
+            padding-top: 10px;
         }
         
         .header-title {
-            font-size: 32px;
+            font-size: 28px;
             font-weight: 700;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
         }
         
         .header-subtitle {
@@ -63,16 +62,76 @@
             color: rgba(255, 255, 255, 0.5);
         }
         
-        /* Тарифы */
-        .plans-section {
-            margin-bottom: 24px;
+        /* Карточки выбора */
+        .selection-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid transparent;
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
         
+        .selection-card:active {
+            transform: scale(0.98);
+        }
+        
+        .selection-card.selected {
+            background: rgba(255, 107, 74, 0.1);
+            border-color: #FF6B4A;
+        }
+        
+        .selection-info {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        
+        .selection-icon {
+            width: 44px;
+            height: 44px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            font-weight: 700;
+        }
+        
+        .selection-text h3 {
+            font-size: 17px;
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+        
+        .selection-text p {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.5);
+        }
+        
+        .selection-arrow {
+            width: 24px;
+            height: 24px;
+            opacity: 0.5;
+        }
+        
+        .selection-arrow svg {
+            width: 100%;
+            height: 100%;
+            fill: #ffffff;
+        }
+        
+        /* Тарифы */
         .plan-card {
             background: rgba(255, 255, 255, 0.05);
             border: 2px solid transparent;
-            border-radius: 20px;
-            padding: 24px;
+            border-radius: 16px;
+            padding: 20px;
             margin-bottom: 12px;
             cursor: pointer;
             transition: all 0.2s;
@@ -88,17 +147,13 @@
             border-color: #FF6B4A;
         }
         
-        .plan-card.featured {
-            border-color: #FF6B4A;
-        }
-        
         .plan-badge {
             position: absolute;
-            top: -10px;
-            right: 20px;
+            top: -8px;
+            right: 16px;
             background: linear-gradient(135deg, #FF6B4A 0%, #FF4757 100%);
-            padding: 4px 12px;
-            border-radius: 12px;
+            padding: 4px 10px;
+            border-radius: 10px;
             font-size: 11px;
             font-weight: 700;
         }
@@ -107,49 +162,41 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 12px;
+            margin-bottom: 8px;
         }
         
         .plan-period {
-            font-size: 20px;
+            font-size: 18px;
             font-weight: 700;
         }
         
         .plan-price {
-            font-size: 28px;
+            font-size: 24px;
             font-weight: 700;
         }
         
         .plan-price-small {
-            font-size: 14px;
-            color: rgba(255, 255, 255, 0.5);
-            margin-top: 4px;
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.4);
+            text-decoration: line-through;
         }
         
         .plan-per-month {
-            font-size: 14px;
+            font-size: 13px;
             color: rgba(255, 255, 255, 0.6);
         }
         
         /* Промокод */
-        .promo-section {
-            margin-bottom: 24px;
-        }
-        
-        .promo-input-wrapper {
-            position: relative;
-        }
-        
         .promo-input {
             width: 100%;
             background: rgba(255, 255, 255, 0.05);
             border: 2px solid rgba(255, 255, 255, 0.1);
-            border-radius: 14px;
-            padding: 16px;
+            border-radius: 12px;
+            padding: 14px;
             font-size: 15px;
             color: #ffffff;
             font-family: inherit;
-            transition: all 0.2s;
+            margin-bottom: 16px;
         }
         
         .promo-input:focus {
@@ -162,33 +209,44 @@
             color: rgba(255, 255, 255, 0.4);
         }
         
-        /* Кнопка подписки */
-        .subscribe-button {
+        /* Кнопки */
+        .btn-primary {
             width: 100%;
             background: linear-gradient(135deg, #FF6B4A 0%, #FF4757 100%);
             border: none;
-            border-radius: 16px;
-            padding: 18px;
+            border-radius: 14px;
+            padding: 16px;
             font-size: 17px;
             font-weight: 700;
             color: #ffffff;
             cursor: pointer;
             transition: all 0.2s;
-            margin-bottom: 32px;
         }
         
-        .subscribe-button:active {
+        .btn-primary:active {
             transform: scale(0.98);
         }
         
-        /* === ЭКРАН С ПОДПИСКОЙ === */
+        .btn-secondary {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.05);
+            border: none;
+            border-radius: 14px;
+            padding: 16px;
+            font-size: 15px;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.7);
+            cursor: pointer;
+            margin-top: 12px;
+        }
         
+        /* Экран с подпиской */
         .status-card {
             background: linear-gradient(135deg, rgba(16, 185, 129, 0.15) 0%, rgba(16, 185, 129, 0.05) 100%);
             border: 1px solid rgba(16, 185, 129, 0.3);
             border-radius: 20px;
             padding: 24px;
-            margin-bottom: 24px;
+            margin-bottom: 20px;
             text-align: center;
         }
         
@@ -197,17 +255,17 @@
             align-items: center;
             gap: 8px;
             background: rgba(16, 185, 129, 0.2);
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 14px;
+            padding: 6px 14px;
+            border-radius: 16px;
+            font-size: 13px;
             font-weight: 600;
             color: #10b981;
-            margin-bottom: 16px;
+            margin-bottom: 12px;
         }
         
         .status-indicator {
-            width: 10px;
-            height: 10px;
+            width: 8px;
+            height: 8px;
             border-radius: 50%;
             background: #10b981;
             animation: pulse 2s infinite;
@@ -219,13 +277,13 @@
         }
         
         .status-title {
-            font-size: 22px;
+            font-size: 20px;
             font-weight: 700;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
         }
         
         .status-date {
-            font-size: 15px;
+            font-size: 14px;
             color: rgba(255, 255, 255, 0.6);
         }
         
@@ -233,21 +291,43 @@
             background: rgba(255, 255, 255, 0.05);
             border-radius: 20px;
             padding: 24px;
-            margin-bottom: 24px;
+            margin-bottom: 20px;
         }
         
         .card-title {
             font-size: 18px;
             font-weight: 700;
-            margin-bottom: 20px;
+            margin-bottom: 16px;
+        }
+        
+        .server-info-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .server-info-row:last-child {
+            border-bottom: none;
+        }
+        
+        .info-label {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.5);
+        }
+        
+        .info-value {
+            font-size: 15px;
+            font-weight: 600;
         }
         
         .qr-wrapper {
             background: #ffffff;
-            padding: 20px;
+            padding: 16px;
             border-radius: 16px;
             text-align: center;
-            margin-bottom: 20px;
+            margin: 20px 0 16px;
         }
         
         #qrcode {
@@ -258,14 +338,14 @@
             font-size: 13px;
             color: rgba(255, 255, 255, 0.5);
             text-align: center;
-            margin-bottom: 20px;
+            margin-bottom: 16px;
         }
         
         .config-box {
             background: rgba(0, 0, 0, 0.3);
             border-radius: 12px;
-            padding: 16px;
-            margin-bottom: 16px;
+            padding: 14px;
+            margin-bottom: 12px;
             word-break: break-all;
             font-family: 'SF Mono', 'Consolas', monospace;
             font-size: 11px;
@@ -273,24 +353,7 @@
             line-height: 1.6;
         }
         
-        .copy-button {
-            width: 100%;
-            background: linear-gradient(135deg, #FF6B4A 0%, #FF4757 100%);
-            border: none;
-            border-radius: 12px;
-            padding: 14px;
-            font-size: 15px;
-            font-weight: 600;
-            color: #ffffff;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-        
-        .copy-button:active {
-            transform: scale(0.98);
-        }
-        
-        /* Нижняя навигация */
+        /* Навигация */
         .bottom-nav {
             position: fixed;
             bottom: 0;
@@ -299,7 +362,7 @@
             background: rgba(0, 0, 0, 0.95);
             backdrop-filter: blur(20px);
             border-top: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 12px 0 20px;
+            padding: 8px 0 calc(8px + env(safe-area-inset-bottom));
             display: flex;
             justify-content: space-around;
             align-items: center;
@@ -311,10 +374,10 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 6px;
+            gap: 4px;
             cursor: pointer;
-            padding: 8px 24px;
-            border-radius: 12px;
+            padding: 6px 16px;
+            border-radius: 10px;
             transition: all 0.2s;
         }
         
@@ -327,33 +390,34 @@
         }
         
         .nav-icon {
-            width: 44px;
-            height: 44px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
+            width: 36px;
+            height: 36px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: all 0.2s;
         }
         
         .nav-item.active .nav-icon {
-            background: linear-gradient(135deg, #FF6B4A 0%, #FF4757 100%);
+            background: rgba(255, 107, 74, 0.2);
         }
         
         .nav-icon svg {
-            width: 22px;
-            height: 22px;
-            fill: rgba(255, 255, 255, 0.7);
+            width: 20px;
+            height: 20px;
+            stroke: rgba(255, 255, 255, 0.6);
+            fill: none;
+            stroke-width: 2;
         }
         
         .nav-item.active .nav-icon svg {
-            fill: #ffffff;
+            stroke: #FF6B4A;
         }
         
         .nav-label {
-            font-size: 11px;
-            color: rgba(255, 255, 255, 0.6);
+            font-size: 10px;
+            color: rgba(255, 255, 255, 0.5);
             font-weight: 500;
         }
         
@@ -364,79 +428,201 @@
     </style>
 </head>
 <body>
-    <!-- ЭКРАН БЕЗ ПОДПИСКИ -->
-    <div id="screenNoSubscription" class="screen active">
+    <!-- 1. Выбор сервера -->
+    <div id="screenServer" class="screen active">
         <div class="container">
             <div class="header">
-                <div class="header-title">VPN Service</div>
-                <div class="header-subtitle">Выберите подходящий тариф</div>
+                <div class="header-title">Выбор сервера</div>
+                <div class="header-subtitle">Шаг 1 из 3</div>
             </div>
             
-            <!-- Тарифы -->
-            <div class="plans-section">
-                <div class="plan-card" onclick="selectPlan('1month', 500)">
-                    <div class="plan-header">
-                        <div class="plan-period">1 месяц</div>
-                        <div>
-                            <div class="plan-price">500⭐</div>
-                        </div>
+            <div class="selection-card" onclick="selectServer('cn', 'Китай', '8ms')">
+                <div class="selection-info">
+                    <div class="selection-icon">CN</div>
+                    <div class="selection-text">
+                        <h3>Китай</h3>
+                        <p>Ping: 8ms</p>
                     </div>
-                    <div class="plan-per-month">500⭐ в месяц</div>
                 </div>
-                
-                <div class="plan-card featured" onclick="selectPlan('6month', 2400)">
-                    <div class="plan-badge">-20% выгода</div>
-                    <div class="plan-header">
-                        <div class="plan-period">6 месяцев</div>
-                        <div>
-                            <div class="plan-price">2400⭐</div>
-                            <div class="plan-price-small"><s>3000⭐</s></div>
-                        </div>
-                    </div>
-                    <div class="plan-per-month">400⭐ в месяц</div>
-                </div>
-                
-                <div class="plan-card" onclick="selectPlan('12month', 4000)">
-                    <div class="plan-badge">-33% выгода</div>
-                    <div class="plan-header">
-                        <div class="plan-period">12 месяцев</div>
-                        <div>
-                            <div class="plan-price">4000⭐</div>
-                            <div class="plan-price-small"><s>6000⭐</s></div>
-                        </div>
-                    </div>
-                    <div class="plan-per-month">333⭐ в месяц</div>
+                <div class="selection-arrow">
+                    <svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
                 </div>
             </div>
             
-            <!-- Промокод -->
-            <div class="promo-section">
-                <div class="promo-input-wrapper">
-                    <input 
-                        type="text" 
-                        class="promo-input" 
-                        placeholder="Промокод (необязательно)"
-                        id="promoInput"
-                    >
+            <div class="selection-card" onclick="selectServer('nl', 'Нидерланды', '12ms')">
+                <div class="selection-info">
+                    <div class="selection-icon">NL</div>
+                    <div class="selection-text">
+                        <h3>Нидерланды</h3>
+                        <p>Ping: 12ms</p>
+                    </div>
+                </div>
+                <div class="selection-arrow">
+                    <svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
                 </div>
             </div>
             
-            <!-- Кнопка оформления -->
-            <button class="subscribe-button" onclick="subscribe()">
-                Оформить подписку
+            <div class="selection-card" onclick="selectServer('us', 'США', '45ms')">
+                <div class="selection-info">
+                    <div class="selection-icon">US</div>
+                    <div class="selection-text">
+                        <h3>США</h3>
+                        <p>Ping: 45ms</p>
+                    </div>
+                </div>
+                <div class="selection-arrow">
+                    <svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+                </div>
+            </div>
+            
+            <div class="selection-card" onclick="selectServer('de', 'Германия', '18ms')">
+                <div class="selection-info">
+                    <div class="selection-icon">DE</div>
+                    <div class="selection-text">
+                        <h3>Германия</h3>
+                        <p>Ping: 18ms</p>
+                    </div>
+                </div>
+                <div class="selection-arrow">
+                    <svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 2. Выбор протокола -->
+    <div id="screenProtocol" class="screen">
+        <div class="container">
+            <div class="header">
+                <div class="header-title">Выбор протокола</div>
+                <div class="header-subtitle">Шаг 2 из 3</div>
+            </div>
+            
+            <div class="selection-card" onclick="selectProtocol('VLESS')">
+                <div class="selection-info">
+                    <div class="selection-icon">V</div>
+                    <div class="selection-text">
+                        <h3>VLESS</h3>
+                        <p>Рекомендуется</p>
+                    </div>
+                </div>
+                <div class="selection-arrow">
+                    <svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+                </div>
+            </div>
+            
+            <div class="selection-card" onclick="selectProtocol('VMess')">
+                <div class="selection-info">
+                    <div class="selection-icon">VM</div>
+                    <div class="selection-text">
+                        <h3>VMess</h3>
+                        <p>Стандартный протокол</p>
+                    </div>
+                </div>
+                <div class="selection-arrow">
+                    <svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+                </div>
+            </div>
+            
+            <div class="selection-card" onclick="selectProtocol('Trojan')">
+                <div class="selection-info">
+                    <div class="selection-icon">T</div>
+                    <div class="selection-text">
+                        <h3>Trojan</h3>
+                        <p>Высокая скорость</p>
+                    </div>
+                </div>
+                <div class="selection-arrow">
+                    <svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+                </div>
+            </div>
+            
+            <div class="selection-card" onclick="selectProtocol('Shadowsocks')">
+                <div class="selection-info">
+                    <div class="selection-icon">SS</div>
+                    <div class="selection-text">
+                        <h3>Shadowsocks</h3>
+                        <p>Легковесный</p>
+                    </div>
+                </div>
+                <div class="selection-arrow">
+                    <svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+                </div>
+            </div>
+            
+            <button class="btn-secondary" onclick="goBack('screenServer')">
+                ← Назад
             </button>
         </div>
     </div>
     
-    <!-- ЭКРАН С ПОДПИСКОЙ -->
-    <div id="screenWithSubscription" class="screen">
+    <!-- 3. Выбор тарифа -->
+    <div id="screenPlan" class="screen">
+        <div class="container">
+            <div class="header">
+                <div class="header-title">Выбор тарифа</div>
+                <div class="header-subtitle">Шаг 3 из 3</div>
+            </div>
+            
+            <div class="plan-card" onclick="selectPlan('1month', 500)">
+                <div class="plan-header">
+                    <div class="plan-period">1 месяц</div>
+                    <div>
+                        <div class="plan-price">500⭐</div>
+                    </div>
+                </div>
+                <div class="plan-per-month">500⭐ в месяц</div>
+            </div>
+            
+            <div class="plan-card" onclick="selectPlan('6month', 2400)">
+                <div class="plan-badge">-20%</div>
+                <div class="plan-header">
+                    <div class="plan-period">6 месяцев</div>
+                    <div>
+                        <div class="plan-price">2400⭐</div>
+                        <div class="plan-price-small">3000⭐</div>
+                    </div>
+                </div>
+                <div class="plan-per-month">400⭐ в месяц</div>
+            </div>
+            
+            <div class="plan-card" onclick="selectPlan('12month', 4000)">
+                <div class="plan-badge">-33%</div>
+                <div class="plan-header">
+                    <div class="plan-period">12 месяцев</div>
+                    <div>
+                        <div class="plan-price">4000⭐</div>
+                        <div class="plan-price-small">6000⭐</div>
+                    </div>
+                </div>
+                <div class="plan-per-month">333⭐ в месяц</div>
+            </div>
+            
+            <input 
+                type="text" 
+                class="promo-input" 
+                placeholder="Промокод (необязательно)"
+                id="promoInput"
+            >
+            
+            <button class="btn-primary" onclick="subscribe()">
+                Оформить подписку
+            </button>
+            
+            <button class="btn-secondary" onclick="goBack('screenProtocol')">
+                ← Назад
+            </button>
+        </div>
+    </div>
+    
+    <!-- 4. Активная подписка -->
+    <div id="screenActive" class="screen">
         <div class="container">
             <div class="header">
                 <div class="header-title">VPN Service</div>
                 <div class="header-subtitle">Ваша подписка</div>
             </div>
             
-            <!-- Статус -->
             <div class="status-card">
                 <div class="status-badge">
                     <div class="status-indicator"></div>
@@ -446,27 +632,36 @@
                 <div class="status-date" id="expiryDate">До 21.02.2026 23:59</div>
             </div>
             
-            <!-- QR и ключ -->
             <div class="connection-card">
-                <div class="card-title">Ключ подключения</div>
+                <div class="card-title">Информация о подключении</div>
+                
+                <div class="server-info-row">
+                    <div class="info-label">Сервер</div>
+                    <div class="info-value" id="selectedServer">Китай</div>
+                </div>
+                
+                <div class="server-info-row">
+                    <div class="info-label">Протокол</div>
+                    <div class="info-value" id="selectedProtocol">VLESS</div>
+                </div>
                 
                 <div class="qr-wrapper">
                     <div id="qrcode"></div>
                 </div>
-                <div class="qr-hint">Отсканируйте QR-код в приложении VPN</div>
+                <div class="qr-hint">Отсканируйте QR-код в приложении</div>
                 
                 <div class="config-box" id="configLink">
-                    vless://uuid-example@45.142.120.45:443?encryption=none&security=tls&type=ws&path=/ws#VPN-Server
+                    vless://uuid@45.142.120.45:443?encryption=none&security=tls&type=ws#VPN
                 </div>
                 
-                <button class="copy-button" onclick="copyConfig()">
+                <button class="btn-primary" onclick="copyConfig()">
                     Скопировать ключ
                 </button>
             </div>
         </div>
     </div>
     
-    <!-- Нижняя навигация -->
+    <!-- Навигация -->
     <div class="bottom-nav">
         <div class="nav-item active" onclick="navHome()">
             <div class="nav-icon">
@@ -480,9 +675,7 @@
         <div class="nav-item" onclick="navSupport()">
             <div class="nav-icon">
                 <svg viewBox="0 0 24 24">
-                    <circle cx="12" cy="12" r="10"/>
-                    <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
-                    <line x1="12" y1="17" x2="12.01" y2="17"/>
+                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
                 </svg>
             </div>
             <div class="nav-label">Поддержка</div>
@@ -492,7 +685,7 @@
             <div class="nav-icon">
                 <svg viewBox="0 0 24 24">
                     <circle cx="12" cy="12" r="3"/>
-                    <path d="M12 1v6m0 6v6M5.64 5.64l4.24 4.24m4.24 4.24l4.24 4.24M1 12h6m6 0h6M5.64 18.36l4.24-4.24m4.24-4.24l4.24-4.24"/>
+                    <path d="M12 1v6m0 6v6m8.66-15.66l-3 3m-11.32 0l3 3m-3 8.66l3-3m8.66 0l3 3"/>
                 </svg>
             </div>
             <div class="nav-label">Настройки</div>
@@ -507,32 +700,36 @@
         tg.setBackgroundColor('#000000');
         
         const userId = tg.initDataUnsafe.user?.id;
-        let selectedPlan = null;
+        
+        let selectedServer = '';
+        let selectedServerName = '';
+        let selectedProtocol = '';
+        let selectedPlan = '';
         let selectedPrice = 0;
         
         // Проверка подписки при загрузке
-        checkSubscription();
+        if (localStorage.getItem('vpn_active')) {
+            showScreen('screenActive');
+            generateQR();
+        }
         
-        function checkSubscription() {
-            // Проверяем локальное хранилище
-            const hasSub = localStorage.getItem('vpn_subscription');
-            if (hasSub) {
-                showScreen('screenWithSubscription');
-                generateQR();
-            } else {
-                showScreen('screenNoSubscription');
-            }
+        function selectServer(code, name, ping) {
+            tg.HapticFeedback.impactOccurred('medium');
+            selectedServer = code;
+            selectedServerName = name;
+            showScreen('screenProtocol');
+        }
+        
+        function selectProtocol(protocol) {
+            tg.HapticFeedback.impactOccurred('medium');
+            selectedProtocol = protocol;
+            showScreen('screenPlan');
         }
         
         function selectPlan(plan, price) {
             tg.HapticFeedback.impactOccurred('light');
             
-            // Убираем выделение со всех
-            document.querySelectorAll('.plan-card').forEach(card => {
-                card.classList.remove('selected');
-            });
-            
-            // Выделяем выбранный
+            document.querySelectorAll('.plan-card').forEach(c => c.classList.remove('selected'));
             event.currentTarget.classList.add('selected');
             
             selectedPlan = plan;
@@ -545,35 +742,39 @@
                 return;
             }
             
-            tg.HapticFeedback.impactOccurred('medium');
+            tg.HapticFeedback.impactOccurred('heavy');
             
             const promo = document.getElementById('promoInput').value;
             
-            // Отправляем данные в бот
+            // Отправка в бот
             tg.sendData(JSON.stringify({
                 action: 'buy_plan',
+                server: selectedServer,
+                protocol: selectedProtocol,
                 plan: selectedPlan,
                 price: selectedPrice,
                 promo: promo,
                 user_id: userId
             }));
             
-            // Для теста сразу активируем
-            localStorage.setItem('vpn_subscription', 'true');
-            localStorage.setItem('vpn_expiry', '21.02.2026 23:59');
+            // Активация (для теста)
+            localStorage.setItem('vpn_active', 'true');
+            document.getElementById('selectedServer').textContent = selectedServerName;
+            document.getElementById('selectedProtocol').textContent = selectedProtocol;
             
-            showScreen('screenWithSubscription');
+            showScreen('screenActive');
             generateQR();
         }
         
         function generateQR() {
-            const configLink = 'vless://uuid-example@45.142.120.45:443?encryption=none&security=tls&type=ws&path=/ws#VPN-Server';
+            const config = `vless://uuid@45.142.120.45:443?encryption=none&security=tls&type=ws#${selectedServerName}-${selectedProtocol}`;
+            document.getElementById('configLink').textContent = config;
             
             document.getElementById('qrcode').innerHTML = '';
             new QRCode(document.getElementById('qrcode'), {
-                text: configLink,
-                width: 200,
-                height: 200,
+                text: config,
+                width: 180,
+                height: 180,
                 colorDark: '#000000',
                 colorLight: '#ffffff'
             });
@@ -581,7 +782,6 @@
         
         function copyConfig() {
             tg.HapticFeedback.notificationOccurred('success');
-            
             const config = document.getElementById('configLink').textContent;
             
             if (navigator.clipboard) {
@@ -595,17 +795,20 @@
             }, 2000);
         }
         
-        function showScreen(screenId) {
+        function showScreen(id) {
             document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-            document.getElementById(screenId).classList.add('active');
+            document.getElementById(id).classList.add('active');
+        }
+        
+        function goBack(screen) {
+            tg.HapticFeedback.impactOccurred('light');
+            showScreen(screen);
         }
         
         // Навигация
         function navHome() {
             tg.HapticFeedback.impactOccurred('light');
-            document.querySelectorAll('.nav-item').forEach(item => {
-                item.classList.remove('active');
-            });
+            document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
             event.currentTarget.classList.add('active');
         }
         
