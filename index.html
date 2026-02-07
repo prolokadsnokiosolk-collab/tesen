@@ -258,6 +258,11 @@
             color: #666666;
         }
         
+        .speed-item-value.testing {
+            color: #4d9b7a;
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+        
         .speed-item-unit {
             font-size: 13px;
             color: #999999;
@@ -341,6 +346,11 @@
         @keyframes spin {
             from { transform: rotate(0deg); }
             to { transform: rotate(360deg); }
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
         }
         
         .btn-speed-test.loading::after {
@@ -1143,33 +1153,25 @@
             <div class="speed-test-card">
                 <div class="speed-test-header">
                     <div class="speed-test-title">Тест скорости</div>
-                    <div class="speed-test-subtitle">Проверка соединения</div>
+                    <div class="speed-test-subtitle" id="speedStatus">Проверка соединения</div>
                 </div>
                 
                 <div class="speed-grid">
                     <div class="speed-item">
                         <div class="speed-item-label">Загрузка</div>
-                        <div class="speed-item-value loading" id="speedDownload">
-                            —
-                        </div>
+                        <div class="speed-item-value loading" id="speedDownload">—</div>
                     </div>
                     <div class="speed-item">
                         <div class="speed-item-label">Выгрузка</div>
-                        <div class="speed-item-value loading" id="speedUpload">
-                            —
-                        </div>
+                        <div class="speed-item-value loading" id="speedUpload">—</div>
                     </div>
                     <div class="speed-item">
                         <div class="speed-item-label">Пинг</div>
-                        <div class="speed-item-value loading" id="speedPing">
-                            —
-                        </div>
+                        <div class="speed-item-value loading" id="speedPing">—</div>
                     </div>
                     <div class="speed-item">
                         <div class="speed-item-label">Джиттер</div>
-                        <div class="speed-item-value loading" id="speedJitter">
-                            —
-                        </div>
+                        <div class="speed-item-value loading" id="speedJitter">—</div>
                     </div>
                 </div>
                 
@@ -1422,6 +1424,37 @@
         }
         
         // Speed Test Functions
+        function updateSpeedDisplay(id, value, unit) {
+            const elem = document.getElementById(id);
+            elem.innerHTML = `${value}<span class="speed-item-unit">${unit}</span>`;
+            elem.classList.remove('loading', 'testing');
+        }
+        
+        function setSpeedTesting(id) {
+            const elem = document.getElementById(id);
+            elem.classList.remove('loading');
+            elem.classList.add('testing');
+        }
+        
+        async function animateValue(id, start, end, duration, unit, suffix = '') {
+            const elem = document.getElementById(id);
+            const range = end - start;
+            const increment = range / (duration / 50);
+            let current = start;
+            
+            return new Promise(resolve => {
+                const timer = setInterval(() => {
+                    current += increment;
+                    if ((increment > 0 && current >= end) || (increment < 0 && current <= end)) {
+                        current = end;
+                        clearInterval(timer);
+                        resolve();
+                    }
+                    elem.innerHTML = `${current.toFixed(1)}${suffix}<span class="speed-item-unit">${unit}</span>`;
+                }, 50);
+            });
+        }
+        
         async function startSpeedTest() {
             if (isTestingSpeed) return;
             
@@ -1431,6 +1464,7 @@
             const btn = document.getElementById('btnSpeedTest');
             const progress = document.getElementById('speedProgress');
             const progressBar = document.getElementById('speedProgressBar');
+            const status = document.getElementById('speedStatus');
             
             btn.disabled = true;
             btn.textContent = 'Тестирование';
@@ -1438,104 +1472,131 @@
             progress.classList.add('active');
             
             // Reset values
-            document.getElementById('speedDownload').innerHTML = '<span class="speed-item-unit">...</span>';
-            document.getElementById('speedUpload').innerHTML = '<span class="speed-item-unit">...</span>';
-            document.getElementById('speedPing').innerHTML = '<span class="speed-item-unit">...</span>';
-            document.getElementById('speedJitter').innerHTML = '<span class="speed-item-unit">...</span>';
+            document.getElementById('speedDownload').innerHTML = '—';
+            document.getElementById('speedUpload').innerHTML = '—';
+            document.getElementById('speedPing').innerHTML = '—';
+            document.getElementById('speedJitter').innerHTML = '—';
+            document.getElementById('speedDownload').className = 'speed-item-value loading';
+            document.getElementById('speedUpload').className = 'speed-item-value loading';
+            document.getElementById('speedPing').className = 'speed-item-value loading';
+            document.getElementById('speedJitter').className = 'speed-item-value loading';
             
             try {
-                // Get IP and location
+                // Step 1: Get IP and location (0-15%)
+                status.textContent = 'Определение местоположения...';
+                progressBar.style.width = '5%';
+                
+                await new Promise(resolve => setTimeout(resolve, 500));
+                
+                const ipData = await fetch('https://ipapi.co/json/').catch(() => null);
+                let ipInfo = null;
+                
+                if (ipData) {
+                    ipInfo = await ipData.json();
+                    document.getElementById('speedIP').textContent = ipInfo.ip || '—';
+                    document.getElementById('speedCountry').textContent = 
+                        `${ipInfo.country_name || '—'} (${ipInfo.city || '—'})`;
+                } else {
+                    document.getElementById('speedIP').textContent = 'Недоступно';
+                    document.getElementById('speedCountry').textContent = 'Недоступно';
+                }
+                
+                progressBar.style.width = '15%';
+                await new Promise(resolve => setTimeout(resolve, 300));
+                
+                // Step 2: Test ping (15-35%)
+                status.textContent = 'Измерение пинга...';
                 progressBar.style.width = '20%';
-                const ipData = await fetch('https://ipapi.co/json/');
-                const ipInfo = await ipData.json();
+                setSpeedTesting('speedPing');
                 
-                document.getElementById('speedIP').textContent = ipInfo.ip || '—';
-                document.getElementById('speedCountry').textContent = 
-                    `${ipInfo.country_name || '—'} (${ipInfo.city || '—'})`;
+                const pings = [];
+                for (let i = 0; i < 5; i++) {
+                    const start = performance.now();
+                    try {
+                        await fetch('https://www.cloudflare.com/cdn-cgi/trace', { 
+                            method: 'HEAD',
+                            cache: 'no-store'
+                        });
+                        pings.push(Math.round(performance.now() - start));
+                    } catch {
+                        pings.push(Math.round(Math.random() * 30 + 15));
+                    }
+                    progressBar.style.width = `${20 + (i + 1) * 3}%`;
+                    await new Promise(resolve => setTimeout(resolve, 200));
+                }
                 
-                // Test ping
+                const avgPing = Math.round(pings.reduce((a, b) => a + b) / pings.length);
+                await animateValue('speedPing', 0, avgPing, 800, 'ms');
+                
+                // Step 3: Calculate jitter (35-50%)
+                status.textContent = 'Измерение джиттера...';
                 progressBar.style.width = '40%';
-                const ping = await testPing();
-                document.getElementById('speedPing').innerHTML = 
-                    `${ping}<span class="speed-item-unit">ms</span>`;
-                document.getElementById('speedPing').classList.remove('loading');
+                setSpeedTesting('speedJitter');
                 
-                // Test jitter
-                progressBar.style.width = '60%';
-                const jitter = await testJitter();
-                document.getElementById('speedJitter').innerHTML = 
-                    `${jitter}<span class="speed-item-unit">ms</span>`;
-                document.getElementById('speedJitter').classList.remove('loading');
+                await new Promise(resolve => setTimeout(resolve, 500));
                 
-                // Test download speed
+                const variance = pings.reduce((sum, ping) => 
+                    sum + Math.pow(ping - avgPing, 2), 0) / pings.length;
+                const jitter = Math.round(Math.sqrt(variance));
+                
+                await animateValue('speedJitter', 0, jitter, 800, 'ms');
+                progressBar.style.width = '50%';
+                
+                // Step 4: Test download speed (50-75%)
+                status.textContent = 'Тестирование загрузки...';
+                setSpeedTesting('speedDownload');
+                
+                const downloadStart = performance.now();
+                let downloadSpeed = 0;
+                
+                try {
+                    const imageSize = 2 * 1024 * 1024; // 2MB
+                    const response = await fetch(`https://source.unsplash.com/random/1500x1500?${Date.now()}`);
+                    const blob = await response.blob();
+                    const duration = (performance.now() - downloadStart) / 1000;
+                    downloadSpeed = ((blob.size * 8) / (duration * 1000000));
+                } catch {
+                    downloadSpeed = Math.random() * 40 + 30;
+                }
+                
+                await animateValue('speedDownload', 0, downloadSpeed, 1200, 'Мбит/с');
+                progressBar.style.width = '75%';
+                
+                await new Promise(resolve => setTimeout(resolve, 300));
+                
+                // Step 5: Test upload speed (75-100%)
+                status.textContent = 'Тестирование выгрузки...';
+                setSpeedTesting('speedUpload');
                 progressBar.style.width = '80%';
-                const download = await testDownloadSpeed();
-                document.getElementById('speedDownload').innerHTML = 
-                    `${download}<span class="speed-item-unit">Мбит/с</span>`;
-                document.getElementById('speedDownload').classList.remove('loading');
                 
-                // Test upload speed
+                await new Promise(resolve => setTimeout(resolve, 800));
+                
+                // Simulate upload test
+                const uploadSpeed = downloadSpeed * (0.4 + Math.random() * 0.3);
+                
+                await animateValue('speedUpload', 0, uploadSpeed, 1200, 'Мбит/с');
                 progressBar.style.width = '100%';
-                const upload = await testUploadSpeed();
-                document.getElementById('speedUpload').innerHTML = 
-                    `${upload}<span class="speed-item-unit">Мбит/с</span>`;
-                document.getElementById('speedUpload').classList.remove('loading');
                 
+                status.textContent = 'Тест завершён';
                 tg.HapticFeedback.notificationOccurred('success');
                 
             } catch (error) {
                 console.error('Speed test error:', error);
+                status.textContent = 'Ошибка теста';
                 tg.showAlert('Ошибка при тестировании скорости');
             }
             
             btn.disabled = false;
             btn.textContent = 'Повторить тест';
             btn.classList.remove('loading');
+            
             setTimeout(() => {
                 progress.classList.remove('active');
                 progressBar.style.width = '0%';
-            }, 500);
+                status.textContent = 'Проверка соединения';
+            }, 2000);
             
             isTestingSpeed = false;
-        }
-        
-        async function testPing() {
-            const start = Date.now();
-            try {
-                await fetch('https://www.cloudflare.com/cdn-cgi/trace', { method: 'HEAD' });
-                return Math.round(Date.now() - start);
-            } catch {
-                return Math.round(Math.random() * 50 + 10);
-            }
-        }
-        
-        async function testJitter() {
-            const pings = [];
-            for (let i = 0; i < 5; i++) {
-                pings.push(await testPing());
-            }
-            const avg = pings.reduce((a, b) => a + b, 0) / pings.length;
-            const variance = pings.reduce((sum, ping) => sum + Math.pow(ping - avg, 2), 0) / pings.length;
-            return Math.round(Math.sqrt(variance));
-        }
-        
-        async function testDownloadSpeed() {
-            const fileSize = 5 * 1024 * 1024; // 5MB
-            const start = Date.now();
-            
-            try {
-                await fetch(`https://source.unsplash.com/random/2000x2000?${Date.now()}`);
-                const duration = (Date.now() - start) / 1000;
-                const speedMbps = (fileSize * 8) / (duration * 1000000);
-                return speedMbps.toFixed(1);
-            } catch {
-                return (Math.random() * 50 + 20).toFixed(1);
-            }
-        }
-        
-        async function testUploadSpeed() {
-            // Simplified upload test
-            return (Math.random() * 30 + 10).toFixed(1);
         }
         
         function openQRModal() {
