@@ -37,6 +37,31 @@
             to { opacity: 1; transform: translateY(0); }
         }
         
+        @keyframes slideUp {
+            from { 
+                opacity: 0; 
+                transform: translateY(20px); 
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0); 
+            }
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        @keyframes shimmer {
+            0% { background-position: -1000px 0; }
+            100% { background-position: 1000px 0; }
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
         .container {
             max-width: 480px;
             margin: 0 auto;
@@ -69,6 +94,7 @@
             border-radius: 20px;
             padding: 24px;
             margin-bottom: 16px;
+            animation: slideUp 0.4s ease-out;
         }
         
         .sub-header {
@@ -186,11 +212,31 @@
             transition: all 0.2s;
             margin-top: 14px;
             box-shadow: 0 4px 12px rgba(77, 155, 122, 0.2);
+            position: relative;
+            overflow: hidden;
         }
         
         .btn-connect:active {
             transform: scale(0.98);
             box-shadow: 0 2px 8px rgba(77, 155, 122, 0.3);
+        }
+        
+        .btn-connect::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+        
+        .btn-connect:active::before {
+            width: 300px;
+            height: 300px;
         }
         
         /* === RENEWAL CARD === */
@@ -201,6 +247,7 @@
             border-radius: 20px;
             padding: 24px;
             margin-bottom: 16px;
+            animation: slideUp 0.4s ease-out 0.1s backwards;
         }
         
         .renewal-header {
@@ -231,6 +278,25 @@
             border: 1px solid #2a2a2a;
             border-radius: 14px;
             padding: 16px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+        
+        .renewal-stat::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #4d9b7a, #3d8a6a);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        .renewal-stat:active::before {
+            opacity: 1;
         }
         
         .renewal-stat-label {
@@ -288,11 +354,108 @@
             cursor: pointer;
             transition: all 0.2s;
             box-shadow: 0 4px 12px rgba(77, 155, 122, 0.2);
+            position: relative;
+            overflow: hidden;
         }
         
         .btn-renew:active {
             transform: scale(0.98);
             box-shadow: 0 2px 8px rgba(77, 155, 122, 0.3);
+        }
+        
+        .btn-renew::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+        
+        .btn-renew:active::before {
+            width: 300px;
+            height: 300px;
+        }
+        
+        /* === RENEWAL SCREEN === */
+        
+        .renewal-current-card {
+            background: linear-gradient(135deg, rgba(77, 155, 122, 0.1) 0%, rgba(77, 155, 122, 0.05) 100%);
+            border: 1px solid rgba(77, 155, 122, 0.3);
+            border-radius: 20px;
+            padding: 24px;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            position: relative;
+            overflow: hidden;
+            animation: slideUp 0.4s ease-out;
+        }
+        
+        .renewal-current-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05), transparent);
+            animation: shimmer 3s infinite;
+        }
+        
+        .renewal-current-icon {
+            width: 64px;
+            height: 64px;
+            background: rgba(77, 155, 122, 0.15);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            flex-shrink: 0;
+            position: relative;
+        }
+        
+        .renewal-current-info {
+            flex: 1;
+        }
+        
+        .renewal-current-label {
+            font-size: 13px;
+            color: #999999;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .renewal-current-date {
+            font-size: 20px;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 4px;
+        }
+        
+        .renewal-current-days {
+            font-size: 14px;
+            color: #4d9b7a;
+            font-weight: 600;
+        }
+        
+        .renewal-plans {
+            margin-bottom: 28px;
+        }
+        
+        .renewal-payment-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 14px;
+            padding-left: 4px;
         }
         
         /* === PAYMENT SCREEN === */
@@ -303,6 +466,7 @@
             border-radius: 18px;
             padding: 20px;
             margin-bottom: 24px;
+            animation: slideUp 0.4s ease-out;
         }
         
         .payment-summary-row {
@@ -363,7 +527,12 @@
             cursor: pointer;
             transition: all 0.2s;
             position: relative;
+            animation: slideUp 0.4s ease-out;
         }
+        
+        .payment-method:nth-child(1) { animation-delay: 0.1s; }
+        .payment-method:nth-child(2) { animation-delay: 0.15s; }
+        .payment-method:nth-child(3) { animation-delay: 0.2s; }
         
         .payment-method:active {
             transform: scale(0.98);
@@ -617,6 +786,8 @@
             cursor: pointer;
             transition: all 0.2s;
             box-shadow: 0 4px 12px rgba(77, 155, 122, 0.2);
+            position: relative;
+            overflow: hidden;
         }
         
         .btn-connection-primary:active {
@@ -627,6 +798,24 @@
         .btn-connection-primary:disabled {
             opacity: 0.5;
             cursor: not-allowed;
+        }
+        
+        .btn-connection-primary::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+        
+        .btn-connection-primary:active::before {
+            width: 300px;
+            height: 300px;
         }
         
         .btn-connection-secondary {
@@ -842,7 +1031,13 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            animation: slideUp 0.4s ease-out;
         }
+        
+        .selection-card:nth-child(1) { animation-delay: 0.05s; }
+        .selection-card:nth-child(2) { animation-delay: 0.1s; }
+        .selection-card:nth-child(3) { animation-delay: 0.15s; }
+        .selection-card:nth-child(4) { animation-delay: 0.2s; }
         
         .selection-card:active {
             transform: scale(0.98);
@@ -906,7 +1101,12 @@
             cursor: pointer;
             transition: all 0.2s;
             position: relative;
+            animation: slideUp 0.4s ease-out;
         }
+        
+        .plan-card:nth-child(1) { animation-delay: 0.05s; }
+        .plan-card:nth-child(2) { animation-delay: 0.1s; }
+        .plan-card:nth-child(3) { animation-delay: 0.15s; }
         
         .plan-card:active {
             transform: scale(0.98);
@@ -927,6 +1127,7 @@
             font-size: 11px;
             font-weight: 700;
             color: #ffffff;
+            animation: pulse 2s ease-in-out infinite;
         }
         
         .plan-header {
@@ -975,6 +1176,7 @@
         .promo-input:focus {
             outline: none;
             border-color: #4d9b7a;
+            box-shadow: 0 0 0 3px rgba(77, 155, 122, 0.1);
         }
         
         .promo-input::placeholder {
@@ -993,11 +1195,55 @@
             cursor: pointer;
             transition: all 0.2s;
             box-shadow: 0 4px 12px rgba(77, 155, 122, 0.2);
+            position: relative;
+            overflow: hidden;
         }
         
         .btn-primary:active {
             transform: scale(0.98);
             box-shadow: 0 2px 8px rgba(77, 155, 122, 0.3);
+        }
+        
+        .btn-primary:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+        
+        .btn-primary:active::before {
+            width: 300px;
+            height: 300px;
+        }
+        
+        .btn-loading {
+            pointer-events: none;
+            opacity: 0.7;
+        }
+        
+        .btn-loading::after {
+            content: '';
+            position: absolute;
+            right: 16px;
+            top: 50%;
+            width: 16px;
+            height: 16px;
+            margin-top: -8px;
+            border: 2px solid #ffffff;
+            border-top-color: transparent;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
         }
         
         .btn-secondary {
@@ -1027,6 +1273,7 @@
             padding: 28px;
             text-align: center;
             margin-bottom: 24px;
+            animation: slideUp 0.4s ease-out;
         }
         
         .support-icon {
@@ -1077,7 +1324,11 @@
             margin-bottom: 12px;
             cursor: pointer;
             transition: all 0.2s;
+            animation: slideUp 0.4s ease-out;
         }
+        
+        .faq-item:nth-child(1) { animation-delay: 0.05s; }
+        .faq-item:nth-child(2) { animation-delay: 0.1s; }
         
         .faq-item:active {
             transform: scale(0.98);
@@ -1143,6 +1394,7 @@
             padding: 24px;
             text-align: center;
             margin-top: 24px;
+            animation: slideUp 0.4s ease-out 0.15s backwards;
         }
         
         .contact-info {
@@ -1173,11 +1425,31 @@
             cursor: pointer;
             transition: all 0.2s;
             box-shadow: 0 4px 12px rgba(77, 155, 122, 0.2);
+            position: relative;
+            overflow: hidden;
         }
         
         .btn-contact:active {
             transform: scale(0.98);
             box-shadow: 0 2px 8px rgba(77, 155, 122, 0.3);
+        }
+        
+        .btn-contact::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+        
+        .btn-contact:active::before {
+            width: 300px;
+            height: 300px;
         }
         
         /* Навигация */
@@ -1240,6 +1512,44 @@
         
         .nav-item.active .nav-icon svg {
             stroke: #ffffff;
+        }
+        
+        /* Hover effects для десктопа */
+        @media (hover: hover) {
+            .plan-card:hover,
+            .payment-method:hover,
+            .selection-card:hover,
+            .faq-item:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+            }
+            
+            .btn-primary:hover,
+            .btn-connect:hover,
+            .btn-renew:hover,
+            .btn-contact:hover,
+            .btn-connection-primary:hover {
+                box-shadow: 0 6px 20px rgba(77, 155, 122, 0.4);
+            }
+        }
+        
+        /* Better scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #0f0f0f;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: #2a2a2a;
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: #3a3a3a;
         }
     </style>
 </head>
@@ -1490,7 +1800,100 @@
         </div>
     </div>
     
-    <!-- 5. Активная подписка -->
+    <!-- 5. Продление подписки (отдельное окно) -->
+    <div id="screenRenewal" class="screen">
+        <div class="container">
+            <div class="header">
+                <div class="header-title">Продление</div>
+                <div class="header-subtitle">Выберите период и способ оплаты</div>
+            </div>
+            
+            <!-- Current Subscription Info -->
+            <div class="renewal-current-card">
+                <div class="renewal-current-icon">⏱️</div>
+                <div class="renewal-current-info">
+                    <div class="renewal-current-label">Текущая подписка истекает</div>
+                    <div class="renewal-current-date">21 февраля 2026</div>
+                    <div class="renewal-current-days">Осталось 14 дней</div>
+                </div>
+            </div>
+            
+            <!-- Plan Selection -->
+            <div class="renewal-plans">
+                <div class="plan-card" onclick="selectRenewalPlan('1month', 500)">
+                    <div class="plan-header">
+                        <div class="plan-period">1 месяц</div>
+                        <div>
+                            <div class="plan-price">500⭐</div>
+                        </div>
+                    </div>
+                    <div class="plan-per-month">До 21 марта 2026</div>
+                </div>
+                
+                <div class="plan-card" onclick="selectRenewalPlan('6month', 2400)">
+                    <div class="plan-badge">-20%</div>
+                    <div class="plan-header">
+                        <div class="plan-period">6 месяцев</div>
+                        <div>
+                            <div class="plan-price">2400⭐</div>
+                            <span class="plan-price-small">3000⭐</span>
+                        </div>
+                    </div>
+                    <div class="plan-per-month">До 21 августа 2026</div>
+                </div>
+                
+                <div class="plan-card" onclick="selectRenewalPlan('12month', 4000)">
+                    <div class="plan-badge">-33%</div>
+                    <div class="plan-header">
+                        <div class="plan-period">12 месяцев</div>
+                        <div>
+                            <div class="plan-price">4000⭐</div>
+                            <span class="plan-price-small">6000⭐</span>
+                        </div>
+                    </div>
+                    <div class="plan-per-month">До 21 февраля 2027</div>
+                </div>
+            </div>
+            
+            <!-- Payment Methods for Renewal -->
+            <div class="renewal-payment-title">Способ оплаты</div>
+            <div class="payment-methods">
+                <div class="payment-method" onclick="selectRenewalPayment('stars')">
+                    <div class="payment-method-icon">⭐</div>
+                    <div class="payment-method-info">
+                        <div class="payment-method-name">Telegram Stars</div>
+                        <div class="payment-method-desc">Мгновенно</div>
+                    </div>
+                </div>
+                
+                <div class="payment-method" onclick="selectRenewalPayment('sbp')">
+                    <div class="payment-method-icon">🏦</div>
+                    <div class="payment-method-info">
+                        <div class="payment-method-name">СБП</div>
+                        <div class="payment-method-desc">Система быстрых платежей</div>
+                    </div>
+                </div>
+                
+                <div class="payment-method" onclick="selectRenewalPayment('crypto')">
+                    <div class="payment-method-icon">₿</div>
+                    <div class="payment-method-info">
+                        <div class="payment-method-name">Криптовалюта</div>
+                        <div class="payment-method-desc">USDT, BTC, ETH</div>
+                    </div>
+                </div>
+            </div>
+            
+            <button class="btn-primary" id="btnRenewalPay" onclick="processRenewal()" disabled>
+                Оплатить продление
+            </button>
+            
+            <button class="btn-secondary" onclick="goBack('screenActive')">
+                Отмена
+            </button>
+        </div>
+    </div>
+    
+    <!-- 6. Активная подписка -->
     <div id="screenActive" class="screen">
         <div class="container">
             <div class="header">
@@ -1563,7 +1966,7 @@
         </div>
     </div>
     
-    <!-- 6. Поддержка -->
+    <!-- 7. Поддержка -->
     <div id="screenSupport" class="screen">
         <div class="container">
             <div class="header">
@@ -1827,6 +2230,10 @@
         let selectedPlanName = '';
         let selectedPaymentMethod = '';
         
+        let selectedRenewalPlan = '';
+        let selectedRenewalPrice = 0;
+        let selectedRenewalPayment = '';
+        
         let qrTimer = null;
         let qrTimeRemaining = 600;
         
@@ -1870,7 +2277,7 @@
         function selectPlan(plan, price) {
             tg.HapticFeedback.impactOccurred('light');
             
-            document.querySelectorAll('.plan-card').forEach(c => c.classList.remove('selected'));
+            document.querySelectorAll('#screenPlan .plan-card').forEach(c => c.classList.remove('selected'));
             event.currentTarget.classList.add('selected');
             
             selectedPlan = plan;
@@ -1909,7 +2316,7 @@
         function selectPaymentMethod(method) {
             tg.HapticFeedback.impactOccurred('medium');
             
-            document.querySelectorAll('.payment-method').forEach(c => c.classList.remove('selected'));
+            document.querySelectorAll('#screenPayment .payment-method').forEach(c => c.classList.remove('selected'));
             event.currentTarget.classList.add('selected');
             
             selectedPaymentMethod = method;
@@ -1990,7 +2397,104 @@
         
         function renewSubscription() {
             tg.HapticFeedback.impactOccurred('medium');
-            showScreen('screenPlan');
+            showScreen('screenRenewal');
+        }
+        
+        function selectRenewalPlan(plan, price) {
+            tg.HapticFeedback.impactOccurred('light');
+            
+            document.querySelectorAll('#screenRenewal .plan-card').forEach(c => c.classList.remove('selected'));
+            event.currentTarget.classList.add('selected');
+            
+            selectedRenewalPlan = plan;
+            selectedRenewalPrice = price;
+            
+            checkRenewalReady();
+        }
+        
+        function selectRenewalPayment(method) {
+            tg.HapticFeedback.impactOccurred('light');
+            
+            document.querySelectorAll('#screenRenewal .payment-method').forEach(c => c.classList.remove('selected'));
+            event.currentTarget.classList.add('selected');
+            
+            selectedRenewalPayment = method;
+            
+            checkRenewalReady();
+        }
+        
+        function checkRenewalReady() {
+            const btn = document.getElementById('btnRenewalPay');
+            if (selectedRenewalPlan && selectedRenewalPayment) {
+                btn.disabled = false;
+                btn.textContent = `Оплатить ${selectedRenewalPrice}⭐`;
+            } else {
+                btn.disabled = true;
+                btn.textContent = 'Оплатить продление';
+            }
+        }
+        
+        function processRenewal() {
+            if (!selectedRenewalPlan || !selectedRenewalPayment) {
+                tg.showAlert('Выберите тариф и способ оплаты');
+                return;
+            }
+            
+            tg.HapticFeedback.impactOccurred('heavy');
+            
+            const btn = document.getElementById('btnRenewalPay');
+            btn.classList.add('btn-loading');
+            btn.textContent = 'Обработка...';
+            
+            setTimeout(() => {
+                switch(selectedRenewalPayment) {
+                    case 'stars':
+                        tg.showPopup({
+                            title: 'Продление подписки',
+                            message: `Стоимость: ${selectedRenewalPrice}⭐\n\nПродлить подписку?`,
+                            buttons: [
+                                {id: 'pay', type: 'default', text: 'Оплатить'},
+                                {id: 'cancel', type: 'cancel'}
+                            ]
+                        }, (buttonId) => {
+                            btn.classList.remove('btn-loading');
+                            if (buttonId === 'pay') {
+                                completeRenewal();
+                            } else {
+                                checkRenewalReady();
+                            }
+                        });
+                        break;
+                        
+                    case 'sbp':
+                        btn.classList.remove('btn-loading');
+                        tg.showAlert('Функция СБП в разработке');
+                        checkRenewalReady();
+                        break;
+                        
+                    case 'crypto':
+                        btn.classList.remove('btn-loading');
+                        tg.showAlert('Функция крипто в разработке');
+                        checkRenewalReady();
+                        break;
+                }
+            }, 500);
+        }
+        
+        function completeRenewal() {
+            tg.HapticFeedback.notificationOccurred('success');
+            
+            showScreen('screenActive');
+            
+            tg.showPopup({
+                title: 'Успешно!',
+                message: 'Подписка продлена. Спасибо!',
+                buttons: [{id: 'ok', type: 'ok'}]
+            });
+            
+            selectedRenewalPlan = '';
+            selectedRenewalPrice = 0;
+            selectedRenewalPayment = '';
         }
         
         function copyLink() {
@@ -2006,7 +2510,6 @@
             });
         }
         
-        // Connection Flow
         function startConnection() {
             tg.HapticFeedback.impactOccurred('medium');
             currentStep = 1;
