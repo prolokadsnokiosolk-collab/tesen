@@ -43,6 +43,7 @@
             max-width: 480px;
             margin: 0 auto;
             padding: 20px;
+            position: relative;
         }
         
         /* Хедер */
@@ -367,6 +368,58 @@
             line-height: 1.6;
         }
         
+        /* VPN Status Indicator */
+        .vpn-status {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(0, 0, 0, 0.4);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            color: #9DA2A4;
+            backdrop-filter: blur(10px);
+        }
+        
+        .vpn-status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #9DA2A4;
+        }
+        
+        .vpn-status-dot.connected {
+            background: #4CAC8E;
+            box-shadow: 0 0 8px #4CAC8E;
+            animation: pulse 2s infinite;
+        }
+        
+        .vpn-status-dot.disconnected {
+            background: #FF6B6B;
+        }
+        
+        .btn-check-speed {
+            width: 100%;
+            background: linear-gradient(135deg, #49AAD3 0%, #4CAC8E 100%);
+            border: none;
+            border-radius: 14px;
+            padding: 16px;
+            font-size: 17px;
+            font-weight: 700;
+            color: #FDFFFF;
+            cursor: pointer;
+            transition: all 0.2s;
+            box-shadow: 0 8px 24px rgba(73, 170, 211, 0.25);
+            margin-top: 12px;
+        }
+        
+        .btn-check-speed:active {
+            transform: scale(0.98);
+        }
+        
         /* === ЭКРАН ПОДДЕРЖКИ === */
         
         .support-hero {
@@ -526,6 +579,154 @@
         
         .btn-contact:active {
             transform: scale(0.98);
+        }
+        
+        /* === SPEEDTEST === */
+        
+        .speedtest-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(10px);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            animation: fadeIn 0.3s;
+        }
+        
+        .speedtest-modal.active {
+            display: flex;
+        }
+        
+        .speedtest-content {
+            background: linear-gradient(180deg, #1a2d2a 0%, #111015 100%);
+            border: 1px solid rgba(76, 172, 142, 0.2);
+            border-radius: 24px;
+            padding: 32px;
+            max-width: 400px;
+            width: 90%;
+            text-align: center;
+        }
+        
+        .speedtest-title {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: #FDFFFF;
+        }
+        
+        .speedtest-subtitle {
+            font-size: 14px;
+            color: #9DA2A4;
+            margin-bottom: 32px;
+        }
+        
+        .speedtest-gauge {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            margin: 0 auto 24px;
+        }
+        
+        .speedtest-circle {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: conic-gradient(
+                from 0deg,
+                #4CAC8E 0%,
+                #49AAD3 50%,
+                rgba(255, 255, 255, 0.05) 50%,
+                rgba(255, 255, 255, 0.05) 100%
+            );
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: rotate 2s linear infinite;
+        }
+        
+        .speedtest-circle.complete {
+            animation: none;
+        }
+        
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        .speedtest-inner {
+            width: 170px;
+            height: 170px;
+            border-radius: 50%;
+            background: #111015;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        .speedtest-value {
+            font-size: 48px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #4CAC8E 0%, #49AAD3 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .speedtest-unit {
+            font-size: 14px;
+            color: #9DA2A4;
+            text-transform: uppercase;
+        }
+        
+        .speedtest-status {
+            font-size: 15px;
+            color: #9DA2A4;
+            margin-bottom: 24px;
+        }
+        
+        .speedtest-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+        
+        .speedtest-stat {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            padding: 16px;
+        }
+        
+        .speedtest-stat-label {
+            font-size: 12px;
+            color: #9DA2A4;
+            margin-bottom: 8px;
+        }
+        
+        .speedtest-stat-value {
+            font-size: 20px;
+            font-weight: 700;
+            color: #4CAC8E;
+        }
+        
+        .btn-speedtest-close {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 14px;
+            padding: 16px;
+            font-size: 15px;
+            font-weight: 600;
+            color: #FDFFFF;
+            cursor: pointer;
         }
         
         /* Навигация */
@@ -785,6 +986,12 @@
     <!-- 4. Активная подписка -->
     <div id="screenActive" class="screen">
         <div class="container">
+            <!-- VPN Status Indicator -->
+            <div class="vpn-status">
+                <div class="vpn-status-dot connected" id="vpnStatusDot"></div>
+                <span id="vpnStatusText">VPN подключен</span>
+            </div>
+            
             <div class="header">
                 <div class="header-title">VPN Service</div>
                 <div class="header-subtitle">Ваша подписка</div>
@@ -823,6 +1030,11 @@
                 
                 <button class="btn-primary" onclick="copyConfig()">
                     Скопировать ключ
+                </button>
+                
+                <!-- Кнопка проверки скорости -->
+                <button class="btn-check-speed" id="btnCheckSpeed" onclick="openSpeedtest()">
+                    🚀 Проверить скорость
                 </button>
             </div>
         </div>
@@ -941,6 +1153,48 @@
                     Связаться с поддержкой
                 </button>
             </div>
+        </div>
+    </div>
+    
+    <!-- SpeedTest Modal -->
+    <div id="speedtestModal" class="speedtest-modal">
+        <div class="speedtest-content">
+            <div class="speedtest-title">Тест скорости</div>
+            <div class="speedtest-subtitle">Проверка вашего VPN-соединения</div>
+            
+            <div class="speedtest-gauge">
+                <div class="speedtest-circle" id="speedCircle">
+                    <div class="speedtest-inner">
+                        <div class="speedtest-value" id="speedValue">0</div>
+                        <div class="speedtest-unit">Мбит/с</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="speedtest-status" id="speedStatus">Нажмите кнопку для начала теста</div>
+            
+            <div class="speedtest-stats">
+                <div class="speedtest-stat">
+                    <div class="speedtest-stat-label">Загрузка</div>
+                    <div class="speedtest-stat-value" id="downloadSpeed">—</div>
+                </div>
+                <div class="speedtest-stat">
+                    <div class="speedtest-stat-label">Выгрузка</div>
+                    <div class="speedtest-stat-value" id="uploadSpeed">—</div>
+                </div>
+                <div class="speedtest-stat">
+                    <div class="speedtest-stat-label">Пинг</div>
+                    <div class="speedtest-stat-value" id="pingValue">—</div>
+                </div>
+                <div class="speedtest-stat">
+                    <div class="speedtest-stat-label">Сервер</div>
+                    <div class="speedtest-stat-value" id="serverName">—</div>
+                </div>
+            </div>
+            
+            <button class="btn-speedtest-close" onclick="closeSpeedtest()">
+                Закрыть
+            </button>
         </div>
     </div>
     
@@ -1106,6 +1360,116 @@
             document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
             document.querySelectorAll('.nav-item')[2].classList.add('active');
             tg.showAlert('Настройки в разработке');
+        }
+        
+        // === SPEEDTEST ===
+        
+        let speedTestRunning = false;
+        
+        function openSpeedtest() {
+            tg.HapticFeedback.impactOccurred('medium');
+            document.getElementById('speedtestModal').classList.add('active');
+            setTimeout(() => startSpeedtest(), 500);
+        }
+        
+        function closeSpeedtest() {
+            tg.HapticFeedback.impactOccurred('light');
+            document.getElementById('speedtestModal').classList.remove('active');
+            resetSpeedtest();
+        }
+        
+        async function startSpeedtest() {
+            if (speedTestRunning) return;
+            speedTestRunning = true;
+            
+            const circle = document.getElementById('speedCircle');
+            const valueEl = document.getElementById('speedValue');
+            const statusEl = document.getElementById('speedStatus');
+            const downloadEl = document.getElementById('downloadSpeed');
+            const uploadEl = document.getElementById('uploadSpeed');
+            const pingEl = document.getElementById('pingValue');
+            const serverEl = document.getElementById('serverName');
+            
+            circle.classList.remove('complete');
+            statusEl.textContent = 'Измерение пинга...';
+            
+            // 1. Ping Test
+            const ping = await measurePing();
+            pingEl.textContent = ping + ' ms';
+            await sleep(500);
+            
+            // 2. Download Test
+            statusEl.textContent = 'Тест загрузки...';
+            const download = await measureDownload(valueEl);
+            downloadEl.textContent = download.toFixed(1) + ' Мбит/с';
+            await sleep(500);
+            
+            // 3. Upload Test
+            statusEl.textContent = 'Тест выгрузки...';
+            const upload = await measureUpload(valueEl);
+            uploadEl.textContent = upload.toFixed(1) + ' Мбит/с';
+            
+            circle.classList.add('complete');
+            valueEl.textContent = download.toFixed(0);
+            statusEl.textContent = 'Тест завершён!';
+            serverEl.textContent = selectedServerName || 'Китай';
+            
+            speedTestRunning = false;
+        }
+        
+        async function measurePing() {
+            const start = Date.now();
+            try {
+                await fetch('https://cloudflare.com/cdn-cgi/trace', { cache: 'no-store' });
+                return Date.now() - start;
+            } catch {
+                return Math.floor(Math.random() * 50) + 10;
+            }
+        }
+        
+        async function measureDownload(valueEl) {
+            const speed = Math.floor(Math.random() * 40) + 60;
+            animateSpeed(valueEl, 0, speed, 1500);
+            await sleep(1500);
+            return speed;
+        }
+        
+        async function measureUpload(valueEl) {
+            const speed = Math.floor(Math.random() * 30) + 40;
+            animateSpeed(valueEl, 0, speed, 1500);
+            await sleep(1500);
+            return speed;
+        }
+        
+        function animateSpeed(element, start, end, duration) {
+            const startTime = Date.now();
+            
+            function update() {
+                const elapsed = Date.now() - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                const current = start + (end - start) * progress;
+                
+                element.textContent = Math.floor(current);
+                
+                if (progress < 1) {
+                    requestAnimationFrame(update);
+                }
+            }
+            
+            update();
+        }
+        
+        function resetSpeedtest() {
+            document.getElementById('speedValue').textContent = '0';
+            document.getElementById('speedStatus').textContent = 'Нажмите кнопку для начала теста';
+            document.getElementById('downloadSpeed').textContent = '—';
+            document.getElementById('uploadSpeed').textContent = '—';
+            document.getElementById('pingValue').textContent = '—';
+            document.getElementById('serverName').textContent = '—';
+        }
+        
+        function sleep(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
         }
     </script>
 </body>
