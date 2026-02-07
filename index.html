@@ -41,7 +41,6 @@
             max-width: 480px;
             margin: 0 auto;
             padding: 20px;
-            position: relative;
         }
         
         .header {
@@ -71,25 +70,35 @@
             margin-bottom: 20px;
         }
         
+        .sub-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+        
         .sub-flag {
-            font-size: 48px;
-            text-align: center;
-            margin-bottom: 16px;
+            width: 48px;
+            height: 32px;
+            font-size: 32px;
+            line-height: 32px;
+            flex-shrink: 0;
+        }
+        
+        .sub-info {
+            flex: 1;
         }
         
         .sub-server {
-            font-size: 22px;
+            font-size: 20px;
             font-weight: 700;
-            text-align: center;
-            margin-bottom: 8px;
             color: #FDFFFF;
+            margin-bottom: 4px;
         }
         
         .sub-protocol {
-            font-size: 15px;
-            text-align: center;
+            font-size: 14px;
             color: #4CAC8E;
-            margin-bottom: 24px;
         }
         
         .btn-show-qr {
@@ -486,40 +495,6 @@
             color: #FDFFFF;
             cursor: pointer;
             margin-top: 12px;
-        }
-        
-        /* VPN Status */
-        .vpn-status {
-            position: absolute;
-            top: 10px;
-            right: 20px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            background: rgba(0, 0, 0, 0.4);
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 12px;
-            color: #9DA2A4;
-            backdrop-filter: blur(10px);
-        }
-        
-        .vpn-status-dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: #9DA2A4;
-        }
-        
-        .vpn-status-dot.connected {
-            background: #4CAC8E;
-            box-shadow: 0 0 8px #4CAC8E;
-            animation: pulse 2s infinite;
-        }
-        
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
         }
         
         .btn-check-speed {
@@ -954,12 +929,6 @@
     <!-- 4. Активная подписка -->
     <div id="screenActive" class="screen">
         <div class="container">
-            <!-- VPN Status -->
-            <div class="vpn-status">
-                <div class="vpn-status-dot connected"></div>
-                <span>VPN подключен</span>
-            </div>
-            
             <div class="header">
                 <div class="header-title">Ваша подписка</div>
                 <div class="header-subtitle">Активный доступ</div>
@@ -967,9 +936,13 @@
             
             <!-- Карточка подписки -->
             <div class="subscription-card">
-                <div class="sub-flag" id="subFlag">🇨🇳</div>
-                <div class="sub-server" id="subServer">Китай</div>
-                <div class="sub-protocol" id="subProtocol">VLESS</div>
+                <div class="sub-header">
+                    <div class="sub-flag" id="subFlag">🇨🇳</div>
+                    <div class="sub-info">
+                        <div class="sub-server" id="subServer">Китай</div>
+                        <div class="sub-protocol" id="subProtocol">VLESS</div>
+                    </div>
+                </div>
                 
                 <button class="btn-show-qr" onclick="openQRModal()">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -1174,7 +1147,7 @@
         let selectedPrice = 0;
         
         let qrTimer = null;
-        let qrTimeRemaining = 600; // 10 минут в секундах
+        let qrTimeRemaining = 600;
         
         function selectServer(code, name, flag) {
             tg.HapticFeedback.impactOccurred('medium');
